@@ -3,44 +3,44 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hypotheekcijfer</title>
+<title>Blinqx Hypotheekcijfer</title>
 <style>
 :root{
-  --navy:#0a2d5c; --navy-2:#173f78; --orange:#f28c00; --orange-l:#fff3e2;
-  --sky:#eaf1fa; --line:#d6dfeb; --text:#1b2a3d; --muted:#5d6b7e;
-  --ok:#1f8a4c; --ok-l:#e6f4ec; --warn:#c98a00; --bad:#c62f3c; --bad-l:#fbe9eb;
-  --bg:#f5f7fb; --card:#fff; --r:10px;
+  --navy:#010101; --navy-2:#333333; --orange:#FFD31C; --orange-l:#FFF6CC;
+  --sky:#FFF6CC; --line:#dddddd; --text:#010101; --muted:#666666;
+  --ok:#1f8a4c; --ok-l:#e6f4ec; --warn:#c98a00; --bad:#E5486B; --bad-l:#fde8ed;
+  --bg:#ffffff; --card:#fff; --r:10px;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--bg);font-size:15px;line-height:1.45}
+body{margin:0;font-family:Montserrat,"Gilroy","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--bg);font-size:15px;line-height:1.45}
 header{background:var(--navy);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-header .logo{font-weight:800;font-size:20px;letter-spacing:.2px}
-header .logo span{color:var(--orange)}
+header .logo{font-weight:900;font-size:22px;letter-spacing:.5px;display:flex;align-items:center;gap:8px}
+header .logo span{color:#fff}
 header .sub{opacity:.85;font-size:14px}
 header .sp{flex:1}
-.btn{border:0;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;font-size:14px}
-.btn-o{background:var(--orange);color:#fff}
+.btn{border:2px solid #010101;border-radius:2px;padding:10px 16px;font-weight:600;cursor:pointer;font-size:14px}
+.btn-o{background:var(--orange);color:#010101;border-color:var(--orange)}
 .btn-o:hover{filter:brightness(.95)}
-.btn-l{background:#fff;color:var(--navy);border:1px solid var(--line)}
+.btn-l{background:#fff;color:#010101}
 .btn-s{padding:6px 10px;font-size:13px}
 main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:20px;padding:20px;max-width:1500px;margin:0 auto}
 @media (max-width:1000px){main{grid-template-columns:1fr;padding:12px}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:16px;overflow:hidden}
-.card>h2,.card summary{margin:0;padding:12px 16px;font-size:16px;background:var(--sky);color:var(--navy);cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
+.card{background:var(--card);border:2px solid #010101;border-radius:2px;margin-bottom:16px;overflow:hidden}
+.card>h2,.card summary{margin:0;padding:12px 16px;font-size:17px;font-weight:800;background:#fff;color:#010101;border-bottom:2px solid var(--orange);cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
 .card summary::-webkit-details-marker{display:none}
-.card summary .n{background:var(--navy);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-grid;place-items:center;font-size:13px}
+.card summary .n{background:var(--orange);color:#010101;font-weight:800;border-radius:50%;width:24px;height:24px;display:inline-grid;place-items:center;font-size:13px}
 .card summary:after{content:"▾";margin-left:auto;color:var(--muted)}
 details:not([open]) summary:after{content:"▸"}
 .body{padding:14px 16px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px 14px}
 label{display:block;font-size:13px;color:var(--muted);margin-bottom:3px}
-input,select,textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:7px;font:inherit;color:var(--text);background:#fff}
+input,select,textarea{width:100%;padding:8px 10px;border:1.5px solid #010101;border-radius:2px;font:inherit;color:var(--text);background:#fff}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--orange);outline-offset:-1px;border-color:var(--orange)}
 .eur{text-align:right}
 .pct{text-align:right}
 .hint{font-size:12px;color:var(--muted);margin-top:4px}
 .sub-h{font-weight:700;color:var(--navy);margin:14px 0 8px;font-size:14px}
-.row-card{border:1px dashed var(--line);border-radius:8px;padding:10px;margin-bottom:10px;position:relative;background:#fbfcfe}
+.row-card{border:1px dashed #999;border-radius:2px;padding:10px;margin-bottom:10px;position:relative;background:#fbfcfe}
 .row-card .del{position:absolute;top:6px;right:6px;background:none;border:0;color:var(--bad);cursor:pointer;font-size:18px}
 .chk{display:flex;gap:8px;align-items:flex-start;margin:6px 0;font-size:14px;color:var(--text)}
 .chk input{width:auto;margin-top:3px}
@@ -52,7 +52,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--orange);outline-
 .score-scale{display:grid;grid-template-columns:repeat(10,1fr);border:2px solid var(--orange);border-radius:8px;overflow:visible;margin:10px 0 6px}
 .score-scale div{text-align:center;padding:8px 0;font-weight:700;position:relative;color:var(--muted)}
 .score-scale div.lo{color:var(--bad)}
-.score-scale div.on{color:#fff}
+.score-scale div.on{color:#010101}
 .score-scale div.on:before{content:"";position:absolute;inset:-9px 50% auto auto;transform:translateX(50%);width:44px;height:44px;border-radius:50%;background:var(--orange);z-index:0}
 .score-scale div.on span{position:relative;z-index:1;font-size:20px}
 .score-txt{font-weight:700;font-size:17px;color:var(--navy)}
@@ -65,7 +65,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--orange);outline-
 .mom .t2.bad{color:var(--bad)} .mom .t2.ok{color:var(--ok)}
 .mom .amt{text-align:right;font-size:13px;white-space:nowrap}
 .mom .amt b{font-size:15px}
-.bar{height:10px;border-radius:5px;background:var(--sky);margin-top:6px;position:relative;overflow:hidden;grid-column:2/4}
+.bar{height:10px;border-radius:2px;background:#eeeeee;margin-top:6px;position:relative;overflow:hidden;grid-column:2/4}
 .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:5px}
 table{width:100%;border-collapse:collapse;font-size:13.5px}
 th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
@@ -77,14 +77,14 @@ td.r,th.r{text-align:right;white-space:nowrap}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:6px}
 .legend i{display:inline-block;width:14px;height:4px;border-radius:2px;vertical-align:middle;margin-right:5px}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:6px}
-.kpi{background:var(--sky);border-radius:8px;padding:10px}
+.kpi{background:var(--sky);border-radius:2px;padding:10px}
 .kpi .l{font-size:12px;color:var(--muted)} .kpi .v{font-size:18px;font-weight:700;color:var(--navy)}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 20px 30px}
+footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22px 20px 30px;margin-top:10px}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo">Hypotheek<span>bond</span></div>
+  <div class="logo"><svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><path d="M13 1 25 8v12l-12 7L1 20V8z" fill="#FFD31C"/><path d="M8 9h7a4 4 0 0 1 0 8h-2l4 4h-3l-6-6V9z" fill="#010101"/></svg><span>BLINQX</span></div>
   <div class="sub">Hypotheekcijfer – betaalbaarheid nu en later</div>
   <div class="sp"></div>
   <button class="btn btn-l" id="btnVoorbeeld" type="button">Voorbeeld laden</button>
@@ -181,10 +181,10 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 20px 30p
     <summary><span class="n">6</span> Rapportinstellingen en normen</summary>
     <div class="body">
       <div class="grid">
-        <div><label>Organisatie</label><input id="o_naam" value="Hypotheekbond"></div>
-        <div><label>Telefoon</label><input id="o_tel" value="op aanvraag"></div>
-        <div><label>E-mail</label><input id="o_mail" value="op aanvraag"></div>
-        <div><label>Website</label><input id="o_web" value="www.hypotheekbond.nl"></div>
+        <div><label>Organisatie</label><input id="o_naam" value="Blinqx"></div>
+        <div><label>Telefoon</label><input id="o_tel" value="020 - 758 21 11"></div>
+        <div><label>E-mail</label><input id="o_mail" value="hello@blinqx.tech"></div>
+        <div><label>Website</label><input id="o_web" value="www.blinqx.tech"></div>
         <div><label>Afzender (naam)</label><input id="o_afz"></div>
         <div><label>Functie afzender</label><input id="o_fun" value="Hypotheekadviseur"></div>
         <div><label>Adres klant</label><input id="k_adres"></div>
@@ -218,7 +218,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 20px 30p
     </div>
     <div class="card"><h2>Belangrijke momenten</h2><div class="body" id="momenten"></div></div>
     <div class="card"><h2>Schuld en maximale hypotheek in de tijd</h2><div class="body"><div id="chart"></div>
-      <div class="legend"><span><i style="background:var(--navy)"></i>Maximale hypotheek</span><span><i style="background:var(--orange)"></i>Hypotheekschuld − eigen geld</span><span><i style="background:#9aa7b8"></i>Belangrijk moment</span></div></div></div>
+      <div class="legend"><span><i style="background:var(--navy)"></i>Maximale hypotheek</span><span><i style="background:#E6B800"></i>Hypotheekschuld − eigen geld</span><span><i style="background:#9a9a9a"></i>Belangrijk moment</span></div></div></div>
     <div class="card"><h2>Kun je de hypotheek blijven betalen bij life events?</h2><div class="body" id="life"></div></div>
     <div class="card"><h2>Maandlasten</h2><div class="body" id="lasten"></div></div>
   </div>
@@ -558,11 +558,11 @@ function chartSVG(ms,w=640,h=260){
   const x=d=>L+W*mdiff(S.peil,d)/n, y=v=>T+H-H*v/ymax;
   const line=k=>pts.map((p,i)=>(i?'L':'M')+x(p.d).toFixed(1)+','+y(p[k]).toFixed(1)).join('');
   let g='';
-  for(let k=0;k<=4;k++){const v=ymax*k/4;g+=`<line x1="${L}" x2="${w-R}" y1="${y(v)}" y2="${y(v)}" stroke="#e3e9f2"/><text x="${L-6}" y="${y(v)+4}" font-size="10" text-anchor="end" fill="#5d6b7e">${nfE.format(Math.round(v/1000))}k</text>`;}
+  for(let k=0;k<=4;k++){const v=ymax*k/4;g+=`<line x1="${L}" x2="${w-R}" y1="${y(v)}" y2="${y(v)}" stroke="#ececec"/><text x="${L-6}" y="${y(v)+4}" font-size="10" text-anchor="end" fill="#666666">${nfE.format(Math.round(v/1000))}k</text>`;}
   const y0=S.peil.getUTCFullYear(),y1=end.getUTCFullYear();const ys=Math.max(1,Math.ceil((y1-y0)/8));
-  for(let yr=y0+1;yr<=y1;yr+=ys){const d=new Date(Date.UTC(yr,0,1));g+=`<text x="${x(d)}" y="${h-8}" font-size="10" text-anchor="middle" fill="#5d6b7e">${yr}</text>`;}
-  for(const m of ms){g+=`<line x1="${x(m.d)}" x2="${x(m.d)}" y1="${T}" y2="${T+H}" stroke="#9aa7b8" stroke-dasharray="3 3"/><circle cx="${x(m.d)}" cy="${y(m.max)}" r="3.5" fill="${m.ruimte>=0?'#1f8a4c':'#c62f3c'}"><title>${fD(m.d)} – ${m.txt}</title></circle>`;}
-  return `<svg class="chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="Verloop schuld en maximale hypotheek">${g}<path d="${line('mx')}" fill="none" stroke="#0a2d5c" stroke-width="2.2"/><path d="${line('s')}" fill="none" stroke="#f28c00" stroke-width="2.2"/></svg>`;
+  for(let yr=y0+1;yr<=y1;yr+=ys){const d=new Date(Date.UTC(yr,0,1));g+=`<text x="${x(d)}" y="${h-8}" font-size="10" text-anchor="middle" fill="#666666">${yr}</text>`;}
+  for(const m of ms){g+=`<line x1="${x(m.d)}" x2="${x(m.d)}" y1="${T}" y2="${T+H}" stroke="#9a9a9a" stroke-dasharray="3 3"/><circle cx="${x(m.d)}" cy="${y(m.max)}" r="3.5" fill="${m.ruimte>=0?'#1f8a4c':'#E5486B'}"><title>${fD(m.d)} – ${m.txt}</title></circle>`;}
+  return `<svg class="chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="Verloop schuld en maximale hypotheek">${g}<path d="${line('mx')}" fill="none" stroke="#010101" stroke-width="2.2"/><path d="${line('s')}" fill="none" stroke="#E6B800" stroke-width="3"/></svg>`;
 }
 
 /* ---------- dynamische rijen ---------- */
@@ -628,7 +628,7 @@ $('#btnRapport').onclick=()=>{
 function rapportHTML(ms,sc,le,nu){
   const o=S.org,k=S.klant,vandaag=fD(new Date());
   const namen=S.partner?`${S.A.naam} en ${S.P.naam}`:S.A.naam;
-  const scale=Array.from({length:10},(_,i)=>`<td class="${i<5?'lo':''} ${sc.c===i+1?'on':''}">${i+1}</td>`).join('');
+  const scale=Array.from({length:10},(_,i)=>`<td class="${i<5?'lo':''} ${sc.c===i+1?'on':''}"><span>${i+1}</span></td>`).join('');
   const gekozen=PLANNEN.filter(p=>S.plannen.includes(p.id)&&p.t), niet=PLANNEN.filter(p=>!S.plannen.includes(p.id)&&p.t&&p.id!=='advies');
   const eigenTxt=[S.plannen.includes('anders')?`Iets anders: ${esc(S.plannenTxt.anders)}`:'',S.plannen.includes('niets')?`Niets, omdat: ${esc(S.plannenTxt.niets)}`:''].filter(Boolean);
   const rij=(l,v)=>`<tr><td>${l}</td><td>${v}</td></tr>`;
@@ -636,35 +636,35 @@ function rapportHTML(ms,sc,le,nu){
   const vormL={af:'Aflossingsvrij',ann:'Annuïtair',lin:'Lineair'};
   const momBlok=m=>{const ok=m.ruimte>=0;const tot=Math.max(m.max+m.verm,m.schuld)||1;const hMax=Math.round((m.max+m.verm)/tot*140),hS=Math.round(Math.min(m.schuld,m.max+m.verm)/tot*140),hO=ok?0:Math.round((m.schuld-m.max-m.verm)/tot*140);
     return `<div class="mb"><div class="mt"><h3>${fD(m.d)}</h3><div class="sub">${esc(m.txt)}</div><p>${UITLEG[m.type]} ${ok?`Volgens de huidige leennormen is de hypotheekschuld dan <b>niet te hoog</b>; de leenruimte is ${fE(m.ruimte)}.`:`Volgens de huidige leennormen is de hypotheekschuld dan <b>te hoog</b>: de overschrijding is ${fE(-m.ruimte)}.`}</p>
-    <table class="kv">${rij('Maximale hypotheek',fE(m.max))}${m.verm?rij('Eigen geld om af te lossen',fE(m.verm)):''}${rij('Hypotheekschuld',fE(m.schuld))}${rij(ok?'Ruimte':'Overschrijding',`<b style="color:${ok?'#1f8a4c':'#c62f3c'}">${fE(Math.abs(m.ruimte))}</b>`)}${rij('Toetsrente / woonquote',`${fP(m.rente,2)} / ${fP(m.wq,1)}`)}</table></div>
-    <div class="bars"><div class="col"><div class="stk" style="height:${hMax}px;background:#0a2d5c"></div><span>Max.</span></div><div class="col"><div class="stk" style="height:${hO}px;background:#c62f3c"></div><div class="stk" style="height:${hS}px;background:#f28c00"></div><span>Schuld</span></div></div></div>`;};
+    <table class="kv">${rij('Maximale hypotheek',fE(m.max))}${m.verm?rij('Eigen geld om af te lossen',fE(m.verm)):''}${rij('Hypotheekschuld',fE(m.schuld))}${rij(ok?'Ruimte':'Overschrijding',`<b style="color:${ok?'#1f8a4c':'#E5486B'}">${fE(Math.abs(m.ruimte))}</b>`)}${rij('Toetsrente / woonquote',`${fP(m.rente,2)} / ${fP(m.wq,1)}`)}</table></div>
+    <div class="bars"><div class="col"><div class="stk" style="height:${hMax}px;background:#010101"></div><span>Max.</span></div><div class="col"><div class="stk" style="height:${hO}px;background:#E5486B"></div><div class="stk" style="height:${hS}px;background:#FFD31C"></div><span>Schuld</span></div></div></div>`;};
   return `<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>Je hypotheek nu en later – ${esc(namen)}</title><style>
   @page{size:A4;margin:16mm 15mm}
-  body{font-family:"Segoe UI",Roboto,Arial,sans-serif;color:#1b2a3d;font-size:12.5px;line-height:1.5;margin:0}
+  body{font-family:Montserrat,"Gilroy","Segoe UI",Roboto,Arial,sans-serif;color:#010101;font-size:12.5px;line-height:1.5;margin:0}
   .pg{page-break-after:always;padding:6mm 2mm;min-height:250mm;position:relative}
   .pg:last-child{page-break-after:auto}
-  .logo{font-weight:800;font-size:22px;color:#0a2d5c}.logo span{color:#f28c00}
-  h1{font-size:30px;color:#0a2d5c;margin:0 0 8px}h2{font-size:20px;color:#0a2d5c;border-bottom:3px solid #f28c00;padding-bottom:4px;margin:0 0 12px}
-  h3{margin:0;font-size:15px;color:#0a2d5c}.sub{color:#5d6b7e;font-weight:600;margin-bottom:4px}
-  .cover{background:#0a2d5c;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:20mm 14mm;min-height:250mm}
-  .cover h1{color:#fff;font-size:44px}.cover .o{color:#f28c00;font-size:20px;font-weight:700}
+  .logo{font-weight:900;font-size:24px;color:#010101;display:flex;align-items:center;gap:8px;letter-spacing:.5px}
+  h1{font-size:30px;color:#010101;margin:0 0 8px;font-weight:900}h2{font-size:24px;font-weight:900;color:#010101;border-bottom:4px solid #FFD31C;padding-bottom:4px;margin:0 0 12px}
+  h3{margin:0;font-size:15px;color:#010101}.sub{color:#666666;font-weight:600;margin-bottom:4px}
+  .cover{background:#FFD31C;color:#010101;display:flex;flex-direction:column;justify-content:flex-end;padding:20mm 14mm;min-height:250mm}
+  .cover h1{color:#010101;font-size:52px}.cover .o{color:#010101;font-size:22px;font-weight:900;display:flex;align-items:center;gap:8px}
   table{border-collapse:collapse;width:100%}td{padding:3px 6px;vertical-align:top}
-  .kv td:first-child{color:#5d6b7e;width:55%}.kv td:last-child{text-align:right}
-  .gg td{border-bottom:1px solid #e3e9f2}.gg td:first-child{color:#5d6b7e;width:50%}
-  .scale{margin:10px 0;border:2px solid #f28c00;border-radius:6px}.scale td{text-align:center;font-weight:700;padding:7px;color:#5d6b7e}.scale td.lo{color:#c62f3c}.scale td.on{background:#f28c00;color:#fff;font-size:18px;border-radius:50%}
-  .box{background:#eaf1fa;border-radius:8px;padding:10px 12px;margin:10px 0}
-  .tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin-top:8px}.tl div{border-top:4px solid #0a2d5c;padding-top:4px;font-size:11.5px}.tl div.bad{border-color:#c62f3c}
-  .mb{display:grid;grid-template-columns:1fr 150px;gap:14px;border:1px solid #d6dfeb;border-radius:8px;padding:12px;margin-bottom:12px;page-break-inside:avoid}
-  .bars{display:flex;align-items:flex-end;justify-content:center;gap:16px;height:170px}.col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:44px}.col span{font-size:11px;color:#5d6b7e;margin-top:3px}.stk{width:44px}
-  .lt th,.lt td{border-bottom:1px solid #e3e9f2;padding:5px 6px;text-align:left}.lt .r{text-align:right}.ok{color:#1f8a4c;font-weight:700}.bad{color:#c62f3c;font-weight:700}
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.two h4{margin:8px 0 2px;color:#0a2d5c}
-  .disc{font-size:11px;color:#5d6b7e;border-top:1px solid #d6dfeb;padding-top:8px;margin-top:14px}
-  .tools{position:fixed;top:10px;right:10px}.tools button{background:#f28c00;color:#fff;border:0;border-radius:6px;padding:9px 14px;font-weight:700;cursor:pointer}
+  .kv td:first-child{color:#666666;width:55%}.kv td:last-child{text-align:right}
+  .gg td{border-bottom:1px solid #ececec}.gg td:first-child{color:#666666;width:50%}
+  .scale{margin:10px 0;border:2px solid #FFD31C;border-radius:6px}.scale td{text-align:center;font-weight:700;padding:7px;color:#666666}.scale td.lo{color:#E5486B}.scale td.on span{display:inline-block;width:32px;height:32px;line-height:32px;background:#FFD31C;border-radius:50%;color:#010101;font-size:17px}
+  .box{background:#FFF6CC;border-radius:2px;padding:10px 12px;margin:10px 0}
+  .tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin-top:8px}.tl div{border-top:4px solid #010101;padding-top:4px;font-size:11.5px}.tl div.bad{border-color:#E5486B}
+  .mb{display:grid;grid-template-columns:1fr 150px;gap:14px;border:2px solid #010101;border-radius:2px;padding:12px;margin-bottom:12px;page-break-inside:avoid}
+  .bars{display:flex;align-items:flex-end;justify-content:center;gap:16px;height:170px}.col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:44px}.col span{font-size:11px;color:#666666;margin-top:3px}.stk{width:44px}
+  .lt th,.lt td{border-bottom:1px solid #ececec;padding:5px 6px;text-align:left}.lt .r{text-align:right}.ok{color:#1f8a4c;font-weight:700}.bad{color:#E5486B;font-weight:700}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.two h4{margin:8px 0 2px;color:#010101}
+  .disc{font-size:11px;color:#666666;border-top:1px solid #dddddd;padding-top:8px;margin-top:14px}
+  .tools{position:fixed;top:10px;right:10px}.tools button{background:#FFD31C;color:#010101;border:2px solid #010101;border-radius:2px;padding:9px 14px;font-weight:700;cursor:pointer}
   @media print{.tools{display:none}}
   </style></head><body>
   <div class="tools"><button onclick="window.print()">Afdrukken / opslaan als PDF</button></div>
   <!-- brief -->
-  <div class="pg"><div class="logo">${esc(o.naam)}</div><br><br>
+  <div class="pg"><div class="logo"><svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><path d="M13 1 25 8v12l-12 7L1 20V8z" fill="#010101"/><path d="M8 9h7a4 4 0 0 1 0 8h-2l4 4h-3l-6-6V9z" fill="#FFD31C"/></svg>${esc(o.naam).toUpperCase()}</div><br><br>
   <div>${esc(namen)}<br>${esc(k.adres)}<br>${esc(k.pc)}</div><br>
   <table class="kv" style="width:60%"><tr><td>Datum</td><td style="text-align:left">${vandaag}</td></tr>${S.hypnr?`<tr><td>Hypotheeknummer</td><td style="text-align:left">${esc(S.hypnr)}</td></tr>`:''}<tr><td>Onderwerp</td><td style="text-align:left">Je hypotheek scoort een ${sc.c??'-'}</td></tr><tr><td>Bijlage</td><td style="text-align:left">Rapport ‘Je hypotheek nu en later’</td></tr></table><br>
   <p>${esc(k.aanhef||'Beste '+namen+',')}</p>
@@ -673,10 +673,10 @@ function rapportHTML(ms,sc,le,nu){
   <p><b>Vragen?</b><br>Bel ${esc(o.tel)} of mail naar ${esc(o.mail)}.</p><br>
   <p>Met vriendelijke groet,<br><br><br>${esc(o.afz)}<br>${esc(o.fun)}<br>${esc(o.naam)}</p></div>
   <!-- cover -->
-  <div class="pg" style="padding:0"><div class="cover"><div class="o">${esc(o.naam)}</div><h1>Je hypotheek<br>nu en later</h1><div>${esc(namen)} · ${vandaag}</div><div style="margin-top:10px;opacity:.8">${esc(o.web)}</div></div></div>
+  <div class="pg" style="padding:0"><div class="cover"><div class="o"><svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><path d="M13 1 25 8v12l-12 7L1 20V8z" fill="#010101"/><path d="M8 9h7a4 4 0 0 1 0 8h-2l4 4h-3l-6-6V9z" fill="#FFD31C"/></svg>${esc(o.naam).toUpperCase()}</div><h1>Je hypotheek<br>nu en later</h1><div>${esc(namen)} · ${vandaag}</div><div style="margin-top:10px;opacity:.8">${esc(o.web)}</div></div></div>
   <!-- samenvatting -->
   <div class="pg"><h2>1 Samenvatting</h2>
-  <p>De betaalbaarheid van je hypotheek scoort een: <b style="font-size:20px;color:#f28c00">${sc.c??'-'}</b></p>
+  <p>De betaalbaarheid van je hypotheek scoort een: <b style="font-size:20px;background:#FFD31C;padding:0 8px;border-radius:50%">${sc.c??'-'}</b></p>
   <table class="scale"><tr>${scale}</tr></table>
   <p>De score is gebaseerd op de ingevulde gegevens en op de leennormen. <b>${esc(sc.txt)}</b></p>
   <div class="box"><b>Hoe is het cijfer berekend?</b><br>${esc(sc.expl)}</div>
@@ -694,11 +694,11 @@ function rapportHTML(ms,sc,le,nu){
   </div></div></div>
   <!-- momenten -->
   <div class="pg"><h2>3 Belangrijke momenten</h2>${ms.map(momBlok).join('')}
-  <p style="font-size:11px;color:#5d6b7e"><span style="color:#0a2d5c">■</span> Maximale hypotheek (incl. eigen geld) &nbsp; <span style="color:#f28c00">■</span> Hypotheekschuld &nbsp; <span style="color:#c62f3c">■</span> Overschrijding maximale hypotheek</p></div>
+  <p style="font-size:11px;color:#666666"><span style="color:#010101">■</span> Maximale hypotheek (incl. eigen geld) &nbsp; <span style="color:#FFD31C">■</span> Hypotheekschuld &nbsp; <span style="color:#E5486B">■</span> Overschrijding maximale hypotheek</p></div>
   <!-- life events -->
   <div class="pg"><h2>4 Kun je de hypotheek blijven betalen bij life events?</h2>
   <p>We hebben getoetst of de huidige hypotheekschuld past bij het inkomen dat overblijft als er iets onverwachts gebeurt. Daarbij is uitgegaan van de leennormen en van deze aannames: arbeidsongeschiktheid ${fP(S.le.ao*100,0)} van het bruto inkomen, werkloosheid ${fP(S.le.ww*100,0)} van het (gemaximeerde) loon${S.partner?', bij overlijden het inkomen van de achterblijvende partner plus nabestaandenpensioen en een eventuele ORV-uitkering, bij scheiding één inkomen voor de volledige schuld':''}.</p>
-  <table class="lt"><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th class="r">Ruimte / tekort</th></tr>${le.map(e=>`<tr><td>${esc(e.naam)}${e.note?`<br><small style="color:#5d6b7e">${esc(e.note)}</small>`:''}</td><td class="r">${fE(e.max)}</td><td class="r">${fE(e.schuld-e.verm)}</td><td class="r ${e.ok?'ok':'bad'}">${e.ok?'+ ':''}${fE(e.ruimte)}</td></tr>`).join('')}</table>
+  <table class="lt"><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th class="r">Ruimte / tekort</th></tr>${le.map(e=>`<tr><td>${esc(e.naam)}${e.note?`<br><small style="color:#666666">${esc(e.note)}</small>`:''}</td><td class="r">${fE(e.max)}</td><td class="r">${fE(e.schuld-e.verm)}</td><td class="r ${e.ok?'ok':'bad'}">${e.ok?'+ ':''}${fE(e.ruimte)}</td></tr>`).join('')}</table>
   <div class="box">Een tekort betekent dat de schuld in die situatie hoger is dan volgens de leennormen verantwoord is. Dat leidt niet automatisch tot betalingsproblemen, maar is wel een risico. Een adviseur kan bekijken of een verzekering (zoals een woonlastenverzekering, AOV of overlijdensrisicoverzekering), extra aflossen of sparen dit risico verkleint.</div></div>
   <!-- plannen -->
   <div class="pg"><h2>5 Wat je van plan bent</h2>

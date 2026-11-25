@@ -508,7 +508,7 @@ footer.site{background:#010101}footer.site .disc{border-color:#333;color:#aaa}
       <div><label>Inkomen bij arbeidsongeschiktheid (% van bruto)</label><input class="pct" id="le_ao" value="70"></div>
       <div><label>WW-uitkering (% van dagloon)</label><input class="pct" id="le_ww" value="70"></div>
       <div><label>Maximaal WW-jaarloon</label><input class="eur" id="le_wwmax" inputmode="numeric"></div>
-      <div><label>Rente na einde rentevast (= toetsrente)</label><input class="pct" id="le_rente" value="5,0" readonly title="Volgt de toetsrente onder Instellingen"></div>
+      <div><label>Rente na einde rentevast (standaard 5%)</label><input class="pct" id="le_rente" value="5,0" title="Standaard de toetsrente van 5%; pas aan als je een andere rente verwacht"></div>
     </div>
     <div class="sub-h">Bij overlijden</div>
     <div class="grid g4">
@@ -718,7 +718,7 @@ function readState(){
     woning:pE(g('woning').value),hypnr:g('hypnr').value.trim(),
     delen:$$('#delenLijst .deel').map(c=>{const v=k=>c.querySelector(`[data-k="${k}"]`).value;return{naam:v('naam'),bedrag:pE(v('bedrag')),vorm:v('vorm'),rente:pP(v('rente')),rvp:D(v('rvp')),eind:D(v('eind')),hra:D(v('hra'))};}).filter(d=>d.bedrag>0&&d.eind),
     verpl:$$('#verplLijst .verpl').map(c=>{const v=k=>c.querySelector(`[data-k="${k}"]`).value;return{soort:v('soort'),bedrag:pE(v('bedrag')),eind:D(v('eind'))};}).filter(v=>v.bedrag>0),
-    le:{ao:pP(g('le_ao').value)/100,ww:pP(g('le_ww').value)/100,wwmax:pE(g('le_wwmax').value)||1e12,rente:pP(g('toetsrente').value)||5,npA:pE(g('le_np_a').value),orvA:pE(g('le_orv_a').value),npP:pE(g('le_np_p').value),orvP:pE(g('le_orv_p').value)},
+    le:{ao:pP(g('le_ao').value)/100,ww:pP(g('le_ww').value)/100,wwmax:pE(g('le_wwmax').value)||1e12,rente:pP(g('le_rente').value)||5,npA:pE(g('le_np_a').value),orvA:pE(g('le_orv_a').value),npP:pE(g('le_np_p').value),orvP:pE(g('le_orv_p').value)},
     spaar:null,
     plannen:$$('#plannenBlok input[type=checkbox]').filter(c=>c.checked).map(c=>c.value),
     plannenTxt:{anders:($('#plan_anders_txt')||{}).value||'',niets:($('#plan_niets_txt')||{}).value||''},
@@ -727,7 +727,6 @@ function readState(){
     org:{naam:g('o_naam').value,tel:g('o_tel').value,mail:g('o_mail').value,web:g('o_web').value,afz:g('o_afz').value,fun:g('o_fun').value},
     klant:{adres:g('k_adres').value,pc:g('k_pc').value,aanhef:g('k_aanhef').value}
   };
-  g('le_rente').value=g('toetsrente').value;
   S.A.aow=aowDatum(S.A.geb); S.P.aow=aowDatum(S.P.geb);
   g('a_aow').value=S.A.aow?fD(S.A.aow):''; g('p_aow').value=S.P.aow?fD(S.P.aow):'';
 }
@@ -925,7 +924,7 @@ function render(){
   const rows=[['Nu',S.peil,nu]];
   for(const m of ms)rows.push([m.txt,m.d,lasten(m.d,S.le.rente)]);
   $('#lasten').innerHTML=`<div class="kpis"><div class="kpi"><div class="l">Schuld nu</div><div class="v">${fE(schuld(S.peil))}</div></div><div class="kpi"><div class="l">Bruto maandlast nu</div><div class="v">${fE(nu.bruto)}</div></div><div class="kpi"><div class="l">Netto maandlast nu (indicatief)</div><div class="v">${fE(nu.netto)}</div></div></div>
-  <table><thead><tr><th>Datum</th><th>Moment</th><th class="r">Aftrektarief</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr></thead><tbody>${rows.map(([t,d,l])=>`<tr><td style="white-space:nowrap;font-weight:700">${fD(d)}</td><td>${esc(t)}</td><td class="r">${l.tarief?fP(l.tarief*100,2):'–'}</td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`).join('')}</tbody></table><div class="hint">Na einde rentevast gerekend met de toetsrente van ${fP(S.le.rente,1)}. Netto = bruto − renteaftrek na bijtelling eigenwoningforfait. Aftrektarief per inkomen (2027): ${fP(S.t1N*100,2)} in de 1e schijf (AOW: ${fP(S.t1A*100,2)}), ${fP(S.hraT*100,2)} boven ${fE(S.t1Grens)}; aftrek toegerekend aan de partner met het hoogste inkomen.</div>`;
+  <table><thead><tr><th>Datum</th><th>Moment</th><th class="r">Aftrektarief</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr></thead><tbody>${rows.map(([t,d,l])=>`<tr><td style="white-space:nowrap;font-weight:700">${fD(d)}</td><td>${esc(t)}</td><td class="r">${l.tarief?fP(l.tarief*100,2):'–'}</td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`).join('')}</tbody></table><div class="hint">Na einde rentevast gerekend met een rente van ${fP(S.le.rente,1)}${S.le.rente===S.toets?' (toetsrente)':''}. Netto = bruto − renteaftrek na bijtelling eigenwoningforfait. Aftrektarief per inkomen (2027): ${fP(S.t1N*100,2)} in de 1e schijf (AOW: ${fP(S.t1A*100,2)}), ${fP(S.hraT*100,2)} boven ${fE(S.t1Grens)}; aftrek toegerekend aan de partner met het hoogste inkomen.</div>`;
   window.__laatste={ms,sc,le,nu};
   if(typeof miniScore==='function')miniScore();
   if(typeof figRender==='function')figRender();
@@ -1073,7 +1072,7 @@ function rapportHTML(ms,sc,le,nu){
       <p>${UITLEG[m.type]} ${ok?`Volgens de leennormen is de hypotheekschuld dan <b>niet te hoog</b>.`:`Volgens de leennormen is de hypotheekschuld dan <b>te hoog</b>.`}</p>
       <div class="mkc"><em class="cf ${cls(cc)}">${cc}</em><span>cijfer voor dit moment</span></div></div></div>
       <div class="mkp">${vbar(m.max,m.verm,m.schuld)}<div class="mkv"><span>Maximale hypotheek</span><b>${fE(m.max)}</b>${m.verm?`<span>Eigen geld</span><b>${fE(m.verm)}</b>`:''}<span>Hypotheekschuld</span><b>${fE(m.schuld)}</b>
-      <span>${ok?'Ruimte':'Overschrijding'}</span><b class="${ok?'ok':'bad'}">${fE(Math.abs(m.ruimte))}</b><span>Netto maandlast</span><b>${fE(l.netto)}</b></div></div></div>`;};
+      <span>${ok?'Ruimte':'Overschrijding'}</span><b class="${ok?'ok':'bad'}">${fE(Math.abs(m.ruimte))}</b><span>Netto maandlast</span><b>${fE(l.netto)}</b><span>Toetsrente</span><b>${fP(m.rente,2)}</b></div></div></div>`;};
   const mChunks=[];for(let i=0;i<ms.length;i+=3)mChunks.push(ms.slice(i,i+3));
   const kpi=(l,v,s='')=>`<div class="kpi"><span>${l}</span><b>${v}</b>${s?`<small>${s}</small>`:''}</div>`;
   const wl=sc.w;
@@ -1109,17 +1108,17 @@ function rapportHTML(ms,sc,le,nu){
     <div class="chart">${chartSVG(ms,720,250)}</div>
     <div class="legend"><span><i class="k"></i>Maximale hypotheek</span><span><i class="y"></i>Schuld − eigen geld</span><span><i class="m"></i>Belangrijk moment</span></div>
     <h3>Maandlasten op de belangrijke momenten</h3>
-    <table class="lt"><tr><th>Datum</th><th>Moment</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr>
-    <tr><td class="dt">${fD(S.peil)}</td><td>Nu</td><td class="r">${fE(nu.bruto)}</td><td class="r">${fE(nu.netto)}</td></tr>
-    ${ms.map(m=>{const l=lasten(m.d,S.le.rente);return `<tr><td class="dt">${fD(m.d)}</td><td>${esc(m.txt)}</td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`;}).join('')}</table>
-    <p class="fine">Na einde rentevast gerekend met de toetsrente van ${fP(S.le.rente,1)}. Netto maandlast is indicatief.</p>`);
+    <table class="lt"><tr><th>Datum</th><th>Moment</th><th class="r">Toetsrente</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr>
+    <tr><td class="dt">${fD(S.peil)}</td><td>Nu</td><td class="r">–</td><td class="r">${fE(nu.bruto)}</td><td class="r">${fE(nu.netto)}</td></tr>
+    ${ms.map(m=>{const l=lasten(m.d,S.le.rente);return `<tr><td class="dt">${fD(m.d)}</td><td>${esc(m.txt)}</td><td class="r">${fP(m.rente,2)}</td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`;}).join('')}</table>
+    <p class="fine">Na einde rentevast gerekend met een rente van ${fP(S.le.rente,1)}${S.le.rente===S.toets?' (toetsrente)':''}. Netto maandlast is indicatief.</p>`);
   const pLE=pagina(['4','Kunt u de hypotheek blijven betalen bij life events?'],`<p class="intro">We hebben getoetst of de huidige hypotheekschuld past bij het inkomen dat overblijft als er iets onverwachts gebeurt. Aannames: arbeidsongeschiktheid ${fP(S.le.ao*100,0)} van het bruto inkomen, werkloosheid ${fP(S.le.ww*100,0)} van het (gemaximeerde) loon${S.partner?', bij overlijden het inkomen van de achterblijvende partner plus nabestaandenpensioen en een eventuele ORV-uitkering, bij scheiding één inkomen voor de volledige schuld':''}.</p>
     <div class="legend"><span><i class="d"></i>Hypotheekschuld</span><span><i class="g"></i>Ruimte tot maximale hypotheek</span><span><i class="r"></i>Overschrijding maximale hypotheek</span></div><table class="lt le"><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th></th><th class="r">Ruimte / tekort</th><th class="r">Cijfer</th></tr>${leRows}</table>
     <div class="note">Een tekort betekent dat de schuld in die situatie hoger is dan volgens de leennormen verantwoord is. Dat leidt niet automatisch tot betalingsproblemen, maar is wel een risico. Een adviseur kan bekijken of een verzekering (zoals een woonlastenverzekering, AOV of overlijdensrisicoverzekering), extra aflossen of sparen dit risico verkleint.</div>`);
   const pG=pagina(['5','Uw gegevens'],`<div class="two"><div>
     <h3>Persoonlijk</h3>${personen().map(([,p])=>`<table class="gg"><tr class="hd"><th colspan="2">${esc(p.naam)}</th></tr>${rij('Geboortedatum',fD(p.geb))}${rij('AOW-datum',fD(p.aow))}${rij('Bruto jaarinkomen',fE(p.ink))}${rij('AOW + pensioen per jaar',fE(p.pens))}</table>`).join('')}
     <h3>Vermogen en verplichtingen</h3><table class="gg">${rij('Eigen geld',fE(S.eigen))}${S.kapitaal?rij('Verwacht kapitaal per '+fDk(S.kapDatum),fE(S.kapitaal)):''}${S.verpl.map(v=>rij(verplL[v.soort],fE(v.bedrag)+(v.eind?' t/m '+fDk(v.eind):''))).join('')||rij('Financiële verplichtingen','geen')}</table></div><div>
-    <h3>Hypotheek per ${fD(S.peil)}</h3><table class="gg">${S.hypnr?rij('Contractnummer',esc(S.hypnr)):''}${rij('Totale schuld',fE(schuld(S.peil)))}${rij('Waarde huis',fE(S.woning))}${rij('Bruto maandlast',fE(nu.bruto))}${rij('Netto maandlast',fE(nu.netto))}</table>
+    <h3>Hypotheek per ${fD(S.peil)}</h3><table class="gg">${S.hypnr?rij('Contractnummer',esc(S.hypnr)):''}${rij('Totale schuld',fE(schuld(S.peil)))}${rij('Waarde huis',fE(S.woning))}${rij('Bruto maandlast',fE(nu.bruto))}${rij('Netto maandlast',fE(nu.netto))}${rij('Toetsrente (rentevast < 10 jaar)',fP(S.toets,1))}</table>
     ${S.delen.map(p=>`<table class="gg"><tr class="hd"><th colspan="2">${esc(p.naam||'Leningdeel')}</th></tr>${rij('Schuld',fE(p.bedrag))}${rij('Aflosvorm',vormL[p.vorm])}${rij('Rente',fP(p.rente,2))}${rij('Maandbedrag (bruto)',fE(maandDeel(p)))}${rij('Einde rentevast',fDk(p.rvp))}${rij('Einddatum',fDk(p.eind))}${rij('Einde renteaftrek',fDk(p.hra))}</table>`).join('')}</div></div>`);
   const optie=p=>`<div class="opt"><b>${p.t}</b><p>${p.b}</p></div>`;
   const pP=pagina(['6','Wat u kunt doen'],`${wl&&wl.ruimte<0?`<div class="need"><span>Wat is nodig?</span><p>Om het tekort op <b>${fD(wl.d)}</b> op te lossen, is <b>${fE(-wl.ruimte)}</b> extra aflossing of eigen geld nodig. Gespreid tot die datum is dat ongeveer <b>${fE(-wl.ruimte/Math.max(1,mdiff(S.peil,wl.d)))} per maand</b> (zonder rendement).</p></div>`:''}

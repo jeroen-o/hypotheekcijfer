@@ -1058,17 +1058,22 @@ function rapportHTML(ms,sc,le,nu){
     ${titel?`<h2><span class="nr">${titel[0]}</span>${titel[1]}</h2>`:''}${inhoud}
     <footer class="pf"><span>${esc(namen)} · ${vandaag}</span><span>${pnr}</span></footer></section>`;};
   const schaal=(x,groot)=>`<div class="sch ${groot?'big':''}">${Array.from({length:10},(_,i)=>`<span class="${i<5?'lo':''} ${x===i+1?'on':''}">${i+1}</span>`).join('')}</div>`;
-  const hbar=(max,verm,schuld)=>{const tot=Math.max(max+verm,schuld,1);const a=(max+verm)/tot*100,s=Math.min(schuld,max+verm)/tot*100,ov=Math.max(0,schuld-max-verm)/tot*100;
-    return `<div class="hb"><div class="hbr"><i style="width:${a}%" class="k"></i></div><div class="hbr"><i style="width:${s}%" class="y"></i>${ov?`<i style="width:${ov}%" class="r"></i>`:''}</div></div>`;};
+  const segs=(max,verm,schuld)=>{const cap=max+verm,tot=Math.max(cap,schuld,1);return schuld<=cap?{d:schuld/tot*100,g:(cap-schuld)/tot*100,r:0}:{d:cap/tot*100,g:0,r:(schuld-cap)/tot*100};};
+  const hbar=(max,verm,schuld)=>{const z=segs(max,verm,schuld);return `<div class="hb1"><i class="d" style="width:${z.d}%"></i><i class="g" style="width:${z.g}%"></i><i class="r" style="width:${z.r}%"></i></div>`;};
+  const vbar=(max,verm,schuld)=>{const z=segs(max,verm,schuld);return `<div class="vb"><i class="r" style="height:${z.r}%"></i><i class="g" style="height:${z.g}%"></i><i class="d" style="height:${z.d}%"></i></div>`;};
+  const hexok=ok=>`<svg class="hx ${ok?'':'neg'}" viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7z"/>${ok?'<path d="m8 12 3 3 5-6"/>':'<path d="M12 8v5M12 16v.5"/>'}</svg>`;
   const momKaart=m=>{const ok=m.ruimte>=0,cc=cijferPct(m.pct),l=lasten(m.d,S.le.rente);
-    return `<div class="mk ${ok?'':'neg'}"><div class="mkh"><div><b>${fD(m.d)}</b><span>${esc(m.txt)}</span></div><em class="cf ${cls(cc)}">${cc}</em></div>
-      ${hbar(m.max,m.verm,m.schuld)}
-      <table class="kv">${rij('Maximale hypotheek',fE(m.max))}${m.verm?rij('Eigen geld',fE(m.verm)):''}${rij('Hypotheekschuld',fE(m.schuld))}
-      <tr class="tot"><th>${ok?'Ruimte':'Overschrijding'}</th><td class="${ok?'ok':'bad'}">${fE(Math.abs(m.ruimte))}</td></tr>${rij('Netto maandlast',fE(l.netto))}</table>
-      <p class="mku">${UITLEG[m.type]}</p></div>`;};
-  const mChunks=[];for(let i=0;i<ms.length;i+=4)mChunks.push(ms.slice(i,i+4));
+    return `<div class="mk ${ok?'':'neg'}"><div class="mkl">${hexok(ok)}<div><span class="dt">${fD(m.d)}</span><b>${esc(m.txt)}</b>
+      <p>${UITLEG[m.type]} ${ok?`Volgens de leennormen is de hypotheekschuld dan <b>niet te hoog</b>.`:`Volgens de leennormen is de hypotheekschuld dan <b>te hoog</b>.`}</p>
+      <div class="mkc"><em class="cf ${cls(cc)}">${cc}</em><span>cijfer voor dit moment</span></div></div></div>
+      <div class="mkp">${vbar(m.max,m.verm,m.schuld)}<div class="mkv"><span>Maximale hypotheek</span><b>${fE(m.max)}</b>${m.verm?`<span>Eigen geld</span><b>${fE(m.verm)}</b>`:''}<span>Hypotheekschuld</span><b>${fE(m.schuld)}</b>
+      <span>${ok?'Ruimte':'Overschrijding'}</span><b class="${ok?'ok':'bad'}">${fE(Math.abs(m.ruimte))}</b><span>Netto maandlast</span><b>${fE(l.netto)}</b></div></div></div>`;};
+  const mChunks=[];for(let i=0;i<ms.length;i+=3)mChunks.push(ms.slice(i,i+3));
   const kpi=(l,v,s='')=>`<div class="kpi"><span>${l}</span><b>${v}</b>${s?`<small>${s}</small>`:''}</div>`;
   const wl=sc.w;
+  const berekening=(()=>{if(!wl)return '<tr><td>–</td><td>Onvoldoende gegevens</td></tr>';const p=wl.pct;
+    if(p>=0)return `<tr><td>6</td><td>Basiscijfer: op geen enkel belangrijk moment is de schuld te hoog</td></tr><tr><td>+${c-6}</td><td>Kleinste ruimte ${fP(p*100,1)} van de schuld (${fD(wl.d)})</td></tr><tr class="tot"><td>${c}</td><td>Uw hypotheekcijfer</td></tr>`;
+    return `<tr><td>!</td><td>Overschrijding ${fP(-p*100,1)} op ${fD(wl.d)}</td></tr><tr class="tot"><td>${c}</td><td>Uw hypotheekcijfer</td></tr>`;})();
   const leRows=le.map(e=>`<tr><td><b>${esc(e.naam)}</b>${e.note?`<small>${esc(e.note)}</small>`:''}</td><td class="r">${fE(e.max)}</td><td class="r">${fE(e.schuld-e.verm)}</td><td class="bcell">${hbar(e.max,e.verm,e.schuld)}</td><td class="r ${e.ok?'ok':'bad'}">${e.ok?'+ ':'- '}${fE(Math.abs(e.ruimte))}</td><td class="r"><em class="cf ${cls(e.c)}">${e.c}</em></td></tr>`).join('');
   const brief=`<section class="pg letter"><header class="ph"><div class="phl">${logo}</div><div class="pht">${esc(o.naam)}</div></header>
     <div class="adr">${esc(namen)}<br>${esc(k.adres)}<br>${esc(k.pc)}</div>
@@ -1086,25 +1091,24 @@ function rapportHTML(ms,sc,le,nu){
     <div class="cvfoot">${esc(o.web)}</div></section>`;
   const p1=pagina(['1','Samenvatting'],`
     <div class="hero"><div class="bigc ${cls(c)}">${c||'–'}</div><div><p class="lbl">De betaalbaarheid van uw hypotheek scoort een</p>${schaal(c,true)}<p class="verd">${esc(sc.txt||'')}</p></div></div>
-    <div class="note"><b>Hoe is het cijfer berekend?</b> ${esc(sc.expl||'')}</div>
+    <div class="calc"><div><b>${esc(sc.txt||'')}</b><p>${esc(sc.expl||'')}</p></div><table><tr><th colspan="2">Zo is uw hypotheekcijfer berekend</th></tr>${berekening}</table></div>
     <div class="kpis">${kpi('Hypotheekschuld nu',fE(schuld(S.peil)))}${kpi('Waarde huis',fE(S.woning))}${kpi('Bruto maandlast',fE(nu.bruto))}${kpi('Netto maandlast',fE(nu.netto),'indicatief')}</div>
-    <h3>Belangrijke momenten</h3>
-    <div class="tlx">${ms.map(m=>{const cc=cijferPct(m.pct);return `<div class="tli ${m.ruimte<0?'neg':''}"><em class="cf ${cls(cc)}">${cc}</em><b>${fDk(m.d)}</b><span>${esc(m.txt)}</span><i class="${m.ruimte<0?'bad':'ok'}">${m.ruimte<0?'tekort ':'ruimte '}${fE(Math.abs(m.ruimte))}</i></div>`;}).join('')}</div>
+    <div class="band"><h3>Belangrijke momenten</h3><div class="tlx">${ms.map(m=>{const cc=cijferPct(m.pct);return `<div class="tli ${m.ruimte<0?'neg':''}"><em class="cf ${cls(cc)}">${cc}</em><b>${fDk(m.d)}</b><span>${esc(m.txt)}</span><i class="${m.ruimte<0?'bad':'ok'}">${m.ruimte<0?'tekort ':'ruimte '}${fE(Math.abs(m.ruimte))}</i></div>`;}).join('')}</div></div>
     <h3>Life events</h3>
     <div class="lev">${le.map(e=>`<div class="${e.ok?'':'neg'}"><em class="cf ${cls(e.c)}">${e.c}</em><span>${esc(e.naam)}</span><i class="${e.ok?'ok':'bad'}">${e.ok?'+ ':'- '}${fE(Math.abs(e.ruimte))}</i></div>`).join('')}</div>`);
   const pM=mChunks.map((ch,i)=>pagina(i===0?['2','Belangrijke momenten']:null,`${i===0?`<p class="intro">Op deze momenten verandert er iets aan uw hypotheek of uw inkomen. We toetsen of uw schuld dan nog past bij de maximale hypotheek volgens de leennormen 2027.</p>
-    <div class="legend"><span><i class="k"></i>Maximale hypotheek + eigen geld</span><span><i class="y"></i>Hypotheekschuld</span><span><i class="r"></i>Overschrijding</span></div>`:''}
-    <div class="mgrid">${ch.map(momKaart).join('')}</div>`)).join('');
+    `:''}
+    <div class="mlist">${ch.map(momKaart).join('')}</div><div class="legend"><span><i class="d"></i>Hypotheekschuld</span><span><i class="g"></i>Ruimte tot maximale hypotheek</span><span><i class="r"></i>Overschrijding maximale hypotheek</span></div>`)).join('');
   const pChart=pagina(['3','Uw hypotheek in de tijd'],`<p class="intro">De lijn laat zien hoe uw maximale hypotheek (donkerblauw) zich verhoudt tot uw schuld min eigen geld (turquoise). Komt de turquoise lijn boven de donkerblauwe, dan past de schuld niet meer binnen de leennormen.</p>
     <div class="chart">${chartSVG(ms,720,250)}</div>
-    <div class="legend"><span><i class="k"></i>Maximale hypotheek</span><span><i class="y"></i>Schuld − eigen geld</span><span><i class="g"></i>Belangrijk moment</span></div>
+    <div class="legend"><span><i class="k"></i>Maximale hypotheek</span><span><i class="y"></i>Schuld − eigen geld</span><span><i class="m"></i>Belangrijk moment</span></div>
     <h3>Maandlasten op de belangrijke momenten</h3>
     <table class="lt"><tr><th>Moment</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr>
     <tr><td>Nu <small class="il">${fD(S.peil)}</small></td><td class="r">${fE(nu.bruto)}</td><td class="r">${fE(nu.netto)}</td></tr>
     ${ms.map(m=>{const l=lasten(m.d,S.le.rente);return `<tr><td>${esc(m.txt)} <small class="il">${fD(m.d)}</small></td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`;}).join('')}</table>
     <p class="fine">Na einde rentevast gerekend met ${fP(S.le.rente,2)} marktrente. Netto maandlast is indicatief.</p>`);
   const pLE=pagina(['4','Kunt u de hypotheek blijven betalen bij life events?'],`<p class="intro">We hebben getoetst of de huidige hypotheekschuld past bij het inkomen dat overblijft als er iets onverwachts gebeurt. Aannames: arbeidsongeschiktheid ${fP(S.le.ao*100,0)} van het bruto inkomen, werkloosheid ${fP(S.le.ww*100,0)} van het (gemaximeerde) loon${S.partner?', bij overlijden het inkomen van de achterblijvende partner plus nabestaandenpensioen en een eventuele ORV-uitkering, bij scheiding één inkomen voor de volledige schuld':''}.</p>
-    <table class="lt le"><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th></th><th class="r">Ruimte / tekort</th><th class="r">Cijfer</th></tr>${leRows}</table>
+    <div class="legend"><span><i class="d"></i>Hypotheekschuld</span><span><i class="g"></i>Ruimte tot maximale hypotheek</span><span><i class="r"></i>Overschrijding maximale hypotheek</span></div><table class="lt le"><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th></th><th class="r">Ruimte / tekort</th><th class="r">Cijfer</th></tr>${leRows}</table>
     <div class="note">Een tekort betekent dat de schuld in die situatie hoger is dan volgens de leennormen verantwoord is. Dat leidt niet automatisch tot betalingsproblemen, maar is wel een risico. Een adviseur kan bekijken of een verzekering (zoals een woonlastenverzekering, AOV of overlijdensrisicoverzekering), extra aflossen of sparen dit risico verkleint.</div>`);
   const pG=pagina(['5','Uw gegevens'],`<div class="two"><div>
     <h3>Persoonlijk</h3>${personen().map(([,p])=>`<table class="gg"><tr class="hd"><th colspan="2">${esc(p.naam)}</th></tr>${rij('Geboortedatum',fD(p.geb))}${rij('AOW-datum',fD(p.aow))}${rij('Bruto jaarinkomen',fE(p.ink))}${rij('AOW + pensioen per jaar',fE(p.pens))}</table>`).join('')}
@@ -1122,25 +1126,29 @@ function rapportHTML(ms,sc,le,nu){
     <div class="opt"><b>De waarde van het huis</b><p>Bij een nieuwe hypotheek kijkt de geldverstrekker ook naar de waarde van het huis. Hoe lager de schuld ten opzichte van de waarde, hoe lager de risicoklasse en vaak de rente.</p></div>
     <div class="opt"><b>Eigen geld gebruiken</b><p>Spaargeld, beleggingen of een erfenis kunt u gebruiken om de hypotheek te verlagen. Houd wel een buffer aan voor onverwachte uitgaven.</p></div>
     <div class="opt"><b>Hypotheekrenteaftrek</b><p>Hypotheekrente is maximaal 30 jaar aftrekbaar, als u voldoet aan de voorwaarden van de Belastingdienst. Na het einde van de aftrek stijgt het netto maandbedrag.</p></div></div>
-    <div class="contact"><div><span>Vragen over uw rapport?</span><p>Bel met of mail met uw adviseur. Hij helpt u graag.</p></div><div><span>Meer over het hypotheekcijfer</span><p>${esc(o.web)}</p></div></div>
+    <h3>Contact</h3><div class="contact"><div><span>Uw adviseur</span><p>Bel met of mail met uw adviseur. Hij helpt u graag.</p></div><div><span>Opnieuw berekenen</span><p>Verandert uw situatie? Doe de hypotheekcheck opnieuw.</p></div><div><span>Meer informatie</span><p>${esc(o.web)}</p></div></div>
     <p class="disc">Dit rapport is gebaseerd op de gegevens die u heeft ingevuld; die zijn niet gecontroleerd. Er is rekening gehouden met de ingevulde financiële verplichtingen. Dit is geen advies. Voor de beoordeling van de betaalbaarheid zijn de leennormen 2027 uit de Tijdelijke regeling hypothecair krediet gehanteerd, met een toetsrente van ${fP(S.toets,1)} als de rentevaste periode korter is dan 10 jaar. Het rapport is een momentopname: verandert uw financiële situatie, kijk dan opnieuw naar de betaalbaarheid van uw hypotheek.</p>`);
+  const toc=[['1','Samenvatting',1],['2','Belangrijke momenten',2],['3','Uw hypotheek in de tijd',2+mChunks.length],['4','Life events',3+mChunks.length],['5','Uw gegevens',4+mChunks.length],['6','Wat u kunt doen',5+mChunks.length],['7','Goed om te weten en contact',6+mChunks.length]];
+  const pToc=`<section class="pg"><header class="ph"><div class="phl">${logo}</div><div class="pht">Uw hypotheekcijfer nu en later</div></header>
+    <h2 style="margin-top:6mm">Wat lees je in dit rapport</h2><ol class="toc">${toc.map(t=>`<li><span>${t[0]}</span><b>${t[1]}</b><i></i><em>${t[2]}</em></li>`).join('')}</ol>
+    <div class="note" style="margin-top:12mm">Dit rapport is gemaakt op basis van de gegevens die u in de hypotheekcheck heeft ingevuld en de leennormen 2027. Bespreek het met uw hypotheekadviseur.</div></section>`;
   return `<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>Uw hypotheekcijfer nu en later – ${esc(namen)}</title><style>
   @page{size:A4;margin:0}
   *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   html,body{margin:0;background:#d9d9d9}
   body{font-family:Poppins,"Segoe UI",Roboto,Arial,sans-serif;color:#334659;font-size:10.5pt;line-height:1.5}
-  .pg{width:210mm;height:297mm;margin:8mm auto;background:#fff;position:relative;overflow:hidden;padding:30mm 16mm 18mm;page-break-after:always;break-after:page;box-shadow:0 2px 14px rgba(0,0,0,.18)}
+  .pg{width:210mm;height:297mm;margin:8mm auto;background:#fff;position:relative;overflow:hidden;padding:34mm 16mm 20mm;page-break-after:always;break-after:page;box-shadow:0 2px 14px rgba(0,0,0,.18)}
   .pg:last-of-type{page-break-after:auto;break-after:auto}
   @media print{html,body{background:#fff}.pg{margin:0;box-shadow:none}.tools{display:none}}
-  .ph{position:absolute;top:0;left:0;right:0;height:18mm;background:#334659;display:flex;align-items:center;justify-content:space-between;padding:0 16mm}
-  .hc{font-weight:700;font-size:12pt;color:#fff;white-space:nowrap}.hc span{background:#65E6D4;color:#334659;padding:.3mm 1.6mm;margin:0 .6mm;border-radius:1mm}.pht{color:#65E6D4;font-weight:700;font-size:9pt;letter-spacing:.3px}
-  .pf{position:absolute;bottom:8mm;left:16mm;right:16mm;display:flex;justify-content:space-between;font-size:8pt;color:#777;border-top:1px solid #e5e5e5;padding-top:3mm}
-  .pf span:last-child{font-weight:800;color:#334659}
-  h2{font-size:22pt;line-height:1.15;margin:0 0 6mm;font-weight:700;display:flex;align-items:center;gap:4mm}
-  h2 .nr{display:inline-grid;place-items:center;width:11mm;height:12.5mm;background:#65E6D4;font-size:15pt;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);flex:none}
-  h3{font-size:12pt;margin:5.5mm 0 2.5mm;font-weight:800}h4{font-size:10.5pt;margin:5mm 0 1mm}
+  .ph{position:absolute;top:0;left:0;right:0;height:22mm;background:#334659;border-bottom:2.2mm solid #65E6D4;display:flex;align-items:center;justify-content:space-between;padding:0 16mm}
+  .hc{font-weight:700;font-size:12pt;color:#fff;white-space:nowrap}.hc span{background:#65E6D4;color:#334659;padding:.3mm 1.6mm;margin:0 .6mm;border-radius:1mm}.pht{color:#65E6D4;font-weight:800;font-size:9.5pt;letter-spacing:.3px;text-transform:uppercase}
+  .pf{position:absolute;bottom:0;left:0;right:0;height:12mm;background:#334659;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 16mm;font-size:8pt}
+  .pf span:last-child{font-weight:700;color:#334659;background:#65E6D4;min-width:9mm;height:9mm;display:grid;place-items:center;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+  h2{font-size:22pt;line-height:1.15;margin:0 0 6mm;font-weight:700;display:flex;align-items:center;gap:4mm;padding-bottom:3mm;border-bottom:1.2mm solid #65E6D4}
+  h2 .nr{display:inline-grid;place-items:center;width:11mm;height:12.5mm;background:#334659;color:#65E6D4;font-size:15pt;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);flex:none}
+  h3{font-size:12pt;margin:5mm 0 2.5mm;font-weight:800;padding-left:3mm;border-left:1.4mm solid #65E6D4}h4{font-size:10.5pt;margin:5mm 0 1mm}
   .intro{margin:0 0 5mm;color:#333}.fine{font-size:8.5pt;color:#777}
-  .ok{color:#1f8a4c;font-weight:800}.bad{color:#E5486B;font-weight:800}
+  .ok{color:#334659;font-weight:800}.bad{color:#E5486B;font-weight:800}
   .cf{display:inline-grid;place-items:center;min-width:8mm;height:8mm;border-radius:50%;background:#65E6D4;font-style:normal;font-weight:700;font-size:10.5pt;padding:0 1mm}.cf.lo{background:#E5486B;color:#fff}
   /* cover */
   .cover{background:#334659;color:#fff;padding:0}
@@ -1151,31 +1159,47 @@ function rapportHTML(ms,sc,le,nu){
   .cover h1{font-size:40pt;line-height:1.05;margin:0 0 10mm;font-weight:700;text-shadow:0 0 0 #000}
   .cvscore{display:flex;align-items:center;gap:6mm;background:#fff;color:#334659;padding:5mm 7mm;max-width:130mm}
   .cvscore span{display:block;font-size:9.5pt;color:#555}.cvscore b{display:block;font-size:12pt}
-  .bigc{flex:none;width:26mm;height:26mm;border-radius:50%;background:#65E6D4;display:grid;place-items:center;font-size:32pt;font-weight:700;color:#334659}.bigc.lo{background:#E5486B;color:#fff}
+  .bigc{flex:none;width:26mm;height:26mm;border-radius:50%;background:#65E6D4;display:grid;place-items:center;font-size:32pt;font-weight:700;color:#334659}.bigc.lo,.hero .bigc.lo{background:#E5486B;color:#fff}
   .cvfoot{position:absolute;left:18mm;bottom:16mm;color:#65E6D4;font-weight:700;font-size:10pt}
   /* brief */
   .letter{padding-top:34mm}.letter .adr{margin-bottom:10mm;line-height:1.6}
   .meta{border-collapse:collapse;margin-bottom:9mm}.meta th{text-align:left;font-weight:400;color:#777;padding:1mm 8mm 1mm 0}.meta td{padding:1mm 0}
   .letter p{margin:0 0 3mm}.letter ul{margin:0 0 3mm;padding-left:5mm}.groet{margin-top:10mm!important}
   /* samenvatting */
-  .hero{display:flex;gap:6mm;align-items:center;background:#EFFCFA;padding:4.5mm 5mm;border-left:2.5mm solid #65E6D4}
-  .hero .bigc{width:26mm;height:26mm;font-size:32pt}
+  .hero{display:flex;gap:6mm;align-items:center;background:#65E6D4;padding:4mm 5mm;border-left:2.5mm solid #334659}
+  .hero .bigc{background:#334659;color:#65E6D4;width:21mm;height:21mm;font-size:26pt}
   .lbl{margin:0 0 2mm;font-weight:700}.verd{margin:2.5mm 0 0;font-size:12.5pt;font-weight:800}
   .sch{display:grid;grid-template-columns:repeat(10,1fr);border:2px solid #334659;background:#fff}
   .sch span{text-align:center;padding:1.6mm 0;font-weight:800;font-size:9.5pt;color:#555;border-right:1px solid #eee}.sch span:last-child{border:0}
   .sch span.lo{color:#E5486B}.sch span.on{background:#65E6D4;color:#334659}.sch span.lo.on{background:#E5486B;color:#fff}
-  .note{background:#f6f6f6;padding:3mm 4mm;margin:4mm 0;font-size:9pt}
+  .note{background:#f6f6f6;padding:4mm 5mm;margin:5mm 0;font-size:9.5pt}
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm}
-  .kpi{border:2px solid #334659;padding:3mm}.kpi span{display:block;font-size:8.5pt;color:#555}.kpi b{font-size:13pt}.kpi small{display:block;font-size:7.5pt;color:#888}
+  .kpi{background:#334659;color:#fff;padding:2.6mm 3mm}.kpi span{display:block;font-size:8.5pt;color:#ccc}.kpi b{font-size:13pt;color:#65E6D4}.kpi small{display:block;font-size:7.5pt;color:#aaa}
   .tlx{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm}
   .tli{border-top:4px solid #334659;padding-top:2mm;font-size:8.5pt;position:relative}.tli.neg{border-color:#E5486B}
-  .tli .cf{float:right;min-width:7mm;height:7mm;font-size:9pt}.tli b{display:block;font-size:9.5pt}.tli span{display:block;color:#444;min-height:7mm}.tli i{font-style:normal;font-weight:800}.tli i.ok{color:#1f8a4c}.tli i.bad{color:#E5486B}
+  .tli .cf{float:right;min-width:7mm;height:7mm;font-size:9pt}.tli b{display:block;font-size:9.5pt}.tli span{display:block;color:#222;min-height:5mm}.tli i{font-style:normal;font-weight:800}.tli i.ok{color:#334659}.tli i.bad{color:#E5486B}
   .lev{display:grid;grid-template-columns:1fr 1fr;gap:1.5mm 6mm}
-  .lev div{display:grid;grid-template-columns:8mm 1fr auto;align-items:center;gap:3mm;padding:.8mm 0;border-bottom:1px solid #eee;font-size:9pt}
-  .lev .cf{min-width:7mm;height:7mm;font-size:9pt}.lev i{font-style:normal;font-weight:800}.lev i.ok{color:#1f8a4c}.lev i.bad{color:#E5486B}
+  .lev div{display:grid;grid-template-columns:8mm 1fr auto;align-items:center;gap:3mm;padding:.2mm 0;border-bottom:1px solid #eee;font-size:9pt}
+  .lev .cf{min-width:7mm;height:7mm;font-size:9pt}.lev i{font-style:normal;font-weight:800}.lev i.ok{color:#334659}.lev i.bad{color:#E5486B}
   /* momenten */
+  .hb1{display:flex;height:3.4mm;background:#f1f1f1;border:1px solid #334659}.hb1 i{display:block;height:100%}
+  i.d{background:#334659}i.g{background:#65E6D4}
+  .mlist{display:flex;flex-direction:column;gap:3.5mm;margin-bottom:4mm}
+  .mk{display:grid;grid-template-columns:1fr 82mm;gap:5mm;border:0!important;padding:0!important;break-inside:avoid}
+  .mkl{display:flex;gap:3mm}.mkl .dt{display:block;font-size:8.5pt;color:#555}.mkl>div>b{font-size:11.5pt;display:block}.mkl p{font-size:8.4pt;margin:1mm 0 1.6mm;line-height:1.42}
+  .hx{width:8mm;height:8mm;flex:none;fill:none;stroke:#334659;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.hx.neg{stroke:#E5486B}
+  .mkc{display:flex;align-items:center;gap:2mm;font-size:8pt;color:#555}.mkc .cf{min-width:7mm;height:7mm;font-size:9pt}
+  .mkp{background:#EFFCFA;border-left:1.4mm solid #334659;padding:3.5mm;display:grid;grid-template-columns:16mm 1fr;gap:4mm;align-items:stretch}
+  .vb{display:flex;flex-direction:column;height:28mm;background:#fff;border:1px solid #334659}.vb i{display:block;width:100%}
+  .mkv{font-size:8pt;display:grid;grid-template-columns:1fr auto;column-gap:3mm;row-gap:.4mm;align-content:center}.mkv span{color:#555;white-space:nowrap}.mkv b{text-align:right;white-space:nowrap}
+  .calc{display:grid;grid-template-columns:1fr 78mm;gap:5mm;margin:4mm 0}.calc p{font-size:8.3pt;margin:1mm 0 0;color:#333}
+  .calc table{border:2px solid #334659;border-collapse:collapse;font-size:8.8pt;width:100%}.calc th{text-align:left;padding:2mm 3mm;border-bottom:1px solid #ddd}.calc td{padding:1.6mm 3mm;vertical-align:top}.calc td:first-child{font-weight:700;width:10mm}.calc tr.tot td{border-top:1px solid #334659;font-weight:800}
+  .band .cf{background:#334659;color:#65E6D4}.band .cf.lo{background:#E5486B;color:#fff}.band .tli i.bad{color:#b0122f}
+  .band{background:#65E6D4;padding:2mm 5mm 3mm;margin-top:4mm}.band h3{margin:1mm 0 3mm}
+  .band .tlx{position:relative}.band .tli{border-top:2px solid #334659;padding-top:3mm}.band .tli:before{content:"";position:absolute;margin-top:-4.6mm;width:2.4mm;height:2.4mm;border-radius:50%;background:#334659}.band .tli.neg{border-color:#E5486B}.band .tli.neg:before{background:#E5486B}
+  .toc{list-style:none;padding:0;margin:8mm 0 0;font-size:13pt}.toc li{display:flex;align-items:baseline;gap:6mm;padding:3.2mm 0;border-bottom:1px solid #eee}.toc span{width:8mm;font-weight:800}.toc i{flex:1}.toc em{font-style:normal;color:#777}
   .legend{display:flex;gap:6mm;font-size:8.5pt;color:#555;margin:0 0 4mm}.legend i{display:inline-block;width:4mm;height:2.5mm;margin-right:1.5mm;vertical-align:middle}
-  i.k{background:#334659}i.y{background:#65E6D4}i.r{background:#E5486B}i.g{background:#9a9a9a}
+  i.k{background:#334659}i.y{background:#65E6D4}i.r{background:#E5486B}i.m{background:#9a9a9a}
   .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
   .mk{border:2px solid #334659;padding:3.5mm 4mm;break-inside:avoid}.mk.neg{border-color:#E5486B}
   .mkh{display:flex;justify-content:space-between;align-items:flex-start;gap:3mm;margin-bottom:2.5mm}.mkh b{display:block;font-size:11pt}.mkh span{font-size:8.5pt;color:#444}
@@ -1184,23 +1208,23 @@ function rapportHTML(ms,sc,le,nu){
   .kv .tot th,.kv .tot td{border-top:1px solid #ddd;font-weight:800;color:#334659}
   .mku{font-size:7.8pt;color:#666;margin:2mm 0 0;line-height:1.4}
   .chart svg{width:100%;height:auto;display:block}
-  .lt{width:100%;border-collapse:collapse;font-size:9pt}.lt th{text-align:left;font-size:8pt;color:#555;font-weight:700;border-bottom:2px solid #334659;padding:1.5mm 1.5mm}
+  .lt{width:100%;border-collapse:collapse;font-size:9pt}.lt th{text-align:left;font-size:8pt;color:#65E6D4;background:#334659;font-weight:700;padding:1.8mm 1.5mm}
   .lt td{border-bottom:1px solid #eee;padding:1.5mm 1.5mm;vertical-align:middle}.lt .r{text-align:right;white-space:nowrap}.lt small{display:block;color:#888;font-size:7.5pt}.lt small.il{display:inline;margin-left:2mm}
-  .lt.le .bcell{width:32mm}.lt.le .hb{margin:0}.lt.le .hbr{height:2.4mm}.lt .cf{min-width:7mm;height:7mm;font-size:9pt}
+  .lt.le .bcell{width:30mm}.lt .cf{min-width:7mm;height:7mm;font-size:9pt}
   /* gegevens */
   .two{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
   .gg{width:100%;border-collapse:collapse;font-size:9pt;margin-bottom:3mm}.gg th{text-align:left;font-weight:400;color:#555;padding:1.1mm 0;border-bottom:1px solid #eee;width:55%}.gg td{padding:1.1mm 0;border-bottom:1px solid #eee;font-weight:600}
-  .gg tr.hd th{font-weight:800;color:#334659;border-bottom:2px solid #65E6D4;padding-top:2mm}
+  .gg tr.hd th{font-weight:800;color:#65E6D4;background:#334659;border:0;padding:1.6mm 2mm}
   /* plannen / weten */
   .need{background:#334659;color:#fff;padding:5mm 6mm;margin-bottom:2mm}.need span{color:#65E6D4;font-weight:800;font-size:11pt}.need p{margin:1.5mm 0 0}
   .opts{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
   .opt{border-left:2mm solid #65E6D4;background:#fafafa;padding:3mm 4mm;font-size:9pt}.opt b{font-size:10pt}.opt p{margin:1mm 0 0}
-  .contact{display:grid;grid-template-columns:1fr 1fr;gap:4mm;margin-top:7mm}.contact>div{background:#65E6D4;padding:4mm 5mm}.contact span{font-weight:800}.contact p{margin:1mm 0 0}
+  .contact{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;margin-top:2mm}.contact>div{background:#65E6D4;padding:4mm 5mm}.contact span{font-weight:800}.contact p{margin:1mm 0 0}
   .disc{font-size:7.8pt;color:#777;margin-top:6mm;line-height:1.45}
   .tools{position:fixed;top:10px;right:10px;z-index:5}.tools button{background:#65E6D4;color:#334659;border:2px solid #334659;padding:9px 14px;font-weight:700;cursor:pointer}
   </style></head><body>
   <div class="tools"><button onclick="window.print()">Afdrukken / opslaan als PDF</button></div>
-  ${brief}${cover}${p1}${pM}${pChart}${pLE}${pG}${pP}${pW}
+  ${brief}${cover}${pToc}${p1}${pM}${pChart}${pLE}${pG}${pP}${pW}
   <script>setTimeout(function(){try{window.focus();window.print();}catch(e){}},500);<\/script>
   </body></html>`;
 }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blinqx Hypotheekcijfer</title>
+<title>Hypotheekcheck – bepaal je hypotheekcijfer</title>
 <style>
 :root{
   --navy:#010101; --navy-2:#333333; --orange:#FFD31C; --orange-l:#FFF6CC;
@@ -92,12 +92,30 @@ td.r,th.r{text-align:right;white-space:nowrap}
 .kpi{background:var(--sky);border-radius:2px;padding:10px}
 .kpi .l{font-size:12px;color:var(--muted)} .kpi .v{font-size:18px;font-weight:700;color:var(--navy)}
 footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22px 20px 30px;margin-top:10px}
+
+.hero-y{background:var(--orange);padding:34px 30px;margin-bottom:16px;border-radius:2px;position:relative;overflow:hidden}
+.hero-y:after{content:"";position:absolute;right:-60px;top:-40px;width:260px;height:300px;background:#010101;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);opacity:.08}
+.hero-y h1{font-size:36px;line-height:1.15;margin:0 0 14px;font-weight:900;color:#010101}
+.hero-y h1 span{font-size:24px;font-weight:800}
+.hero-y .lead{max-width:640px;font-size:15px;margin:0 0 18px;color:#010101}
+.btn-k{background:#010101;color:#fff;border-color:#010101}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.mitem{border:1.5px solid #010101;border-radius:2px;padding:14px}
+.mitem h3{font-size:15px;margin:8px 0 6px}.mitem p{margin:0;font-size:13.5px}
+.mic{width:34px;height:34px;display:grid;place-items:center;background:var(--orange);font-weight:900;font-size:17px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.two-c{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.two-c{grid-template-columns:1fr}.hero-y h1{font-size:28px}}
+.vink,.docl{margin:0;padding:0;list-style:none}
+.vink li,.docl li{padding:6px 0 6px 28px;position:relative;font-size:14px}
+.vink li:before{content:"✓";position:absolute;left:0;top:5px;width:20px;height:20px;border-radius:50%;background:var(--orange);display:grid;place-items:center;font-size:12px;font-weight:900}
+.docl li:before{content:"";position:absolute;left:4px;top:13px;width:10px;height:10px;background:#010101;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.ask-y{background:var(--orange-l);border-left:5px solid var(--orange);padding:14px 16px;margin-bottom:16px;font-size:14px}
 </style>
 </head>
 <body>
 <header>
   <div class="logo"><svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><path d="M13 1 25 8v12l-12 7L1 20V8z" fill="#FFD31C"/><path d="M8 9h7a4 4 0 0 1 0 8h-2l4 4h-3l-6-6V9z" fill="#010101"/></svg><span>BLINQX</span></div>
-  <div class="sub">Hypotheekcijfer – betaalbaarheid nu en later</div>
+  <div class="sub">Hypotheekcheck – bepaal je hypotheekcijfer</div>
   <div class="sp"></div>
   <button class="btn btn-l" id="btnVoorbeeld" type="button">Voorbeeld laden</button>
   <button class="btn btn-l" id="btnInst" type="button">Instellingen</button>
@@ -135,8 +153,62 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 1 -->
-<section class="card step" data-step="1" data-title="Over jou">
-  <h2><span class="n">1</span> Over jou en je huidige inkomen</h2>
+<section class="step intro-step" data-step="1" data-title="Start">
+  <div class="hero-y">
+    <div class="hero-txt">
+      <h1>Hypotheekcheck<br><span>Bepaal je hypotheekcijfer</span></h1>
+      <p class="lead">Weet waar je aan toe bent. Nu en later. Met de hypotheekcheck zie je eenvoudig en snel of je je hypotheek kunt blijven betalen, nu en op belangrijke momenten in de toekomst. In het rapport lees je ook wat je kunt doen om op tijd af te lossen: sparen, extra aflossen of een andere hypotheekvorm.</p>
+      <button class="btn btn-k" type="button" data-next>Start de hypotheekcheck →</button>
+      <div class="hint" style="color:#010101;margin-top:8px">Duurt ongeveer 15 minuten. Je bestaande hypotheekcontract verandert niet.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Belangrijke momenten tijdens de looptijd van je hypotheek</h2>
+    <div class="body">
+      <p class="intro">De check rekent uit of je hypotheek op deze momenten nog past bij je inkomen, volgens de leennormen van de overheid.</p>
+      <div class="mgrid">
+        <div class="mitem"><div class="mic">%</div><h3>Einde hypotheekrenteaftrek</h3><p>Hypotheekrente is maximaal 30 jaar aftrekbaar. Voor veel hypotheken stopt de aftrek in 2031. Je netto maandlasten stijgen dan.</p></div>
+        <div class="mitem"><div class="mic">⟳</div><h3>Einde rentevaste periode</h3><p>Je krijgt een nieuwe rente. Kun je de hypotheek dan nog betalen, ook als de rente hoger is?</p></div>
+        <div class="mitem"><div class="mic">☂</div><h3>AOW-leeftijd en pensioen</h3><p>Na je pensioen daalt je inkomen meestal. Ook het pensioen van je partner telt mee.</p></div>
+        <div class="mitem"><div class="mic">⚑</div><h3>Einde looptijd</h3><p>Een aflossingsvrije hypotheek moet je op de einddatum in één keer terugbetalen: met eigen geld, door verkoop of met een nieuwe hypotheek. Een nieuw aflossingsvrij deel mag maximaal 50% van de marktwaarde van je huis zijn.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-c">
+    <div class="card">
+      <h2>Wat levert de check je op?</h2>
+      <div class="body">
+        <ul class="vink">
+          <li>Goed inzicht in je situatie, nu en later</li>
+          <li>Een hypotheekcijfer van 1 tot 10, ook per moment en per life event</li>
+          <li>De mogelijkheden voor jouw situatie</li>
+          <li>Een persoonlijk rapport om te downloaden</li>
+          <li>Gebaseerd op je actuele gegevens en de leennormen 2027</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Dit heb je nodig</h2>
+      <div class="body">
+        <ul class="docl">
+          <li><b>Inkomen</b>: je loonstrook of het UWV-verzekeringsbericht (via mijn.uwv.nl)</li>
+          <li><b>Pensioen</b>: je opgebouwde en verwachte pensioen (via mijnpensioenoverzicht.nl)</li>
+          <li><b>Hypotheek</b>: je jaaroverzicht met schuld, rente en einddata per leningdeel</li>
+          <li><b>Woning</b>: de WOZ-waarde en het energielabel</li>
+          <li><b>Overig</b>, als dat voor jou geldt: kredieten, studieschuld, partneralimentatie, erfpachtcanon, private lease of je aangifte inkomstenbelasting (ondernemers)</li>
+        </ul>
+        <div class="hint">Heb je niet alles bij de hand? Vul een schatting in; de check geeft dan nog steeds veel inzicht.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ask-y"><b>Vragen?</b> Bel <span class="o-tel">020 - 758 21 11</span> of mail naar <span class="o-mail">hello@blinqx.tech</span>. Wij helpen je graag.</div>
+</section>
+
+<section class="card step" data-step="2" data-title="Over jou">
+  <h2><span class="n">2</span> Over jou en je huidige inkomen</h2>
   <div class="body">
     <p class="intro">Vul je gegevens en je huidige bruto jaarinkomen in. Heb je een partner die mee-aanvraagt? Vul dan ook diens gegevens in.</p>
     <div class="sub-h">Aanvrager</div>
@@ -164,8 +236,8 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 2 -->
-<section class="card step" data-step="2" data-title="Pensioen">
-  <h2><span class="n">2</span> Je inkomen op pensioendatum</h2>
+<section class="card step" data-step="3" data-title="Pensioen">
+  <h2><span class="n">3</span> Je inkomen op pensioendatum</h2>
   <div class="body">
     <p class="intro">Vanaf de AOW-datum verandert je inkomen. Vul het totale bruto inkomen in dat je dan verwacht: AOW plus aanvullend pensioen. Je vindt dit op <b>mijnpensioenoverzicht.nl</b>.</p>
     <div class="grid">
@@ -181,8 +253,8 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 3 -->
-<section class="card step" data-step="3" data-title="Eigen geld">
-  <h2><span class="n">3</span> Eigen geld en verplichtingen</h2>
+<section class="card step" data-step="4" data-title="Eigen geld">
+  <h2><span class="n">4</span> Eigen geld en verplichtingen</h2>
   <div class="body">
     <p class="intro">Hoeveel eigen geld heb je nu beschikbaar om af te lossen? Denk aan spaargeld of beleggingen. Houd zelf rekening met een buffer voor onverwachte uitgaven.</p>
     <div class="grid">
@@ -198,8 +270,8 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 4 -->
-<section class="card step" data-step="4" data-title="Hypotheek">
-  <h2><span class="n">4</span> Je hypotheek</h2>
+<section class="card step" data-step="5" data-title="Hypotheek">
+  <h2><span class="n">5</span> Je hypotheek</h2>
   <div class="body">
     <p class="intro">Neem de gegevens over van je jaaroverzicht. Vul per leningdeel de huidige schuld in.</p>
     <div class="grid">
@@ -215,8 +287,8 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 5 -->
-<section class="card step" data-step="5" data-title="Life events">
-  <h2><span class="n">5</span> Life events</h2>
+<section class="card step" data-step="6" data-title="Life events">
+  <h2><span class="n">6</span> Life events</h2>
   <div class="body">
     <p class="intro">Wat gebeurt er als je inkomen onverwacht daalt? Controleer de aannames; de standaardwaarden zijn een vereenvoudiging.</p>
     <div class="grid">
@@ -237,9 +309,9 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 6 -->
-<section class="step" data-step="6" data-title="Resultaat">
+<section class="step" data-step="7" data-title="Resultaat">
   <div class="card">
-    <h2><span class="n">6</span> Resultaat</h2>
+    <h2><span class="n">7</span> Resultaat</h2>
     <div class="score-wrap">
       <div>De betaalbaarheid van je hypotheek scoort een:</div>
       <div class="score-scale" id="scale"></div>
@@ -255,8 +327,8 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 7 -->
-<section class="card step" data-step="7" data-title="Wat ga je doen?">
-  <h2><span class="n">7</span> Wat ga je doen?</h2>
+<section class="card step" data-step="8" data-title="Wat ga je doen?">
+  <h2><span class="n">8</span> Wat ga je doen?</h2>
   <div class="body">
     <div id="plannenBlok"></div>
   </div>
@@ -767,9 +839,9 @@ function maandDeel(p){const n=Math.max(1,mdiff(S.peil,p.eind)),i=p.rente/100/12;
 let stap=1;const STAPPEN=$$('.step');const N=STAPPEN.length;
 function valideer(n){
   const fout=[];const req=(id,ok)=>{const el=$('#'+id);el.classList.toggle('err',!ok);if(!ok)fout.push(el);};
-  if(n===1){req('a_geb',!!$('#a_geb').value);req('a_ink',pE($('#a_ink').value)>0);if($('#p_actief').checked)req('p_geb',!!$('#p_geb').value);}
-  if(n===2){req('a_pens',pE($('#a_pens').value)>0);}
-  if(n===4){const ok=$$('#delenLijst .deel').some(c=>pE(c.querySelector('[data-k="bedrag"]').value)>0&&c.querySelector('[data-k="eind"]').value);
+  if(n===2){req('a_geb',!!$('#a_geb').value);req('a_ink',pE($('#a_ink').value)>0);if($('#p_actief').checked)req('p_geb',!!$('#p_geb').value);}
+  if(n===3){req('a_pens',pE($('#a_pens').value)>0);}
+  if(n===5){const ok=$$('#delenLijst .deel').some(c=>pE(c.querySelector('[data-k="bedrag"]').value)>0&&c.querySelector('[data-k="eind"]').value);
     if(!ok){alert('Vul minimaal één leningdeel in met schuld en einddatum.');return false;}}
   if(fout.length){fout[0].focus();return false;}
   return true;
@@ -780,7 +852,8 @@ function toon(n){
   $('#stepper').innerHTML=STAPPEN.map(s=>{const k=+s.dataset.step;return `<button type="button" data-go="${k}" class="${k===stap?'act':k<stap?'done':''}"><b>Stap ${k}</b>${s.dataset.title}</button>`;}).join('');
   $('#btnPrev').style.visibility=stap===1?'hidden':'visible';
   $('#btnNext').hidden=stap===N;$('#btnRapport').hidden=stap!==N;
-  $('#btnNext').textContent=stap===N-2?'Bekijk resultaat →':'Volgende →';
+  $('#btnNext').textContent=stap===1?'Start de hypotheekcheck →':stap===N-2?'Bekijk resultaat →':'Volgende →';
+  $('#mini').style.display=stap===1?'none':'';
   $('#navInfo').textContent=`Stap ${stap} van ${N}`;
   render();window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -788,9 +861,12 @@ $('#stepper').addEventListener('click',e=>{const b=e.target.closest('[data-go]')
   if(k>stap){for(let i=stap;i<k;i++)if(!valideer(i)){toon(i);return;}}toon(k);});
 $('#btnNext').onclick=()=>{if(valideer(stap))toon(stap+1);};
 $('#btnPrev').onclick=()=>toon(stap-1);
+$$('[data-next]').forEach(b=>b.onclick=()=>toon(2));
+$$('.o-tel').forEach(e=>e.textContent=$('#o_tel').value);$$('.o-mail').forEach(e=>e.textContent=$('#o_mail').value);
+document.addEventListener('input',e=>{if(e.target.id==='o_tel')$$('.o-tel').forEach(x=>x.textContent=e.target.value);if(e.target.id==='o_mail')$$('.o-mail').forEach(x=>x.textContent=e.target.value);});
 $('#btnInst').onclick=()=>{const p=$('#instellingen');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({behavior:'smooth'});};
 function miniScore(){const sc=window.__laatste&&window.__laatste.sc;
-  $('#mini').innerHTML=stap<6&&sc&&sc.c?`Voorlopig hypotheekcijfer: <b>${sc.c}</b> <span>(wordt bijgewerkt terwijl je invult)</span>`:'';}
+  $('#mini').innerHTML=stap>1&&stap<7&&sc&&sc.c?`Voorlopig hypotheekcijfer: <b>${sc.c}</b> <span>(wordt bijgewerkt terwijl je invult)</span>`:'';}
 
 voorbeeld();toon(1);
 })();

@@ -17,7 +17,7 @@
 .hero{background:var(--y);position:relative;overflow:hidden;clip-path:polygon(0 0,100% 0,100% 100%,0 86%);padding-bottom:40px}
 .hero:after{content:"";position:absolute;right:6%;top:14%;width:300px;height:340px;background:var(--k);opacity:1;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
 .hero .wrap{padding-top:56px;padding-bottom:70px;position:relative;z-index:1}.hero .wrap>*{max-width:600px}
-.hero:before{content:"7";position:absolute;right:6%;top:14%;width:300px;height:340px;display:grid;place-items:center;color:var(--y);font-size:230px;font-weight:900;line-height:1;z-index:2}
+.hero:before{content:attr(data-n);position:absolute;right:6%;top:14%;width:300px;height:340px;display:grid;place-items:center;color:var(--y);font-size:230px;font-weight:900;line-height:1;z-index:2}
 @media (max-width:980px){.hero:after,.hero:before{display:none}}
 .hero h1{font-size:46px;line-height:1.1;margin:0 0 16px;font-weight:900;max-width:760px}
 .hero p{font-size:18px;max-width:640px;margin:0 0 24px}
@@ -75,6 +75,10 @@ form.cf .rad input{width:auto}
 .lbh{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--k);color:#fff;position:sticky;top:0}
 .lbh button{background:none;border:0;color:#fff;font-size:28px;line-height:1;cursor:pointer}
 .lbb{overflow:auto;max-height:calc(92vh - 50px)}.lbb img{display:block;width:100%;height:auto}
+.person{display:flex;gap:16px;align-items:flex-start}
+.person .av{flex:none;width:76px;height:86px;position:relative;background:var(--y);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);display:grid;place-items:center;font-weight:900;font-size:22px}
+.person .av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.person .pi{min-width:0}.person .pi b{display:block}.person a{overflow-wrap:anywhere}
 .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:center}
 .strip img{min-width:0;width:100%;height:96px;padding:16px 22px!important;border:1px solid #d5dce6!important;object-fit:contain;background:#fff;border:2px solid var(--k);padding:10px}
 @media (max-width:980px){.strip{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -231,7 +235,7 @@ form.cf .rad input{width:auto}
 <button class="burger" type="button" aria-label="Menu" onclick="document.querySelector('.sitenav').classList.toggle('open')">☰</button>
 <nav class="sitenav"><a href="" class="on">Home</a><a href="bepaal-uw-hypotheekcijfer/" class="">Bepaal je hypotheekcijfer</a><a href="voor-consumenten/" class="">Voor consumenten</a><a href="voor-hypotheekadviseurs/" class="">Voor adviseurs</a><a href="voor-geldverstrekkers/" class="">Voor geldverstrekkers</a><a href="contact/" class="">Contact</a></nav></div></div>
 <main>
-<section class="hero"><div class="wrap"><h1>Je hypotheek verdient aandacht. Bepaal je <mark>hypotheekcijfer</mark>!</h1>
+<section class="hero" data-n="7"><div class="wrap"><h1>Je hypotheek verdient aandacht. Bepaal je <mark>hypotheekcijfer</mark>!</h1>
 <p>Kun je je hypotheek blijven betalen, nu en later? Met de hypotheekcheck zie je het in een paar stappen, met een cijfer van 1 tot 10 en een persoonlijk rapport.</p>
 <div class="btns"><a class="b k" href="bepaal-uw-hypotheekcijfer/">Start de hypotheekcheck →</a><a class="b w" href="#inzicht">Meer info</a></div></div></section>
 
@@ -421,7 +425,7 @@ form.cf .rad input{width:auto}
 </svg></a></div>
 <div class="cols">
 <div><b>Adres</b>Hullenbergweg 109<br>1101 CL Amsterdam, NL<br>T: <a href="tel:+31207582111">020 - 758 21 11</a><br><a href="https://www.blinqx.tech" target="_blank" rel="noopener noreferrer">www.blinqx.tech</a></div>
-<div><b>Voor meer informatie</b>Oscar Kuypers<br>Business Development Manager Blinqx V&amp;H<br>M: <a href="tel:+31628321881">+31 6 28 321 881</a><br>E: <a href="mailto:oscar.kuypers@blinqx.tech">oscar.kuypers@blinqx.tech</a> · <a href="https://www.linkedin.com/in/oscar-kuypers-3b898aa/" target="_blank" rel="noopener noreferrer">LinkedIn</a><br><br>Jeroen Oversteegen<br>Non Executive Director Business Partners<br>M: <a href="tel:+31621247257">+31 6 21 247 257</a><br>E: <a href="mailto:jeroen.oversteegen@blinqx.tech">jeroen.oversteegen@blinqx.tech</a> · <a href="https://www.linkedin.com/in/oversteegen/" target="_blank" rel="noopener noreferrer">LinkedIn</a><br><br>Igor Driessen<br>Director Banking &amp; Financial Services<br>M: <a href="tel:+31620615614">+31 6 20 615 614</a><br>E: <a href="mailto:igor.driessen@blinqx.tech">igor.driessen@blinqx.tech</a> · <a href="https://www.linkedin.com/in/igor-driessen/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+<div><b>Voor meer informatie</b>Igor Driessen<br>Director Banking &amp; Financial Services<br>M: <a href="tel:+31620615614">+31 6 20 615 614</a><br>E: <a href="mailto:igor.driessen@blinqx.tech">igor.driessen@blinqx.tech</a><br><a href="https://www.linkedin.com/in/igor-driessen/" target="_blank" rel="noopener noreferrer">LinkedIn</a><br><br>Oscar Kuypers<br>Business Development Manager Blinqx V&amp;H<br>M: <a href="tel:+31628321881">+31 6 28 321 881</a><br>E: <a href="mailto:oscar.kuypers@blinqx.tech">oscar.kuypers@blinqx.tech</a><br><a href="https://www.linkedin.com/in/oscar-kuypers-3b898aa/" target="_blank" rel="noopener noreferrer">LinkedIn</a><br><br>Jeroen Oversteegen<br>Non Executive Director Business Partners<br>M: <a href="tel:+31621247257">+31 6 21 247 257</a><br>E: <a href="mailto:jeroen.oversteegen@blinqx.tech">jeroen.oversteegen@blinqx.tech</a><br><a href="https://www.linkedin.com/in/oversteegen/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
 <div><b>Sitemap</b><a href="">Home</a><br><a href="bepaal-uw-hypotheekcijfer/">Bepaal je hypotheekcijfer</a><br><a href="voor-consumenten/">Voor consumenten</a><br><a href="voor-hypotheekadviseurs/">Voor adviseurs</a><br><a href="voor-geldverstrekkers/">Voor geldverstrekkers</a><br><a href="contact/">Contact</a><br><a href="voor-geldverstrekkers/use-cases/">Use cases</a></div>
 </div><div class="disc">Hypotheekcijfer is een oplossing van Blinqx. De hypotheekcheck geeft een indicatie op basis van de ingevulde gegevens en de leennormen 2027 (Tijdelijke regeling hypothecair krediet). Dit is geen hypotheekadvies.</div></div></footer>
 </body></html>

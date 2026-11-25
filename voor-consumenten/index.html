@@ -90,6 +90,11 @@ form.cf .rad input{width:auto}
 .hexpic:before{content:"";position:absolute;inset:0;background:var(--k);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);transform:translate(14px,14px)}
 .hexpic>div{position:absolute;inset:0;background:var(--y);display:grid;place-items:center;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);overflow:hidden}
 .hexpic img{width:82%;height:auto;display:block;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.advform input[type=file]{padding:8px;background:#fff}
+.advprev{display:flex;gap:20px;align-items:center;background:#fff;padding:16px;margin:16px 0;clip-path:polygon(16px 0,100% 0,100% 100%,0 100%,0 16px)}
+.advprev .lp{width:220px;height:90px;display:grid;place-items:center;border:1px dashed #bbb;color:#888;font-size:13px;flex:none}
+.advprev .lp img{max-width:100%;max-height:100%;object-fit:contain}
+@media (max-width:560px){.advprev{flex-direction:column;align-items:flex-start}}
 .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:center}
 .strip img{min-width:0;width:100%;height:96px;padding:16px 22px!important;border:1px solid #d5dce6!important;object-fit:contain;background:#fff;border:2px solid var(--k);padding:10px}
 @media (max-width:980px){.strip{grid-template-columns:repeat(4,minmax(0,1fr))}}

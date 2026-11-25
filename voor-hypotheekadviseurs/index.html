@@ -90,6 +90,11 @@ form.cf .rad input{width:auto}
 .hexpic:before{content:"";position:absolute;inset:0;background:var(--k);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);transform:translate(14px,14px)}
 .hexpic>div{position:absolute;inset:0;background:var(--y);display:grid;place-items:center;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);overflow:hidden}
 .hexpic img{width:82%;height:auto;display:block;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.advform input[type=file]{padding:8px;background:#fff}
+.advprev{display:flex;gap:20px;align-items:center;background:#fff;padding:16px;margin:16px 0;clip-path:polygon(16px 0,100% 0,100% 100%,0 100%,0 16px)}
+.advprev .lp{width:220px;height:90px;display:grid;place-items:center;border:1px dashed #bbb;color:#888;font-size:13px;flex:none}
+.advprev .lp img{max-width:100%;max-height:100%;object-fit:contain}
+@media (max-width:560px){.advprev{flex-direction:column;align-items:flex-start}}
 .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:center}
 .strip img{min-width:0;width:100%;height:96px;padding:16px 22px!important;border:1px solid #d5dce6!important;object-fit:contain;background:#fff;border:2px solid var(--k);padding:10px}
 @media (max-width:980px){.strip{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -248,7 +253,7 @@ form.cf .rad input{width:auto}
 <main>
 <section class="hero" data-n="3"><div class="wrap"><h1>Het hypotheekcijfer in je <mark>adviespraktijk</mark></h1>
 <p>Breng snel in beeld welke klanten een betaalbaarheidsrisico hebben en gebruik het rapport als start van een goed gesprek.</p>
-<div class="btns"><a class="b k" href="../bepaal-uw-hypotheekcijfer/">Bekijk de tool →</a><a class="b w" href="../contact/">Neem contact op</a></div></div></section>
+<div class="btns"><a class="b k" href="#eigen-rapport">Maak een rapport met jouw gegevens →</a><a class="b w" href="../bepaal-uw-hypotheekcijfer/">Bekijk de tool</a><a class="b w" href="../contact/">Neem contact op</a></div></div></section>
 <section class="sec"><div class="wrap grid3">
 <div class="tile"><div class="hex"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Inzicht in één cijfer</h3><p>Een hypotheekcijfer van 1 tot 10, met een cijfer per belangrijk moment en per life event, getoetst aan de leennormen 2027.</p></div>
 <div class="tile"><div class="hex"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></div><h3>Gespreksstarter</h3><p>Het rapport laat zien waar het knelt en welke mogelijkheden er zijn: extra aflossen, sparen, omzetten of looptijd verlengen.</p></div>
@@ -259,6 +264,49 @@ form.cf .rad input{width:auto}
 <div><h2 class="h">Gegevens sneller ophalen</h2><span class="bar"></span>
 <p>Met een Blinqx-account haal je gegevens op via Ockto of laat je documenten uploaden en uitlezen. Zonder account vult je klant de check handmatig in.</p>
 <div class="box">Ockto en documenten uploaden zijn alleen beschikbaar voor professionals met een Blinqx-account.</div></div></div></section>
+<section class="sec yl" id="eigen-rapport"><div class="wrap">
+<h2 class="h">Rapport met <mark>jouw</mark> gegevens</h2><span class="bar"></span>
+<p class="lead">Vul je gegevens in en upload je logo. De hypotheekcheck en het rapport komen dan op jouw naam: met jouw logo, bedrijfsnaam, adres en contactgegevens. In het rapport staat geen verwijzing naar Blinqx.</p>
+<form class="cf advform" id="advForm" data-tool="../bepaal-uw-hypotheekcijfer/" autocomplete="on">
+ <div class="grid3">
+  <div><label for="a_n">Naam *</label><input id="a_n" name="naam" required autocomplete="name"></div>
+  <div><label for="a_f">Functie</label><input id="a_f" name="functie" placeholder="Hypotheekadviseur"></div>
+  <div><label for="a_b">Bedrijfsnaam *</label><input id="a_b" name="bedrijf" required autocomplete="organization"></div>
+  <div><label for="a_a">Adres</label><input id="a_a" name="adres" autocomplete="street-address"></div>
+  <div><label for="a_p">Postcode en plaats</label><input id="a_p" name="pc"></div>
+  <div><label for="a_t">Telefoon</label><input id="a_t" name="tel" inputmode="tel" autocomplete="tel"></div>
+  <div><label for="a_m">E-mail</label><input id="a_m" name="mail" type="email" autocomplete="email"></div>
+  <div><label for="a_w">Website</label><input id="a_w" name="web" placeholder="www.jouwkantoor.nl"></div>
+  <div><label for="a_l">Logo (PNG, JPG of SVG, max. 2 MB)</label><input id="a_l" type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp"></div>
+ </div>
+ <div class="advprev"><div id="advLogoPrev" class="lp">Nog geen logo</div><div id="advPrevTxt"></div></div>
+ <p style="font-size:13px;color:#555">Je gegevens blijven in deze browser (dit tabblad) en worden nergens naartoe gestuurd. Sluit je het tabblad, dan zijn ze weg.</p>
+ <div class="btns"><button class="b k" type="submit">Start de hypotheekcheck met mijn gegevens →</button><button class="b w" type="button" id="advWis">Gegevens wissen</button></div>
+ <p id="advMsg" style="font-weight:700"></p>
+</form>
+</div></section>
+<script>
+(function(){
+ var f=document.getElementById('advForm'),logo='',prev=document.getElementById('advLogoPrev'),msg=document.getElementById('advMsg');
+ var velden=['naam','functie','bedrijf','adres','pc','tel','mail','web'];
+ function lees(){var A={};velden.forEach(function(k){A[k]=f.elements[k].value.trim();});A.logo=logo;return A;}
+ function toon(){var A=lees();document.getElementById('advPrevTxt').innerHTML='';var d=document.getElementById('advPrevTxt');
+   [A.naam,A.functie,A.bedrijf,A.adres,A.pc,A.tel,A.mail,A.web].filter(Boolean).forEach(function(t,i){var e=document.createElement(i===0?'b':'span');e.textContent=t;d.appendChild(e);d.appendChild(document.createElement('br'));});}
+ try{var o=JSON.parse(sessionStorage.getItem('hcAdviseur')||'null');if(o){velden.forEach(function(k){if(o[k])f.elements[k].value=o[k];});if(o.logo){logo=o.logo;prev.innerHTML='<img alt="Logo" src="'+logo+'">';}}}catch(e){}
+ toon();f.addEventListener('input',toon);
+ document.getElementById('a_l').addEventListener('change',function(){var file=this.files[0];if(!file)return;
+   if(file.size>2*1024*1024){msg.textContent='Het logo is groter dan 2 MB.';this.value='';return;}
+   var r=new FileReader();r.onload=function(){var src=r.result;
+     if(file.type==='image/svg+xml'){logo=src;prev.innerHTML='<img alt="Logo" src="'+src+'">';return;}
+     var img=new Image();img.onload=function(){var k=Math.min(1,600/img.width,240/img.height),c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
+       c.getContext('2d').drawImage(img,0,0,c.width,c.height);logo=c.toDataURL('image/png');prev.innerHTML='<img alt="Logo" src="'+logo+'">';};img.src=src;};
+   r.readAsDataURL(file);});
+ document.getElementById('advWis').onclick=function(){try{sessionStorage.removeItem('hcAdviseur');}catch(e){}f.reset();logo='';prev.textContent='Nog geen logo';toon();msg.textContent='Gegevens gewist.';};
+ f.addEventListener('submit',function(e){e.preventDefault();var A=lees();if(!A.naam||!A.bedrijf){msg.textContent='Vul ten minste je naam en bedrijfsnaam in.';return;}
+   try{sessionStorage.setItem('hcAdviseur',JSON.stringify(A));}catch(err){msg.textContent='Je browser staat opslaan in dit tabblad niet toe.';return;}
+   location.href=f.getAttribute('data-tool');});
+})();
+</script>
 <section class="sec"><div class="wrap"><h2 class="h">Kennismaken?</h2><span class="bar"></span>
 <div class="grid3"><div class="person"><div class="av"><img src="/assets/team/igor-driessen.jpg" alt="" onerror="this.remove()"><span>ID</span></div><div class="pi"><b>Igor Driessen</b>Director Banking &amp; Financial Services<br>M: <a href="tel:+31620615614">+31 6 20 615 614</a><br>E: <a href="mailto:igor.driessen@blinqx.tech">igor.driessen@blinqx.tech</a><br><a href="https://www.linkedin.com/in/igor-driessen/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div>
 <div class="person"><div class="av"><img src="/assets/team/oscar-kuypers.jpg" alt="" onerror="this.remove()"><span>OK</span></div><div class="pi"><b>Oscar Kuypers</b>Business Development Manager Blinqx V&amp;H<br>M: <a href="tel:+31628321881">+31 6 28 321 881</a><br>E: <a href="mailto:oscar.kuypers@blinqx.tech">oscar.kuypers@blinqx.tech</a><br><a href="https://www.linkedin.com/in/oscar-kuypers-3b898aa/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div>

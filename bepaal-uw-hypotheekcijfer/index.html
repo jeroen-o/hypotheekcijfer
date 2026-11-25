@@ -213,6 +213,7 @@ a[href*="mijnpensioenoverzicht"],a[href*="mijn.uwv.nl"]{color:inherit;text-decor
 .tooltop{background:#FFF6CC;border-bottom:1px solid #eee}
 .tooltop .in{max-width:1060px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
 .tooltop .sp{flex:1}
+#advBanner{margin-left:14px;background:#FFD31C;color:#010101;padding:4px 10px;font-weight:600;display:inline-flex;gap:8px;align-items:center}#advBanner[hidden]{display:none}#advBanner .btn{padding:3px 8px;font-size:12px}
 #voorbeeldrapport-hint{outline:3px solid #010101;outline-offset:3px}
 .pwdlg{border:2px solid #010101;padding:20px 22px;max-width:360px;width:calc(100% - 32px)}
 .pwdlg::backdrop{background:rgba(0,0,0,.45)}
@@ -401,7 +402,7 @@ function zetLogoCijfer(c){document.querySelectorAll('.hclogo').forEach(function(
 </svg></a>
 <button class="burger" type="button" aria-label="Menu" onclick="document.querySelector('.sitenav').classList.toggle('open')">☰</button>
 <nav class="sitenav"><a href="../" class="">Home</a><a href="../bepaal-uw-hypotheekcijfer/" class="on">Bepaal je hypotheekcijfer</a><a href="../voor-consumenten/" class="">Voor consumenten</a><a href="../voor-hypotheekadviseurs/" class="">Voor adviseurs</a><a href="../voor-geldverstrekkers/" class="">Voor geldverstrekkers</a><a href="../contact/" class="">Contact</a></nav></div></div>
-<div class="tooltop"><div class="in"><span>Hypotheekcheck – bepaal je hypotheekcijfer</span><span class="sp"></span>
+<div class="tooltop"><div class="in"><span>Hypotheekcheck – bepaal je hypotheekcijfer</span><span id="advBanner" hidden></span><span class="sp"></span>
   <button class="btn btn-l btn-s" id="btnVoorbeeld" type="button">Voorbeeld laden</button>
   <button class="btn btn-l btn-s" id="btnInst" type="button">Instellingen</button></div></div>
 
@@ -1311,7 +1312,10 @@ function rapportHTML(ms,sc,le,nu){
   const logoCijfer=el=>{if(!el)return '';const k=el.cloneNode(true);const blob=[...k.querySelectorAll('path')].find(p=>(p.getAttribute('d')||'').startsWith('M140.5,34.4'));
     if(blob){blob.setAttribute('style','fill:#FFD31C');}if(blob&&c0>=1&&c0<=10){const x=n=>9.2+18.17*(n-1);blob.setAttribute('transform','translate('+(x(c0)-x(8)).toFixed(2)+',0)');}
     k.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));return k.outerHTML;};
-  const logo=logoCijfer(document.querySelector('.sitehead .hclogo'));const logoL=logoCijfer(document.querySelector('.sitefoot .hclogo'));
+  let logo=logoCijfer(document.querySelector('.sitehead .hclogo'));let logoL=logoCijfer(document.querySelector('.sitefoot .hclogo'));
+  const A=window.__adviseur||null;
+  if(A){const merk=A.logo?`<img class="advlogo" src="${A.logo}" alt="${esc(A.bedrijf||A.naam)}">`:`<span class="advnaam">${esc(A.bedrijf||A.naam)}</span>`;logo=merk;logoL=`<div class="advbox">${merk}</div>`;}
+  const advBlok=A?[A.naam&&`<b>${esc(A.naam)}</b>`,A.functie&&esc(A.functie),A.bedrijf&&esc(A.bedrijf),A.adres&&esc(A.adres),A.pc&&esc(A.pc),A.tel&&('T: '+esc(A.tel)),A.mail&&('E: '+esc(A.mail)),A.web&&esc(A.web)].filter(Boolean).join('<br>'):'';
   const c=sc.c||0, cls=x=>x<6?'lo':'';
   const gekozen=PLANNEN.filter(p=>S.plannen.includes(p.id)&&p.t), niet=PLANNEN.filter(p=>!S.plannen.includes(p.id)&&p.t);
   const eigenTxt=[S.plannen.includes('anders')?`Iets anders: ${esc(S.plannenTxt.anders)}`:'',S.plannen.includes('niets')?`Niets, omdat: ${esc(S.plannenTxt.niets)}`:''].filter(Boolean);
@@ -1340,7 +1344,7 @@ function rapportHTML(ms,sc,le,nu){
     if(p>=0)return `<tr><td>6</td><td>Basiscijfer: op geen enkel belangrijk moment is de schuld te hoog</td></tr><tr><td>+${c-6}</td><td>Kleinste ruimte ${fP(p*100,1)} van de schuld (${fD(wl.d)})</td></tr><tr class="tot"><td>${c}</td><td>Je hypotheekcijfer</td></tr>`;
     return `<tr><td>!</td><td>Overschrijding ${fP(-p*100,1)} op ${fD(wl.d)}</td></tr><tr class="tot"><td>${c}</td><td>Je hypotheekcijfer</td></tr>`;})();
   const leRows=le.map(e=>`<tr><td><b>${esc(e.naam)}</b>${e.note?`<small>${esc(e.note)}</small>`:''}</td><td class="r">${fE(e.max)}</td><td class="r">${fE(e.schuld-e.verm)}</td><td class="bcell">${hbar(e.max,e.verm,e.schuld)}</td><td class="r ${e.ok?'ok':'bad'}">${e.ok?'+ ':'- '}${fE(Math.abs(e.ruimte))}</td><td class="r"><em class="cf ${cls(e.c)}">${e.c}</em></td></tr>`).join('');
-  const brief=`<section class="pg letter"><header class="ph"><div class="phl">${logo}</div><div class="pht">${esc(o.naam)}</div></header>
+  const brief=`<section class="pg letter"><header class="ph"><div class="phl">${logo}</div><div class="pht">${esc(A?(A.bedrijf||A.naam):o.naam)}</div></header>
     <div class="adr">${esc(namen)}<br>${esc(k.adres)}<br>${esc(k.pc)}</div>
     <table class="meta">${rij('Datum',vandaag)}${S.hypnr?rij('Hypotheeknummer',esc(S.hypnr)):''}${rij('Onderwerp','Je hypotheek scoort een '+(sc.c??'-'))}${rij('Bijlage','Rapport ‘Je hypotheekcijfer nu en later’')}</table>
     <p>${esc(k.aanhef||'Beste '+namen+',')}</p>
@@ -1348,8 +1352,8 @@ function rapportHTML(ms,sc,le,nu){
     <h4>Kunnen we je verder helpen?</h4><p>Dit rapport is geen hypotheekadvies. Wil je de betaalbaarheid verbeteren of heb je vragen over je situatie? Bespreek het rapport dan met een hypotheekadviseur.</p>
     ${S.plannen.length?`<h4>Wat je van plan bent</h4><ul>${PLANNEN.filter(p=>S.plannen.includes(p.id)).map(p=>`<li>${esc(p.l.replace(/^Ik /,'').replace(/:$/,''))}${p.id==='anders'?' '+esc(S.plannenTxt.anders):''}${p.id==='niets'?' '+esc(S.plannenTxt.niets):''}</li>`).join('')}</ul>`:''}
     ${afspraakTekst()?`<h4>Toelichting</h4><p>${afspraakTekst()}</p>`:''}
-    <h4>Vragen?</h4><p>Bel met of mail met je adviseur. Hij helpt je graag.</p>
-    <p class="groet">Met vriendelijke groet,<br><br>${esc(o.afz)||'&nbsp;'}<br>${esc(o.fun)}<br>${esc(o.naam)}</p></section>`;
+    <h4>Vragen?</h4><p>${A?`Neem contact met mij op${A.tel?' via '+esc(A.tel):''}${A.mail?(A.tel?' of ':' via ')+esc(A.mail):''}. Ik help je graag.`:'Bel met of mail met je adviseur. Hij helpt je graag.'}</p>
+    <p class="groet">Met vriendelijke groet,<br><br>${A?[esc(A.naam),esc(A.functie||''),esc(A.bedrijf||'')].filter(Boolean).join('<br>'):(esc(o.afz)||'&nbsp;')+'<br>'+esc(o.fun)+'<br>'+esc(o.naam)}</p>${A?`<div class="advfoot">${[A.bedrijf,A.adres,A.pc,A.tel,A.mail,A.web].filter(Boolean).map(esc).join(' · ')}</div>`:''}</section>`;
   const cover=`<section class="pg cover"><div class="cvlogo">${logoL}</div><div class="hexbg ${cls(c)}"><span>${c||'–'}</span><small>je hypotheekcijfer</small></div>
     <div class="cvbody"><div class="cvlabel">Persoonlijk rapport</div><h1>Je hypotheekcijfer<br>nu en later</h1>
     <div class="cvscore"><div><b>${esc(sc.txt||'')}</b><span>${esc(namen)}</span><span>${vandaag}</span></div></div></div>
@@ -1391,7 +1395,7 @@ function rapportHTML(ms,sc,le,nu){
     <div class="opt"><b>De waarde van het huis</b><p>Bij een nieuwe hypotheek kijkt de geldverstrekker ook naar de waarde van het huis. Hoe lager de schuld ten opzichte van de waarde, hoe lager de risicoklasse en vaak de rente.</p></div>
     <div class="opt"><b>Eigen geld gebruiken</b><p>Spaargeld, beleggingen of een erfenis kun je gebruiken om de hypotheek te verlagen. Houd wel een buffer aan voor onverwachte uitgaven.</p></div>
     <div class="opt"><b>Hypotheekrenteaftrek</b><p>Hypotheekrente is maximaal 30 jaar aftrekbaar, als je voldoet aan de voorwaarden van de Belastingdienst. Na het einde van de aftrek stijgt het netto maandbedrag.</p></div></div>
-    <h3>Contact</h3><div class="contact"><div><span>Je adviseur</span><p>Bel met of mail met je adviseur. Hij helpt je graag.</p></div><div><span>Opnieuw berekenen</span><p>Verandert je situatie? Doe de hypotheekcheck opnieuw.</p></div></div>
+    <h3>Contact</h3><div class="contact"><div><span>Je adviseur</span><p>${A?advBlok:'Bel met of mail met je adviseur. Hij helpt je graag.'}</p></div><div><span>Opnieuw berekenen</span><p>Verandert je situatie? Doe de hypotheekcheck opnieuw.</p></div></div>
     <p class="disc">Dit rapport is gebaseerd op de gegevens die je hebt ingevuld; die zijn niet gecontroleerd. Er is rekening gehouden met de ingevulde financiële verplichtingen. Dit is geen advies. Voor de beoordeling van de betaalbaarheid zijn de leennormen 2027 uit de Tijdelijke regeling hypothecair krediet gehanteerd, met een toetsrente van ${fP(S.toets,1)} als de rentevaste periode korter is dan 10 jaar. Het rapport is een momentopname: verandert je financiële situatie, kijk dan opnieuw naar de betaalbaarheid van je hypotheek.</p>`);
   const toc=[['1','Samenvatting',1],['2','Belangrijke momenten',2],['3','Je hypotheek in de tijd',2+mChunks.length],['4','Life events',3+mChunks.length],['5','Je gegevens',4+mChunks.length],['6','Wat je kunt doen',5+mChunks.length],['7','Goed om te weten en contact',6+mChunks.length]];
   const pToc=`<section class="pg"><header class="ph"><div class="phl">${logo}</div><div class="pht">Je hypotheekcijfer nu en later</div></header>
@@ -1486,6 +1490,9 @@ function rapportHTML(ms,sc,le,nu){
   .opt{border-left:2mm solid #FFD31C;background:#fafafa;padding:3mm 4mm;font-size:9pt}.opt b{font-size:10pt}.opt p{margin:1mm 0 0}
   .contact{display:grid;grid-template-columns:repeat(2,1fr);gap:4mm;margin-top:2mm}.contact>div{background:#FFD31C;padding:4mm 5mm}.contact span{font-weight:800}.contact p{margin:1mm 0 0}
   .disc{font-size:7.8pt;color:#777;margin-top:6mm;line-height:1.45}
+  .advlogo{max-height:13mm;max-width:60mm;width:auto;height:auto;display:block;object-fit:contain}.advnaam{font-weight:900;font-size:14pt;color:#010101}
+  .advbox{background:#fff;padding:4mm 6mm;display:inline-block}.advbox .advlogo{max-height:20mm;max-width:80mm}.advbox .advnaam{font-size:20pt}
+  .advfoot{position:absolute;left:16mm;right:16mm;bottom:16mm;font-size:8pt;color:#5B616B;border-top:1px solid #E2E6EC;padding-top:2mm}
   .tools{position:fixed;top:10px;right:10px;z-index:5;display:flex;gap:8px;align-items:center}.tools .sec{background:#fff!important}.tools button[disabled]{opacity:.6;cursor:wait}#pdfMsg{background:#fff;padding:4px 8px;font-size:12px}#pdfMsg:empty{display:none}.tools button{background:#FFD31C;color:#010101;border:2px solid #010101;padding:9px 14px;font-weight:700;cursor:pointer}
   </style></head><body>
   <div class="tools"><button id="pdfBtn" type="button">Download als PDF</button><button type="button" class="sec" onclick="window.print()">Afdrukken</button><span id="pdfMsg"></span></div>
@@ -1636,6 +1643,16 @@ function leegDossier(){
   $('#p_actief').checked=false;togglePartner();
 }
 leegDossier();syncSituatie();inkHint();toon(1);
+/* adviseursmodus: gegevens komen alleen van de pagina Voor hypotheekadviseurs (sessionStorage, alleen dit tabblad) */
+(function(){var A=null;try{A=JSON.parse(sessionStorage.getItem('hcAdviseur')||'null');}catch(e){}
+  if(!A||!(A.naam||A.bedrijf))return;window.__adviseur=A;
+  var set=function(id,v){var e=document.getElementById(id);if(e&&v)e.value=v;};
+  set('o_naam',A.bedrijf||A.naam);set('o_afz',A.naam);set('o_fun',A.functie);set('o_tel',A.tel);set('o_mail',A.mail);set('o_web',A.web);
+  var b=document.getElementById('advBanner');b.hidden=false;
+  b.innerHTML='Rapport op naam van <b></b> <button type="button" class="btn btn-l btn-s" id="advStop">Stoppen</button>';
+  b.querySelector('b').textContent=A.bedrijf||A.naam;
+  document.getElementById('advStop').onclick=function(){try{sessionStorage.removeItem('hcAdviseur');}catch(e){}delete window.__adviseur;location.reload();};
+})();
 if(location.hash==="#voorbeeldrapport"){const l=document.querySelector("[data-voorbeeldrapport]");if(l){l.id="voorbeeldrapport-hint";l.scrollIntoView({block:"center"});l.focus();}}
 })();
 </script>

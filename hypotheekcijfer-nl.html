@@ -176,6 +176,8 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
 .choice.off{border-color:#bdbdbd;color:#777}.choice.off .btn{opacity:.45;cursor:not-allowed}
 .btn-k{background:var(--navy);color:var(--orange)}
 .tag{background:var(--orange);color:#334659;font-size:11px;font-weight:800;border-radius:20px;padding:2px 8px}
+.xopt{margin:2px 0 14px}
+#extraBlok{margin-bottom:6px}
 .cfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .na{font-size:12px;color:#999}
 .q{margin-bottom:26px;max-width:520px}
@@ -328,6 +330,9 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
     <p>Houd al uw gegevens bij de hand en vul de gevraagde velden zelf in.</p>
     <div class="cfoot"><span></span><button class="btn btn-k" type="button" data-go-handmatig>Start met handmatig invullen →</button></div>
   </div>
+  <button class="btn btn-l btn-s xopt" type="button" aria-expanded="false" onclick="const x=document.getElementById('extraBlok');x.hidden=!x.hidden;this.setAttribute('aria-expanded',!x.hidden);this.querySelector('i').textContent=x.hidden?'▾':'▴'">Extra opties voor professionals <i>▾</i></button>
+  <div id="extraBlok" hidden>
+  <p class="hint" style="margin:10px 0">Gegevens automatisch ophalen of documenten uploaden werkt alleen voor professionals met een Blinqx-account.</p>
   <div class="choice off">
     <h3>Via Ockto <span class="tag">± 5 minuten</span></h3>
     <p>Gemakkelijk en snel al uw gegevens ingevuld met de Ockto-app. U logt in met DigiD en haalt uw gegevens op bij Belastingdienst, MijnOverheid, Mijn Pensioenoverzicht, DUO en UWV.</p>
@@ -337,6 +342,7 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
     <h3>Documenten uploaden <span class="tag">± 10 minuten</span></h3>
     <p>Upload uw loonstrook en pensioenoverzicht. Wij lezen deze uit en u ontvangt het rapport.</p>
     <div class="cfoot"><span class="na">Alleen beschikbaar voor professionals met een Blinqx-account</span><button class="btn btn-k" type="button" disabled>Start met documenten uploaden →</button></div>
+  </div>
   </div>
 </section>
 

@@ -1055,7 +1055,7 @@ function rapportHTML(ms,sc,le,nu){
   const c0=sc.c||0;
   /* het gemarkeerde cijfer op de schaal in het logo (standaard 8) verplaatsen naar het eigen hypotheekcijfer */
   const logoCijfer=el=>{if(!el)return '';const k=el.cloneNode(true);const blob=[...k.querySelectorAll('path')].find(p=>(p.getAttribute('d')||'').startsWith('M140.5,34.4'));
-    if(blob&&c0>=1&&c0<=10){const x=n=>9.2+18.17*(n-1);blob.setAttribute('transform','translate('+(x(c0)-x(8)).toFixed(2)+',0)');}
+    if(blob){blob.setAttribute('style','fill:#FFD31C');}if(blob&&c0>=1&&c0<=10){const x=n=>9.2+18.17*(n-1);blob.setAttribute('transform','translate('+(x(c0)-x(8)).toFixed(2)+',0)');}
     k.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));return k.outerHTML;};
   const logo='<span class="hc dk">Hypotheek<span>Cijfer</span>.nl</span>';const logoL='<span class="hc">Hypotheek<span>Cijfer</span>.nl</span>';
   const c=sc.c||0, cls=x=>x<6?'lo':'';

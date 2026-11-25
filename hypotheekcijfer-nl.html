@@ -229,6 +229,11 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
 select{text-overflow:ellipsis;padding-right:30px}
 .lnk{background:none;border:0;padding:0;font:inherit;text-decoration:underline;cursor:pointer;color:inherit;font-weight:700}
 a[href*="mijnpensioenoverzicht"]{color:inherit;text-decoration:underline;font-weight:inherit}
+.pwdlg{border:2px solid #010101;padding:20px 22px;max-width:360px;width:calc(100% - 32px)}
+.pwdlg::backdrop{background:rgba(0,0,0,.45)}
+.pwdlg h3{margin:0 0 6px}.pwdlg p{margin:0 0 12px;font-size:14px}
+.pwerr{color:#E5486B;font-size:13px;margin-top:6px}
+.pwbtns{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
 </style>
 </head>
 <body>
@@ -600,6 +605,12 @@ a[href*="mijnpensioenoverzicht"]{color:inherit;text-decoration:underline;font-we
 </footer>
 
 
+<dialog id="pwDlg" class="pwdlg"><form id="pwForm" method="dialog">
+  <h3>Instellingen</h3><p>Vul het wachtwoord in om de instellingen te openen.</p>
+  <input id="pwIn" type="password" autocomplete="off" aria-label="Wachtwoord">
+  <div id="pwErr" class="pwerr" hidden>Onjuist wachtwoord.</div>
+  <div class="pwbtns"><button class="btn btn-l btn-s" type="submit" value="annuleer" formnovalidate>Annuleren</button><button class="btn btn-o btn-s" type="submit" value="ok">Openen</button></div>
+</form></dialog>
 <template id="tplDeel">
   <div class="row-card deel">
     <button type="button" class="del" title="Verwijderen">×</button>
@@ -1159,7 +1170,16 @@ $('#stepper').addEventListener('click',e=>{const b=e.target.closest('[data-go]')
   if(k>stap){for(let i=stap;i<k;i++)if(!valideer(i)){toon(i);return;}}toon(k);});
 $('#btnNext').onclick=()=>{if(valideer(stap))toon(stap+1);};
 $('#btnPrev').onclick=()=>toon(stap-1);
-$('#btnInst').onclick=()=>{const p=$('#instellingen');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({behavior:'smooth'});};
+/* Instellingen achter wachtwoord (alleen een drempel: de controle gebeurt in de browser) */
+const INST_HASH='0f6b9fdf96d894009581c51059ed933ddd2e693888eabef0200c8fc0d362d5b8';let instOpen=false;
+async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+function toonInst(){const p=$('#instellingen');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({behavior:'smooth'});}
+$('#btnInst').onclick=()=>{if(instOpen){toonInst();return;}const d=$('#pwDlg');$('#pwIn').value='';$('#pwErr').hidden=true;d.showModal();$('#pwIn').focus();};
+$('#pwForm').addEventListener('submit',async e=>{e.preventDefault();
+  if(e.submitter&&e.submitter.value==='annuleer'){$('#pwDlg').close();return;}
+  const ok=(await sha256($('#pwIn').value.trim()))===INST_HASH;
+  if(!ok){$('#pwErr').hidden=false;$('#pwIn').select();return;}
+  instOpen=true;$('#pwDlg').close();toonInst();});
 function miniScore(){const sc=window.__laatste&&window.__laatste.sc;
   $('#mini').innerHTML=stap>2&&stap<9&&sc&&sc.c?`Voorlopig hypotheekcijfer: <b>${sc.c}</b> <span>(wordt bijgewerkt terwijl u invult)</span>`:'';}
 

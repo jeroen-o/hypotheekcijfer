@@ -209,6 +209,11 @@ a[href*="mijnpensioenoverzicht"],a[href*="mijn.uwv.nl"]{color:inherit;text-decor
 .tooltop .in{max-width:1060px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
 .tooltop .sp{flex:1}
 #voorbeeldrapport-hint{outline:3px solid #010101;outline-offset:3px}
+.pwdlg{border:2px solid #010101;padding:20px 22px;max-width:360px;width:calc(100% - 32px)}
+.pwdlg::backdrop{background:rgba(0,0,0,.45)}
+.pwdlg h3{margin:0 0 6px}.pwdlg p{margin:0 0 12px;font-size:14px}
+.pwerr{color:#E5486B;font-size:13px;margin-top:6px}
+.pwbtns{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
 </style>
 </head>
 <body>
@@ -822,6 +827,12 @@ a[href*="mijnpensioenoverzicht"],a[href*="mijn.uwv.nl"]{color:inherit;text-decor
 <div><b>Sitemap</b><a href="../">Home</a><br><a href="../bepaal-uw-hypotheekcijfer/">Bepaal je hypotheekcijfer</a><br><a href="../voor-consumenten/">Voor consumenten</a><br><a href="../voor-hypotheekadviseurs/">Voor adviseurs</a><br><a href="../voor-geldverstrekkers/">Voor geldverstrekkers</a><br><a href="../contact/">Contact</a><br><a href="../voor-geldverstrekkers/use-cases/">Use cases</a></div>
 </div><div class="disc">Hypotheekcijfer is een oplossing van Blinqx. De hypotheekcheck geeft een indicatie op basis van de ingevulde gegevens en de leennormen 2027 (Tijdelijke regeling hypothecair krediet). Dit is geen hypotheekadvies.</div></div></footer>
 
+<dialog id="pwDlg" class="pwdlg"><form id="pwForm" method="dialog">
+  <h3>Instellingen</h3><p>Vul het wachtwoord in om de instellingen te openen.</p>
+  <input id="pwIn" type="password" autocomplete="off" aria-label="Wachtwoord">
+  <div id="pwErr" class="pwerr" hidden>Onjuist wachtwoord.</div>
+  <div class="pwbtns"><button class="btn btn-l btn-s" type="submit" value="annuleer" formnovalidate>Annuleren</button><button class="btn btn-o btn-s" type="submit" value="ok">Openen</button></div>
+</form></dialog>
 <template id="tplDeel">
   <div class="row-card deel">
     <button type="button" class="del" title="Verwijderen">×</button>
@@ -1385,7 +1396,16 @@ $('#btnPrev').onclick=()=>toon(stap-1);
 $$('[data-next]').forEach(b=>b.onclick=()=>toon(2));
 $$('.o-tel').forEach(e=>e.textContent=$('#o_tel').value);$$('.o-mail').forEach(e=>e.textContent=$('#o_mail').value);
 document.addEventListener('input',e=>{if(e.target.id==='o_tel')$$('.o-tel').forEach(x=>x.textContent=e.target.value);if(e.target.id==='o_mail')$$('.o-mail').forEach(x=>x.textContent=e.target.value);});
-$('#btnInst').onclick=()=>{const p=$('#instellingen');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({behavior:'smooth'});};
+/* Instellingen achter wachtwoord (alleen een drempel: de controle gebeurt in de browser) */
+const INST_HASH='0f6b9fdf96d894009581c51059ed933ddd2e693888eabef0200c8fc0d362d5b8';let instOpen=false;
+async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+function toonInst(){const p=$('#instellingen');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({behavior:'smooth'});}
+$('#btnInst').onclick=()=>{if(instOpen){toonInst();return;}const d=$('#pwDlg');$('#pwIn').value='';$('#pwErr').hidden=true;d.showModal();$('#pwIn').focus();};
+$('#pwForm').addEventListener('submit',async e=>{e.preventDefault();
+  if(e.submitter&&e.submitter.value==='annuleer'){$('#pwDlg').close();return;}
+  const ok=(await sha256($('#pwIn').value.trim()))===INST_HASH;
+  if(!ok){$('#pwErr').hidden=false;$('#pwIn').select();return;}
+  instOpen=true;$('#pwDlg').close();toonInst();});
 function miniScore(){const sc=window.__laatste&&window.__laatste.sc;
   $('#mini').innerHTML=stap>3&&stap<10&&sc&&sc.c?`Voorlopig hypotheekcijfer: <b>${sc.c}</b> <span>(wordt bijgewerkt terwijl je invult)</span>`:'';}
 

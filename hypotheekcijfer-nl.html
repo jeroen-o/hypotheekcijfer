@@ -980,7 +980,7 @@ function voorbeeld(){
 }
 function togglePartner(){const on=$('#p_actief').checked;$('#partnerBlok').hidden=!on;$$('.pp').forEach(e=>e.style.display=on?'':'none');}
 $('#p_actief').addEventListener('change',togglePartner);
-$('#btnVoorbeeld').onclick=()=>{voorbeeld();syncSituatie();toon(stap);};
+$('#btnVoorbeeld').onclick=()=>{if(pE($('#a_ink').value)>0&&!confirm('Uw ingevulde gegevens worden vervangen door voorbeeldgegevens. Doorgaan?'))return;voorbeeld();syncSituatie();inkHint();toon(stap);};
 
 let tmr;document.addEventListener('input',()=>{clearTimeout(tmr);tmr=setTimeout(render,180);});
 document.addEventListener('change',()=>{clearTimeout(tmr);tmr=setTimeout(render,50);});

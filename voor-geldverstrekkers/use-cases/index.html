@@ -417,7 +417,7 @@ form.cf .rad input{width:auto}
 <script>
 /* gemarkeerd cijfer in het logo: volgt het cijfer in de zeshoek van deze pagina */
 function zetLogoCijfer(c){document.querySelectorAll('.hclogo').forEach(function(svg){var b=[].slice.call(svg.querySelectorAll('path')).find(function(p){return (p.getAttribute('d')||'').indexOf('M140.5,34.4')===0;});
- if(!b||!(c>=1&&c<=10))return;var x=function(n){return 9.2+18.17*(n-1);};b.setAttribute('transform','translate('+(x(c)-x(8)).toFixed(2)+',0)');b.style.fill='#FFD31C';b.style.transition='transform .4s';});}
+ if(!b||!(c>=1&&c<=10))return;var x=function(n){return 9.2+18.17*(n-1);};b.setAttribute('transform','translate('+(x(c)-x(8)).toFixed(2)+',0)');b.style.fill='#FFD31C';b.style.transition='transform .4s';var bub=[].slice.call(svg.querySelectorAll('path')).find(function(p){return (p.getAttribute('d')||'').indexOf('M151.2,0H8.9')===0;});if(bub&&c>=3&&c<=8){var dd=x(c)-x(8);if(!bub.getAttribute('data-d0'))bub.setAttribute('data-d0',bub.getAttribute('d'));bub.setAttribute('d',bub.getAttribute('data-d0').replace(/H125\s*c4\.3,0,8\.4,1\.5,11\.6,4\.3v-4\.3h14\.6/,'H'+(125+dd).toFixed(2)+'c4.3,0,8.4,1.5,11.6,4.3v-4.3h'+(14.6-dd).toFixed(2)));}});}
 (function(){var h=document.querySelector('[data-n]');if(h)zetLogoCijfer(+h.getAttribute('data-n'));})();
 </script>
 </body></html>

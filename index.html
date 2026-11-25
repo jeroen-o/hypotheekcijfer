@@ -45,6 +45,9 @@ main{padding:20px 16px;max-width:980px;margin:0 auto}
 details:not([open]) summary:after{content:"▸"}
 .body{padding:14px 16px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px 14px}
+.grid>div{display:flex;flex-direction:column}
+.grid>div>label:first-child{flex:1;display:flex;align-items:flex-end}
+.grid>div>.hint{order:9}
 label{display:block;font-size:13px;color:var(--muted);margin-bottom:3px}
 input,select,textarea{width:100%;padding:8px 10px;border:1.5px solid #010101;border-radius:2px;font:inherit;color:var(--text);background:#fff}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--orange);outline-offset:-1px;border-color:var(--orange)}

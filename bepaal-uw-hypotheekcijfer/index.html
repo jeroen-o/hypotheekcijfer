@@ -184,15 +184,16 @@ footer.bq .disc{border-top:1px solid #444;margin-top:24px;padding-top:12px;font-
 select{text-overflow:ellipsis;padding-right:30px}
 .lnk{background:none;border:0;padding:0;font:inherit;text-decoration:underline;cursor:pointer;color:inherit;font-weight:700}
 a[href*="mijnpensioenoverzicht"],a[href*="mijn.uwv.nl"]{color:inherit;text-decoration:underline;font-weight:inherit}
-.sitehead{background:var(--k);color:#fff;position:sticky;top:0;z-index:20}
-.sitehead .in{max-width:1120px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:22px}
-.hclogo{height:42px;width:auto;display:block}
-.sitenav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
-.sitenav a{color:#fff;text-decoration:none;font-size:13.5px;font-weight:600;padding:8px 10px;border-bottom:3px solid transparent}
-.sitenav a:hover{border-color:#555}.sitenav a.on{border-color:var(--y)}
-.burger{display:none;margin-left:auto;background:none;border:0;color:#fff;font-size:26px;cursor:pointer}
-@media (max-width:980px){.burger{display:block}.sitenav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--k);flex-direction:column;padding:6px 20px 14px}.sitenav.open{display:flex}}
-.sitefoot{background:var(--k);color:#fff;padding:52px 0 26px;font-size:14px}
+.sitehead{background:var(--y);color:var(--k);position:sticky;top:0;z-index:20}
+.sitehead .in{max-width:1120px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;gap:22px}
+.hclogo{height:58px;width:auto;display:block}
+.sitenav{margin-left:auto;display:flex;gap:2px;flex-wrap:wrap;align-items:center}
+.sitenav a{color:var(--k);text-decoration:none;font-size:13.5px;font-weight:700;padding:8px 10px;border-bottom:3px solid transparent}
+.sitenav a:hover{border-color:var(--k)}.sitenav a.on{border-color:var(--k)}
+.sitenav a:last-child{background:var(--k);color:#fff;padding:10px 16px;margin-left:8px;border:0}
+.burger{display:none;margin-left:auto;background:none;border:0;color:var(--k);font-size:28px;cursor:pointer}
+@media (max-width:980px){.burger{display:block}.sitenav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--y);flex-direction:column;align-items:stretch;padding:6px 20px 14px;border-bottom:2px solid var(--k)}.sitenav.open{display:flex}.sitenav a:last-child{margin:8px 0 0;text-align:center}}
+.sitefoot{background:var(--k);color:#fff;padding:60px 0 26px;font-size:14px}
 .sitefoot .top{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-start}
 .sitefoot h2{color:var(--y);font-size:30px;margin:0 0 6px;font-weight:900}
 .sitefoot .ln{width:30px;height:5px;background:#fff;margin-bottom:12px}
@@ -202,7 +203,6 @@ a[href*="mijnpensioenoverzicht"],a[href*="mijn.uwv.nl"]{color:inherit;text-decor
 .sitefoot .disc{border-top:1px solid #333;margin-top:30px;padding-top:14px;font-size:12px;color:#aaa}
 /* site-header en -footer */
 :root{--k:#010101;--y:#FFD31C;--yl:#FFF6CC}
-.sitehead,.sitefoot{font-family:Montserrat,"Gilroy","Segoe UI",Roboto,Arial,sans-serif;text-align:left}
 .sitefoot .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 .sitefoot .b{display:inline-flex;padding:12px 20px;font-weight:700;font-size:14.5px;text-decoration:none;background:#FFD31C;color:#010101;border:2px solid #FFD31C}
 .tooltop{background:#FFF6CC;border-bottom:1px solid #eee}
@@ -217,147 +217,147 @@ a[href*="mijnpensioenoverzicht"],a[href*="mijn.uwv.nl"]{color:inherit;text-decor
 </style>
 </head>
 <body>
-<div class="sitehead"><div class="in"><a href="../" aria-label="Home"><svg class="hclogo" role="img" aria-label="Hypotheekcijfer.nl" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<div class="sitehead"><div class="in"><a href="../" aria-label="Home"><svg class="hclogo" role="img" aria-label="Hypotheekcijfer.nl" version="1.1" id="Layer_d" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 190.2 43.9" style="enable-background:new 0 0 190.2 43.9;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#FFFFFF;}
-	.st1{fill:#010101;}
-	.st2{fill-rule:evenodd;clip-rule:evenodd;fill:#FFD31C;}
-	.st3{fill:#FFD31C;}
+	.sd0{fill:#010101;}
+	.sd1{fill:#FFD31C;}
+	.sd2{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+	.sd3{fill:#FFFFFF;}
 </style>
-<g id="a4007617-3338-4bda-aebc-e4b0342e8871">
-	<g id="b470ac87-7db9-4109-8099-07cfe6791308">
+<g id="d4007617-3338-4bda-aebc-e4b0342e8871">
+	<g id="d470ac87-7db9-4109-8099-07cfe6791308">
 		<g>
-			<path class="st0" d="M151.2,0H8.9C4,0,0,4,0,8.9V17c0,4.9,4,8.9,8.9,8.9H125c4.3,0,8.4,1.5,11.6,4.3v-4.3h14.6
+			<path class="sd0" d="M151.2,0H8.9C4,0,0,4,0,8.9V17c0,4.9,4,8.9,8.9,8.9H125c4.3,0,8.4,1.5,11.6,4.3v-4.3h14.6
 				c4.9,0,8.9-4,8.9-8.9V8.9C160.1,4,156.1,0,151.2,0z"/>
-			<path class="st0" d="M175,43.1H4.8c-2.6,0-4.7-2.2-4.7-4.8c0-2.6,2.1-4.7,4.7-4.7H175c2.6,0,4.8,2.1,4.8,4.7
+			<path class="sd0" d="M175,43.1H4.8c-2.6,0-4.7-2.2-4.7-4.8c0-2.6,2.1-4.7,4.7-4.7H175c2.6,0,4.8,2.1,4.8,4.7
 				c0,2.6-2.1,4.8-4.7,4.8C175.1,43.1,175,43.1,175,43.1z M4.8,34.3c-2.2,0-4,1.9-4,4.1c0,2.2,1.8,3.9,4,4H175c2.2,0,4-1.7,4.1-4
 				s-1.7-4-4-4.1c0,0-0.1,0-0.1,0H4.8z"/>
 			<g>
-				<path class="st1" d="M15.3,5h-2.2c-0.3,0-0.5,0.2-0.5,0.4c0,0,0,0,0,0.1v4.8h-4V5.5c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0-0.1,0H5.9
+				<path class="sd1" d="M15.3,5h-2.2c-0.3,0-0.5,0.2-0.5,0.4c0,0,0,0,0,0.1v4.8h-4V5.5c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0-0.1,0H5.9
 					C5.6,5,5.4,5.2,5.4,5.5c0,0,0,0,0,0.1v13c0,0.3,0.2,0.5,0.4,0.5c0,0,0,0,0.1,0h2.2c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1v-5.2h4
 					v5.2c0,0.3,0.2,0.5,0.4,0.5c0,0,0,0,0.1,0h2.2c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1v-13C15.8,5.3,15.6,5.1,15.3,5
 					C15.3,5,15.3,5,15.3,5z"/>
-				<path class="st1" d="M27.1,9h-2.2c-0.3,0-0.5,0.1-0.6,0.4l-1.5,5.2l-1.9-5.3c-0.1-0.3-0.3-0.4-0.6-0.4h-2.2
+				<path class="sd1" d="M27.1,9h-2.2c-0.3,0-0.5,0.1-0.6,0.4l-1.5,5.2l-1.9-5.3c-0.1-0.3-0.3-0.4-0.6-0.4h-2.2
 					c-0.4,0-0.5,0.3-0.4,0.6l3.5,9.3L20,22.4c-0.1,0.4,0,0.6,0.4,0.6h2.2c0.3,0,0.5-0.2,0.6-0.4l4.3-13C27.6,9.2,27.5,9,27.1,9z"/>
-				<path class="st1" d="M35.2,8.7c-1.2,0-2.3,0.4-3.1,1.2V9.5c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0-0.1,0h-2c-0.3,0-0.5,0.2-0.5,0.4
+				<path class="sd1" d="M35.2,8.7c-1.2,0-2.3,0.4-3.1,1.2V9.5c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0-0.1,0h-2c-0.3,0-0.5,0.2-0.5,0.4
 					c0,0,0,0,0,0.1v13c0,0.3,0.2,0.5,0.4,0.5c0,0,0,0,0.1,0h2c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1v-4.4c0.8,0.8,1.9,1.2,3,1.2
 					c2.8-0.1,4.9-2.5,4.8-5.3c0,0,0,0,0,0C39.9,11,37.8,8.7,35.2,8.7z M34.6,16.4c-1.2,0.1-2.3-0.9-2.4-2.1c0-0.1,0-0.2,0-0.3
 					c0-1.3,1.1-2.4,2.4-2.4c1.3,0,2.4,1.1,2.4,2.4c0.1,1.2-0.9,2.3-2.1,2.4C34.8,16.4,34.7,16.4,34.6,16.4z"/>
-				<path class="st1" d="M46.9,8.7c-2.9,0-5.3,2.4-5.3,5.3s2.4,5.3,5.3,5.3s5.3-2.4,5.3-5.3l0,0C52.2,11.1,49.8,8.8,46.9,8.7
+				<path class="sd1" d="M46.9,8.7c-2.9,0-5.3,2.4-5.3,5.3s2.4,5.3,5.3,5.3s5.3-2.4,5.3-5.3l0,0C52.2,11.1,49.8,8.8,46.9,8.7
 					C46.9,8.7,46.9,8.7,46.9,8.7z M46.9,16.4c-1.3,0-2.3-1-2.3-2.3c0,0,0-0.1,0-0.1c-0.1-1.3,0.9-2.3,2.2-2.4c0,0,0.1,0,0.1,0
 					c1.2,0,2.3,0.9,2.3,2.2c0,0.1,0,0.2,0,0.2c0.1,1.2-0.8,2.3-2.1,2.4C47,16.4,47,16.4,46.9,16.4z"/>
-				<path class="st1" d="M59,9h-1.1V6.3c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0-0.1,0h-2c-0.3,0-0.5,0.2-0.5,0.4c0,0,0,0,0,0.1V9h-1.1
+				<path class="sd1" d="M59,9h-1.1V6.3c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0-0.1,0h-2c-0.3,0-0.5,0.2-0.5,0.4c0,0,0,0,0,0.1V9h-1.1
 					c-0.3,0-0.5,0.2-0.5,0.4c0,0,0,0,0,0.1v1.9c0,0.3,0.2,0.5,0.4,0.5c0,0,0,0,0.1,0h1.1v6.6c0,0.3,0.2,0.5,0.4,0.5c0,0,0,0,0.1,0h2
 					c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1v-6.6H59c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1V9.5C59.5,9.3,59.3,9.1,59,9C59,9,59,9,59,9z
 					"/>
-				<path class="st1" d="M67,8.7c-1-0.1-2,0.4-2.6,1.2V5.5c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0-0.1,0h-2c-0.3,0-0.5,0.2-0.5,0.4
+				<path class="sd1" d="M67,8.7c-1-0.1-2,0.4-2.6,1.2V5.5c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0-0.1,0h-2c-0.3,0-0.5,0.2-0.5,0.4
 					c0,0,0,0,0,0.1v13c0,0.3,0.2,0.5,0.4,0.5c0,0,0,0,0.1,0h2c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1v-5.3c0-1.2,0.6-1.7,1.5-1.7
 					c0.7,0,1.3,0.5,1.3,1.2c0,0.1,0,0.2,0,0.2v5.5c0,0.3,0.2,0.5,0.4,0.5c0,0,0,0,0.1,0h2c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1v-5.8
 					C70.2,10.1,68.9,8.7,67,8.7z"/>
-				<path class="st1" d="M77.4,8.7c-2.9-0.1-5.3,2.2-5.4,5.1c0,0.1,0,0.2,0,0.2c-0.1,2.8,2.1,5.2,4.9,5.3c0.2,0,0.3,0,0.5,0
+				<path class="sd1" d="M77.4,8.7c-2.9-0.1-5.3,2.2-5.4,5.1c0,0.1,0,0.2,0,0.2c-0.1,2.8,2.1,5.2,4.9,5.3c0.2,0,0.3,0,0.5,0
 					c1.9,0.1,3.7-0.9,4.5-2.6c0.2-0.4,0-0.6-0.4-0.6h-1.9c-0.2,0-0.4,0.1-0.6,0.3c-0.4,0.3-1,0.5-1.5,0.5c-1.1,0-2-0.7-2.3-1.7h6.7
 					c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1V14c0.2-2.8-2-5.1-4.7-5.3C77.5,8.7,77.5,8.7,77.4,8.7z M75.2,12.9c0.3-1,1.2-1.6,2.2-1.5
 					c1-0.1,1.9,0.6,2.1,1.5H75.2z"/>
-				<path class="st1" d="M89.4,8.7c-2.9-0.1-5.3,2.2-5.4,5.1c0,0.1,0,0.2,0,0.2c-0.1,2.8,2.1,5.2,4.9,5.3c0.2,0,0.3,0,0.5,0
+				<path class="sd1" d="M89.4,8.7c-2.9-0.1-5.3,2.2-5.4,5.1c0,0.1,0,0.2,0,0.2c-0.1,2.8,2.1,5.2,4.9,5.3c0.2,0,0.3,0,0.5,0
 					c1.9,0.1,3.7-0.9,4.5-2.6c0.2-0.4,0-0.6-0.4-0.6h-1.9c-0.2,0-0.4,0.1-0.6,0.3c-0.4,0.3-1,0.5-1.5,0.5c-1.1,0-2-0.7-2.3-1.7h6.7
 					c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1V14c0.2-2.8-2-5.1-4.7-5.3C89.5,8.7,89.5,8.7,89.4,8.7z M87.2,12.9c0.3-1,1.2-1.6,2.2-1.5
 					c1-0.1,1.9,0.6,2.1,1.5H87.2z"/>
-				<path class="st1" d="M105.5,18.4l-3.1-4.4l3-4.4c0.2-0.3,0.1-0.6-0.3-0.6h-2.3c-0.2,0-0.5,0.1-0.6,0.3l-2.6,4V5.5
+				<path class="sd1" d="M105.5,18.4l-3.1-4.4l3-4.4c0.2-0.3,0.1-0.6-0.3-0.6h-2.3c-0.2,0-0.5,0.1-0.6,0.3l-2.6,4V5.5
 					c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0-0.1,0h-2c-0.3,0-0.5,0.2-0.6,0.5v13c0,0.3,0.2,0.5,0.4,0.5c0,0,0,0,0.1,0h2
 					c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1v-3.9l2.8,4.1c0.1,0.2,0.4,0.3,0.6,0.3h2.3C105.6,19,105.7,18.7,105.5,18.4z"/>
 			</g>
 			<g>
-				<path class="st0" d="M169.9,8.8c-1-0.1-2,0.3-2.6,1.1V9.5c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0-0.1,0h-2c-0.3,0-0.5,0.2-0.5,0.4
+				<path class="sd0" d="M169.9,8.8c-1-0.1-2,0.3-2.6,1.1V9.5c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0-0.1,0h-2c-0.3,0-0.5,0.2-0.5,0.4
 					c0,0,0,0,0,0.1v9c0,0.3,0.2,0.5,0.4,0.5c0,0,0,0,0.1,0h2c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1v-5.3c0-1.2,0.6-1.7,1.5-1.7
 					c0.7,0,1.3,0.5,1.3,1.2c0,0.1,0,0.2,0,0.2v5.6c0,0.3,0.2,0.5,0.4,0.5c0,0,0,0,0.1,0h2c0.3,0,0.5-0.2,0.5-0.4c0,0,0,0,0-0.1v-5.8
 					C173.1,10.2,171.8,8.8,169.9,8.8z"/>
-				<path class="st0" d="M175.9,4.7h2c0.3,0,0.5,0.2,0.5,0.5v13.4c0,0.3-0.2,0.5-0.5,0.5h-2c-0.3,0-0.5-0.2-0.5-0.5V5.2
+				<path class="sd0" d="M175.9,4.7h2c0.3,0,0.5,0.2,0.5,0.5v13.4c0,0.3-0.2,0.5-0.5,0.5h-2c-0.3,0-0.5-0.2-0.5-0.5V5.2
 					C175.4,4.9,175.6,4.7,175.9,4.7z"/>
 			</g>
-			<path id="ab69c963-60eb-479d-8246-3d171d77c44e" class="st2" d="M159.3,19.1c-0.3,0-0.5-0.2-0.5-0.4c0,0,0,0,0-0.1v-2.2
+			<path id="ab69c963-60eb-479d-8246-3d171d77c44e" class="sd2" d="M159.3,19.1c-0.3,0-0.5-0.2-0.5-0.4c0,0,0,0,0-0.1v-2.2
 				c0-0.3,0.2-0.5,0.4-0.5c0,0,0,0,0.1,0h2.2c0.3,0,0.5,0.2,0.5,0.4c0,0,0,0,0,0.1v2.2c0,0.3-0.2,0.5-0.4,0.5c0,0,0,0-0.1,0H159.3z"
 				/>
 			<g>
-				<path class="st3" d="M140.5,34.4L140.5,34.4c-1.1-1.2-2.6-1.8-4.1-1.8c0,0,0,0,0,0c-0.1,0-0.2,0-0.3,0c-0.2,0-0.3,0-0.5,0
+				<path class="sd3" d="M140.5,34.4L140.5,34.4c-1.1-1.2-2.6-1.8-4.1-1.8c0,0,0,0,0,0c-0.1,0-0.2,0-0.3,0c-0.2,0-0.3,0-0.5,0
 					c-0.2,0-0.5,0.1-0.7,0.1c0,0-0.1,0-0.1,0c0,0,0,0,0,0c-0.8,0.2-1.5,0.6-2.1,1.1l-0.2,0.2c-2.2,2-2.4,5.4-0.4,7.6
 					c0.1,0.1,0.1,0.2,0.2,0.2l0,0c1.1,1.1,2.5,1.7,4.1,1.7c0,0,0,0,0,0c0.1,0,0.2,0,0.3,0c0.2,0,0.3,0,0.5,0c0.2,0,0.5-0.1,0.7-0.1
 					c0,0,0.1,0,0.1,0c0,0,0,0,0,0c0.8-0.2,1.5-0.6,2.1-1.1l0.2-0.2c2.2-2,2.4-5.4,0.4-7.6C140.7,34.6,140.6,34.5,140.5,34.4z"/>
-				<path class="st0" d="M138.3,39.4c0,0.9-0.7,1.6-1.9,1.6s-1.9-0.6-1.9-1.6c0-0.5,0.2-1,0.7-1.2c-0.3-0.2-0.5-0.6-0.5-1
+				<path class="sd0" d="M138.3,39.4c0,0.9-0.7,1.6-1.9,1.6s-1.9-0.6-1.9-1.6c0-0.5,0.2-1,0.7-1.2c-0.3-0.2-0.5-0.6-0.5-1
 					c0.1-1,1-1.6,1.9-1.5c0.8,0.1,1.4,0.7,1.5,1.5c0,0.4-0.2,0.8-0.5,1C138.1,38.4,138.4,38.9,138.3,39.4z M137.2,39.3
 					c0.1-0.4-0.2-0.8-0.6-0.8c-0.4-0.1-0.8,0.2-0.8,0.6c-0.1,0.4,0.2,0.8,0.6,0.8c0,0,0.1,0,0.1,0C136.8,39.9,137.1,39.7,137.2,39.3
 					C137.2,39.3,137.2,39.3,137.2,39.3z M135.9,37.2c0,0.3,0.2,0.6,0.5,0.6c0.3,0,0.6-0.2,0.6-0.5c0-0.3-0.2-0.6-0.5-0.6
 					c0,0,0,0,0,0C136.2,36.7,135.9,36.9,135.9,37.2C135.9,37.2,135.9,37.2,135.9,37.2z"/>
 			</g>
-			<path class="st0" d="M116.4,35.7h3c0.1,0,0.2,0.1,0.2,0.1c0,0,0,0,0,0v0.7c0,0.1,0,0.2,0,0.2l-1.6,3.9c0,0.1-0.1,0.1-0.2,0.1
+			<path class="sd0" d="M116.4,35.7h3c0.1,0,0.2,0.1,0.2,0.1c0,0,0,0,0,0v0.7c0,0.1,0,0.2,0,0.2l-1.6,3.9c0,0.1-0.1,0.1-0.2,0.1
 				h-0.9c-0.1,0-0.2-0.1-0.1-0.2l1.5-3.8h-1.9c-0.1,0-0.2-0.1-0.2-0.1c0,0,0,0,0,0v-0.8C116.2,35.8,116.3,35.7,116.4,35.7
 				C116.4,35.7,116.4,35.7,116.4,35.7z"/>
-			<path class="st0" d="M156.7,38.5L156.7,38.5l-1.5,2.3c0,0.1-0.1,0.1-0.2,0.1H154c-0.1,0-0.2-0.1-0.1-0.2l1-1.4
+			<path class="sd0" d="M156.7,38.5L156.7,38.5l-1.5,2.3c0,0.1-0.1,0.1-0.2,0.1H154c-0.1,0-0.2-0.1-0.1-0.2l1-1.4
 				c-1,0-1.8-0.8-1.7-1.8c0.1-1.1,1-1.9,2-1.8c1,0.1,1.8,0.8,1.8,1.8C157,37.8,156.9,38.2,156.7,38.5z M155.1,38.2
 				c0.4,0,0.7-0.3,0.7-0.7c0-0.4-0.3-0.7-0.7-0.7c0,0,0,0-0.1,0c-0.4,0-0.7,0.3-0.7,0.7C154.3,37.8,154.6,38.2,155.1,38.2
 				C155,38.2,155,38.2,155.1,38.2z"/>
 			<g>
-				<path class="st0" d="M169.3,35.7h0.9c0.1,0,0.2,0.1,0.2,0.1c0,0,0,0,0,0v4.8c0,0.1-0.1,0.2-0.1,0.2c0,0,0,0,0,0h-0.8
+				<path class="sd0" d="M169.3,35.7h0.9c0.1,0,0.2,0.1,0.2,0.1c0,0,0,0,0,0v4.8c0,0.1-0.1,0.2-0.1,0.2c0,0,0,0,0,0h-0.8
 					c-0.1,0-0.2-0.1-0.2-0.1c0,0,0,0,0,0v-3.8l-1,0.5c-0.1,0.1-0.2,0-0.2-0.1v-0.8c0-0.1,0-0.2,0.1-0.2l1-0.5
 					C169.2,35.7,169.2,35.7,169.3,35.7z"/>
-				<path class="st0" d="M171.1,38.3c0-1.6,0.8-2.7,2.1-2.7s2.1,1.1,2.1,2.7s-0.8,2.7-2.1,2.7S171.1,39.9,171.1,38.3z M174.2,38.3
+				<path class="sd0" d="M171.1,38.3c0-1.6,0.8-2.7,2.1-2.7s2.1,1.1,2.1,2.7s-0.8,2.7-2.1,2.7S171.1,39.9,171.1,38.3z M174.2,38.3
 					c0-1-0.3-1.5-0.9-1.5s-0.9,0.5-0.9,1.5s0.3,1.5,0.9,1.5S174.2,39.3,174.2,38.3z"/>
 			</g>
-			<path class="st0" d="M101.5,39.1c-0.1,1.1-1,1.9-2,1.8c-1-0.1-1.8-0.8-1.8-1.8c0-0.4,0.1-0.7,0.3-1.1l0,0l1.5-2.3
+			<path class="sd0" d="M101.5,39.1c-0.1,1.1-1,1.9-2,1.8c-1-0.1-1.8-0.8-1.8-1.8c0-0.4,0.1-0.7,0.3-1.1l0,0l1.5-2.3
 				c0-0.1,0.1-0.1,0.2-0.1h0.9c0.1,0,0.2,0.1,0.1,0.2l-1,1.4C100.8,37.3,101.6,38.2,101.5,39.1z M100.4,39.1c0-0.4-0.3-0.7-0.7-0.7
 				c0,0,0,0,0,0c-0.4,0-0.7,0.3-0.7,0.7c0,0.4,0.3,0.7,0.7,0.7c0,0,0,0,0,0C100,39.9,100.3,39.6,100.4,39.1
 				C100.4,39.2,100.4,39.1,100.4,39.1z"/>
-			<path class="st0" d="M83.2,39.2c-0.1,1.1-1,1.8-2.1,1.7c-0.8-0.1-1.5-0.7-1.7-1.5c0-0.1,0-0.2,0.1-0.2c0,0,0,0,0,0h0.8
+			<path class="sd0" d="M83.2,39.2c-0.1,1.1-1,1.8-2.1,1.7c-0.8-0.1-1.5-0.7-1.7-1.5c0-0.1,0-0.2,0.1-0.2c0,0,0,0,0,0h0.8
 				c0.1,0,0.2,0.1,0.2,0.2c0.1,0.2,0.3,0.4,0.7,0.4c0.5,0,0.7-0.3,0.7-0.6s-0.2-0.6-0.7-0.6h-1.5c-0.1,0-0.2-0.1-0.2-0.1
 				c0,0,0,0,0,0l0.2-2.6c0-0.1,0.1-0.2,0.2-0.2c0,0,0,0,0,0h2.7c0.1,0,0.2,0.1,0.2,0.1c0,0,0,0,0,0v0.7c0,0.1-0.1,0.2-0.1,0.2
 				c0,0,0,0,0,0H81l-0.1,0.7h0.5c0.9-0.1,1.7,0.6,1.8,1.5C83.2,39.1,83.2,39.2,83.2,39.2z"/>
-			<path class="st0" d="M65.1,39.1v0.7c0,0.1-0.1,0.2-0.1,0.2c0,0,0,0,0,0h-0.3v0.6c0,0.1-0.1,0.2-0.1,0.2c0,0,0,0,0,0h-0.8
+			<path class="sd0" d="M65.1,39.1v0.7c0,0.1-0.1,0.2-0.1,0.2c0,0,0,0,0,0h-0.3v0.6c0,0.1-0.1,0.2-0.1,0.2c0,0,0,0,0,0h-0.8
 				c-0.1,0-0.2-0.1-0.2-0.1c0,0,0,0,0,0v-0.6h-2.2c-0.1,0-0.2-0.1-0.2-0.2c0,0,0,0,0,0v-0.8c0-0.1,0-0.2,0.1-0.2l1.5-3
 				c0-0.1,0.1-0.1,0.2-0.1h0.9c0.1,0,0.2,0.1,0.1,0.2l-1.5,3h1.2V38c0-0.1,0.1-0.2,0.1-0.2c0,0,0,0,0,0h0.8c0.1,0,0.2,0.1,0.2,0.1
 				c0,0,0,0,0,0V39h0.3C65,38.9,65.1,39,65.1,39.1C65.1,39.1,65.1,39.1,65.1,39.1z"/>
-			<path class="st0" d="M46.6,39.2c-0.1,1-1,1.8-2.1,1.7c-0.8-0.1-1.5-0.7-1.7-1.5c0-0.1,0-0.2,0.1-0.2c0,0,0,0,0,0h0.8
+			<path class="sd0" d="M46.6,39.2c-0.1,1-1,1.8-2.1,1.7c-0.8-0.1-1.5-0.7-1.7-1.5c0-0.1,0-0.2,0.1-0.2c0,0,0,0,0,0h0.8
 				c0.1,0,0.2,0.1,0.2,0.2c0.1,0.2,0.3,0.4,0.7,0.4c0.5,0,0.7-0.3,0.7-0.6s-0.2-0.6-0.7-0.6h-0.4c-0.1,0-0.2-0.1-0.2-0.1
 				c0,0,0,0,0,0V38c0-0.1,0-0.2,0.1-0.2l0.7-1h-1.7c-0.1,0-0.2-0.1-0.2-0.2c0,0,0,0,0,0v-0.7c0-0.1,0.1-0.2,0.1-0.2c0,0,0,0,0,0h3
 				c0.1,0,0.2,0.1,0.2,0.1c0,0,0,0,0,0v0.7c0,0.1,0,0.2-0.1,0.2l-0.8,1C46.1,37.9,46.6,38.5,46.6,39.2z"/>
-			<path class="st0" d="M24.6,40.7v-0.5c0-0.1,0-0.2,0.1-0.2l1.6-1.6c0.3-0.3,0.5-0.6,0.5-1c0-0.3-0.1-0.5-0.4-0.5c0,0-0.1,0-0.1,0
+			<path class="sd0" d="M24.6,40.7v-0.5c0-0.1,0-0.2,0.1-0.2l1.6-1.6c0.3-0.3,0.5-0.6,0.5-1c0-0.3-0.1-0.5-0.4-0.5c0,0-0.1,0-0.1,0
 				c-0.3,0-0.5,0.1-0.6,0.4c0,0.1-0.1,0.2-0.2,0.2h-0.8c-0.1,0-0.2-0.1-0.2-0.1c0,0,0,0,0-0.1c0.1-0.9,1-1.6,1.9-1.5
 				c0.9,0.1,1.5,0.8,1.5,1.7c0,0.6-0.3,1.2-0.8,1.6l-0.9,0.9H28c0.1,0,0.2,0.1,0.2,0.1c0,0,0,0,0,0v0.8c0,0.1-0.1,0.2-0.1,0.2
 				c0,0,0,0,0,0h-3.2C24.7,40.9,24.6,40.9,24.6,40.7C24.6,40.8,24.6,40.8,24.6,40.7z"/>
-			<path class="st0" d="M8.2,35.7h0.9c0.1,0,0.2,0.1,0.2,0.1c0,0,0,0,0,0v4.8c0,0.1-0.1,0.2-0.1,0.2c0,0,0,0,0,0H8.3
+			<path class="sd0" d="M8.2,35.7h0.9c0.1,0,0.2,0.1,0.2,0.1c0,0,0,0,0,0v4.8c0,0.1-0.1,0.2-0.1,0.2c0,0,0,0,0,0H8.3
 				c-0.1,0-0.2-0.1-0.2-0.1c0,0,0,0,0,0v-3.8l-1,0.5c-0.1,0.1-0.2,0-0.2-0.1v-0.8c0-0.1,0-0.2,0.1-0.2l1-0.5
 				C8,35.7,8.1,35.7,8.2,35.7z"/>
 			<g>
-				<path class="st1" d="M117.4,15.8c-0.7,2.2-2.7,3.6-5,3.6c-2.9,0.1-5.3-2.2-5.4-5.1c0-0.1,0-0.2,0-0.2c-0.1-2.9,2.3-5.3,5.2-5.4
+				<path class="sd1" d="M117.4,15.8c-0.7,2.2-2.7,3.6-5,3.6c-2.9,0.1-5.3-2.2-5.4-5.1c0-0.1,0-0.2,0-0.2c-0.1-2.9,2.3-5.3,5.2-5.4
 					c0.1,0,0.1,0,0.2,0c2.3-0.1,4.3,1.4,5,3.6c0.1,0.3-0.1,0.6-0.4,0.6h-2.2c-0.2,0-0.5-0.1-0.6-0.3c-0.4-0.5-1.1-0.8-1.7-0.8
 					c-1.3,0-2.3,0.9-2.3,2.2c0,0.1,0,0.1,0,0.2c-0.1,1.2,0.9,2.3,2.2,2.4c0.1,0,0.1,0,0.2,0c0.7,0,1.3-0.3,1.7-0.8
 					c0.1-0.2,0.4-0.4,0.6-0.4h2.2C117.3,15.2,117.5,15.5,117.4,15.8z"/>
-				<path class="st1" d="M119.3,7.2V5.4c0-0.3,0.2-0.5,0.4-0.5c0,0,0.1,0,0.1,0h2c0.3,0,0.5,0.2,0.5,0.4c0,0,0,0.1,0,0.1v1.8
+				<path class="sd1" d="M119.3,7.2V5.4c0-0.3,0.2-0.5,0.4-0.5c0,0,0.1,0,0.1,0h2c0.3,0,0.5,0.2,0.5,0.4c0,0,0,0.1,0,0.1v1.8
 					c0,0.3-0.2,0.5-0.4,0.5c0,0-0.1,0-0.1,0h-2c-0.3,0-0.5-0.2-0.5-0.4C119.3,7.3,119.3,7.2,119.3,7.2z M119.3,18.6V9.4
 					c0-0.3,0.2-0.5,0.4-0.5c0,0,0.1,0,0.1,0h2c0.3,0,0.5,0.2,0.5,0.4c0,0,0,0.1,0,0.1v9.1c0,0.3-0.2,0.5-0.4,0.5c0,0-0.1,0-0.1,0h-2
 					c-0.3,0-0.5-0.2-0.5-0.4C119.3,18.6,119.3,18.6,119.3,18.6z"/>
-				<path class="st1" d="M128.2,9.4v9.6c0,3-1.3,4.4-4.2,4.4c-0.3,0-0.5-0.2-0.5-0.4c0,0,0-0.1,0-0.1V21c0-0.3,0.2-0.5,0.5-0.5
+				<path class="sd1" d="M128.2,9.4v9.6c0,3-1.3,4.4-4.2,4.4c-0.3,0-0.5-0.2-0.5-0.4c0,0,0-0.1,0-0.1V21c0-0.3,0.2-0.5,0.5-0.5
 					c0.8-0.1,1.1-0.5,1.1-1.4V9.4c0-0.3,0.2-0.5,0.4-0.5c0,0,0.1,0,0.1,0h2C127.9,8.9,128.1,9.1,128.2,9.4
 					C128.2,9.4,128.2,9.4,128.2,9.4z M128.2,5.4v1.8c0,0.3-0.2,0.5-0.4,0.5c0,0-0.1,0-0.1,0h-2c-0.3,0-0.5-0.2-0.5-0.4
 					c0,0,0-0.1,0-0.1V5.4c0-0.3,0.2-0.5,0.4-0.5c0,0,0.1,0,0.1,0h2c0.3,0,0.5,0.2,0.5,0.4C128.2,5.3,128.2,5.4,128.2,5.4z"/>
-				<path class="st1" d="M134.1,8.9h1.4c0.3,0,0.5,0.2,0.5,0.4c0,0,0,0.1,0,0.1v1.9c0,0.3-0.2,0.5-0.4,0.5c0,0-0.1,0-0.1,0h-1.4v6.7
+				<path class="sd1" d="M134.1,8.9h1.4c0.3,0,0.5,0.2,0.5,0.4c0,0,0,0.1,0,0.1v1.9c0,0.3-0.2,0.5-0.4,0.5c0,0-0.1,0-0.1,0h-1.4v6.7
 					c0,0.3-0.2,0.5-0.4,0.5c0,0-0.1,0-0.1,0h-2c-0.3,0-0.5-0.2-0.5-0.4c0,0,0-0.1,0-0.1v-6.7h-0.8c-0.3,0-0.5-0.2-0.5-0.4
 					c0,0,0-0.1,0-0.1V9.4c0-0.3,0.2-0.5,0.4-0.5c0,0,0.1,0,0.1,0h0.9c0-2.7,1.4-4.4,4.4-4.4c0.3,0,0.5,0.2,0.5,0.4c0,0,0,0.1,0,0.1
 					V7c0,0.3-0.2,0.5-0.5,0.5c-0.7-0.1-1.3,0.5-1.4,1.1C134.1,8.7,134.1,8.8,134.1,8.9z"/>
-				<path class="st1" d="M147.4,14c0,0.3,0,0.5,0,0.8c0,0.3-0.2,0.5-0.5,0.5c0,0,0,0,0,0h-6.8c0.3,1.1,1.3,1.8,2.4,1.7
+				<path class="sd1" d="M147.4,14c0,0.3,0,0.5,0,0.8c0,0.3-0.2,0.5-0.5,0.5c0,0,0,0,0,0h-6.8c0.3,1.1,1.3,1.8,2.4,1.7
 					c0.5,0,1.1-0.2,1.5-0.5c0.2-0.2,0.4-0.3,0.6-0.3l1.9,0c0.4,0,0.6,0.2,0.4,0.6c-0.8,1.7-2.6,2.8-4.5,2.7c-2.9,0.2-5.3-2-5.5-4.9
 					c0-0.2,0-0.3,0-0.5c-0.1-2.9,2.2-5.3,5.1-5.4c0.1,0,0.2,0,0.3,0c2.8,0,5.1,2.2,5.1,5.1C147.5,13.8,147.4,13.9,147.4,14z
 					 M144.4,12.9c-0.2-1-1.1-1.6-2.1-1.6c-1-0.1-2,0.6-2.2,1.6H144.4z"/>
-				<path class="st1" d="M155.2,9.3v2.4c0,0.3-0.1,0.5-0.4,0.5c-1.1-0.1-2.1,0.6-2.2,1.7c0,0.2,0,0.3,0,0.5v4.3
+				<path class="sd1" d="M155.2,9.3v2.4c0,0.3-0.1,0.5-0.4,0.5c-1.1-0.1-2.1,0.6-2.2,1.7c0,0.2,0,0.3,0,0.5v4.3
 					c0,0.3-0.2,0.5-0.4,0.5c0,0-0.1,0-0.1,0h-2c-0.3,0-0.5-0.2-0.5-0.4c0,0,0-0.1,0-0.1V9.4c0-0.3,0.2-0.5,0.4-0.5c0,0,0.1,0,0.1,0
 					h2c0.3,0,0.5,0.2,0.5,0.4c0,0,0,0.1,0,0.1v1.1c0.3-1,1.1-1.7,2.1-1.8C155,8.7,155.2,8.9,155.2,9.3z"/>
 			</g>
-			<path class="st3" d="M189.1,1.2c-0.7-0.8-1.7-1.2-2.8-1.2c-0.1,0-0.2,0-0.3,0c-0.1,0-0.2,0-0.3,0c-0.2,0-0.3,0.1-0.5,0.1l-0.1,0
+			<path class="sd3" d="M189.1,1.2c-0.7-0.8-1.7-1.2-2.8-1.2c-0.1,0-0.2,0-0.3,0c-0.1,0-0.2,0-0.3,0c-0.2,0-0.3,0.1-0.5,0.1l-0.1,0
 				c-0.5,0.2-1,0.4-1.4,0.8l-0.1,0.1c-0.7,0.7-1.2,1.6-1.2,2.6c0,1.1,0.4,2.1,1.1,2.8c0.7,0.8,1.7,1.2,2.8,1.2c0.1,0,0.1,0,0.2,0
 				l0.1,0c0.1,0,0.2,0,0.3,0c0.2,0,0.3-0.1,0.5-0.1l0.1,0c0.5-0.2,1-0.4,1.4-0.8l0.1-0.1c0.7-0.7,1.2-1.6,1.2-2.6
 				C190.2,2.9,189.8,1.9,189.1,1.2z M188.4,6l-0.1,0.1c-0.3,0.3-0.7,0.5-1.1,0.6l-0.1,0c-0.1,0-0.2,0.1-0.4,0.1c-0.1,0-0.1,0-0.3,0
 				l-0.2,0c-0.9,0-1.7-0.3-2.3-1c-0.6-0.6-0.9-1.4-0.9-2.3c0-0.8,0.4-1.5,1-2l0.1-0.1c0.4-0.3,0.8-0.5,1.2-0.6
 				c0.1,0,0.2-0.1,0.4-0.1c0.1,0,0.2,0,0.3,0l0.2,0h0c0.8,0,1.6,0.3,2.2,1c0.6,0.6,0.9,1.4,0.9,2.3C189.4,4.8,189,5.5,188.4,6z"/>
-			<path class="st0" d="M188,5.7h-0.7c-0.1,0-0.1,0-0.2-0.1l-0.9-1.2h-0.3v1.1c0,0.1,0,0.1-0.1,0.1c0,0,0,0,0,0h-0.6
+			<path class="sd0" d="M188,5.7h-0.7c-0.1,0-0.1,0-0.2-0.1l-0.9-1.2h-0.3v1.1c0,0.1,0,0.1-0.1,0.1c0,0,0,0,0,0h-0.6
 				c-0.1,0-0.1,0-0.1-0.1c0,0,0,0,0,0V2c0-0.1,0-0.1,0.1-0.1c0,0,0,0,0,0h1.3c0.7,0,1.3,0.6,1.3,1.3c0,0,0,0,0,0
 				c0,0.5-0.3,0.9-0.7,1.1l1,1.2C188.2,5.6,188.1,5.7,188,5.7z M185.9,3.7h0.6c0.3,0,0.5-0.2,0.4-0.5c0,0,0,0,0,0
 				c0-0.3-0.2-0.5-0.4-0.5c0,0,0,0,0,0h-0.6V3.7z"/>
@@ -1269,7 +1269,7 @@ $$('[data-voorbeeldrapport]').forEach(b=>b.onclick=voorbeeldRapport);
 function rapportHTML(ms,sc,le,nu){
   const o=S.org,k=S.klant,vandaag=fD(new Date());
   const namen=S.partner?`${S.A.naam} en ${S.P.naam}`:S.A.naam;
-  const logo=(document.querySelector('.sitehead .hclogo')||{outerHTML:''}).outerHTML;
+  const logo=(document.querySelector('.sitefoot .hclogo')||{outerHTML:''}).outerHTML;
   const c=sc.c||0, cls=x=>x<6?'lo':'';
   const gekozen=PLANNEN.filter(p=>S.plannen.includes(p.id)&&p.t), niet=PLANNEN.filter(p=>!S.plannen.includes(p.id)&&p.t);
   const eigenTxt=[S.plannen.includes('anders')?`Iets anders: ${esc(S.plannenTxt.anders)}`:'',S.plannen.includes('niets')?`Niets, omdat: ${esc(S.plannenTxt.niets)}`:''].filter(Boolean);
@@ -1281,17 +1281,22 @@ function rapportHTML(ms,sc,le,nu){
     ${titel?`<h2><span class="nr">${titel[0]}</span>${titel[1]}</h2>`:''}${inhoud}
     <footer class="pf"><span>${esc(namen)} · ${vandaag}</span><span>${pnr}</span></footer></section>`;};
   const schaal=(x,groot)=>`<div class="sch ${groot?'big':''}">${Array.from({length:10},(_,i)=>`<span class="${i<5?'lo':''} ${x===i+1?'on':''}">${i+1}</span>`).join('')}</div>`;
-  const hbar=(max,verm,schuld)=>{const tot=Math.max(max+verm,schuld,1);const a=(max+verm)/tot*100,s=Math.min(schuld,max+verm)/tot*100,ov=Math.max(0,schuld-max-verm)/tot*100;
-    return `<div class="hb"><div class="hbr"><i style="width:${a}%" class="k"></i></div><div class="hbr"><i style="width:${s}%" class="y"></i>${ov?`<i style="width:${ov}%" class="r"></i>`:''}</div></div>`;};
+  const segs=(max,verm,schuld)=>{const cap=max+verm,tot=Math.max(cap,schuld,1);return schuld<=cap?{d:schuld/tot*100,g:(cap-schuld)/tot*100,r:0}:{d:cap/tot*100,g:0,r:(schuld-cap)/tot*100};};
+  const hbar=(max,verm,schuld)=>{const z=segs(max,verm,schuld);return `<div class="hb1"><i class="d" style="width:${z.d}%"></i><i class="g" style="width:${z.g}%"></i><i class="r" style="width:${z.r}%"></i></div>`;};
+  const vbar=(max,verm,schuld)=>{const z=segs(max,verm,schuld);return `<div class="vb"><i class="r" style="height:${z.r}%"></i><i class="g" style="height:${z.g}%"></i><i class="d" style="height:${z.d}%"></i></div>`;};
+  const hexok=ok=>`<svg class="hx ${ok?'':'neg'}" viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7z"/>${ok?'<path d="m8 12 3 3 5-6"/>':'<path d="M12 8v5M12 16v.5"/>'}</svg>`;
   const momKaart=m=>{const ok=m.ruimte>=0,cc=cijferPct(m.pct),l=lasten(m.d,S.le.rente);
-    return `<div class="mk ${ok?'':'neg'}"><div class="mkh"><div><b>${fD(m.d)}</b><span>${esc(m.txt)}</span></div><em class="cf ${cls(cc)}">${cc}</em></div>
-      ${hbar(m.max,m.verm,m.schuld)}
-      <table class="kv">${rij('Maximale hypotheek',fE(m.max))}${m.verm?rij('Eigen geld',fE(m.verm)):''}${rij('Hypotheekschuld',fE(m.schuld))}
-      <tr class="tot"><th>${ok?'Ruimte':'Overschrijding'}</th><td class="${ok?'ok':'bad'}">${fE(Math.abs(m.ruimte))}</td></tr>${rij('Netto maandlast',fE(l.netto))}</table>
-      <p class="mku">${UITLEG[m.type]}</p></div>`;};
-  const mChunks=[];for(let i=0;i<ms.length;i+=4)mChunks.push(ms.slice(i,i+4));
+    return `<div class="mk ${ok?'':'neg'}"><div class="mkl">${hexok(ok)}<div><span class="dt">${fD(m.d)}</span><b>${esc(m.txt)}</b>
+      <p>${UITLEG[m.type]} ${ok?`Volgens de leennormen is de hypotheekschuld dan <b>niet te hoog</b>.`:`Volgens de leennormen is de hypotheekschuld dan <b>te hoog</b>.`}</p>
+      <div class="mkc"><em class="cf ${cls(cc)}">${cc}</em><span>cijfer voor dit moment</span></div></div></div>
+      <div class="mkp">${vbar(m.max,m.verm,m.schuld)}<div class="mkv"><span>Maximale hypotheek</span><b>${fE(m.max)}</b>${m.verm?`<span>Eigen geld</span><b>${fE(m.verm)}</b>`:''}<span>Hypotheekschuld</span><b>${fE(m.schuld)}</b>
+      <span>${ok?'Ruimte':'Overschrijding'}</span><b class="${ok?'ok':'bad'}">${fE(Math.abs(m.ruimte))}</b><span>Netto maandlast</span><b>${fE(l.netto)}</b></div></div></div>`;};
+  const mChunks=[];for(let i=0;i<ms.length;i+=3)mChunks.push(ms.slice(i,i+3));
   const kpi=(l,v,s='')=>`<div class="kpi"><span>${l}</span><b>${v}</b>${s?`<small>${s}</small>`:''}</div>`;
   const wl=sc.w;
+  const berekening=(()=>{if(!wl)return '<tr><td>–</td><td>Onvoldoende gegevens</td></tr>';const p=wl.pct;
+    if(p>=0)return `<tr><td>6</td><td>Basiscijfer: op geen enkel belangrijk moment is de schuld te hoog</td></tr><tr><td>+${c-6}</td><td>Kleinste ruimte ${fP(p*100,1)} van de schuld (${fD(wl.d)})</td></tr><tr class="tot"><td>${c}</td><td>Je hypotheekcijfer</td></tr>`;
+    return `<tr><td>!</td><td>Overschrijding ${fP(-p*100,1)} op ${fD(wl.d)}</td></tr><tr class="tot"><td>${c}</td><td>Je hypotheekcijfer</td></tr>`;})();
   const leRows=le.map(e=>`<tr><td><b>${esc(e.naam)}</b>${e.note?`<small>${esc(e.note)}</small>`:''}</td><td class="r">${fE(e.max)}</td><td class="r">${fE(e.schuld-e.verm)}</td><td class="bcell">${hbar(e.max,e.verm,e.schuld)}</td><td class="r ${e.ok?'ok':'bad'}">${e.ok?'+ ':'- '}${fE(Math.abs(e.ruimte))}</td><td class="r"><em class="cf ${cls(e.c)}">${e.c}</em></td></tr>`).join('');
   const brief=`<section class="pg letter"><header class="ph"><div class="phl">${logo}</div><div class="pht">${esc(o.naam)}</div></header>
     <div class="adr">${esc(namen)}<br>${esc(k.adres)}<br>${esc(k.pc)}</div>
@@ -1309,25 +1314,24 @@ function rapportHTML(ms,sc,le,nu){
     <div class="cvfoot">${esc(o.web)}</div></section>`;
   const p1=pagina(['1','Samenvatting'],`
     <div class="hero"><div class="bigc ${cls(c)}">${c||'–'}</div><div><p class="lbl">De betaalbaarheid van je hypotheek scoort een</p>${schaal(c,true)}<p class="verd">${esc(sc.txt||'')}</p></div></div>
-    <div class="note"><b>Hoe is het cijfer berekend?</b> ${esc(sc.expl||'')}</div>
+    <div class="calc"><div><b>${esc(sc.txt||'')}</b><p>${esc(sc.expl||'')}</p></div><table><tr><th colspan="2">Zo is je hypotheekcijfer berekend</th></tr>${berekening}</table></div>
     <div class="kpis">${kpi('Hypotheekschuld nu',fE(schuld(S.peil)))}${kpi('Waarde huis',fE(S.woning))}${kpi('Bruto maandlast',fE(nu.bruto))}${kpi('Netto maandlast',fE(nu.netto),'indicatief')}</div>
-    <h3>Belangrijke momenten</h3>
-    <div class="tlx">${ms.map(m=>{const cc=cijferPct(m.pct);return `<div class="tli ${m.ruimte<0?'neg':''}"><em class="cf ${cls(cc)}">${cc}</em><b>${fDk(m.d)}</b><span>${esc(m.txt)}</span><i class="${m.ruimte<0?'bad':'ok'}">${m.ruimte<0?'tekort ':'ruimte '}${fE(Math.abs(m.ruimte))}</i></div>`;}).join('')}</div>
+    <div class="band"><h3>Belangrijke momenten</h3><div class="tlx">${ms.map(m=>{const cc=cijferPct(m.pct);return `<div class="tli ${m.ruimte<0?'neg':''}"><em class="cf ${cls(cc)}">${cc}</em><b>${fDk(m.d)}</b><span>${esc(m.txt)}</span><i class="${m.ruimte<0?'bad':'ok'}">${m.ruimte<0?'tekort ':'ruimte '}${fE(Math.abs(m.ruimte))}</i></div>`;}).join('')}</div></div>
     <h3>Life events</h3>
     <div class="lev">${le.map(e=>`<div class="${e.ok?'':'neg'}"><em class="cf ${cls(e.c)}">${e.c}</em><span>${esc(e.naam)}</span><i class="${e.ok?'ok':'bad'}">${e.ok?'+ ':'- '}${fE(Math.abs(e.ruimte))}</i></div>`).join('')}</div>`);
   const pM=mChunks.map((ch,i)=>pagina(i===0?['2','Belangrijke momenten']:null,`${i===0?`<p class="intro">Op deze momenten verandert er iets aan je hypotheek of je inkomen. We toetsen of je schuld dan nog past bij de maximale hypotheek volgens de leennormen 2027.</p>
-    <div class="legend"><span><i class="k"></i>Maximale hypotheek + eigen geld</span><span><i class="y"></i>Hypotheekschuld</span><span><i class="r"></i>Overschrijding</span></div>`:''}
-    <div class="mgrid">${ch.map(momKaart).join('')}</div>`)).join('');
+    `:''}
+    <div class="mlist">${ch.map(momKaart).join('')}</div><div class="legend"><span><i class="d"></i>Hypotheekschuld</span><span><i class="g"></i>Ruimte tot maximale hypotheek</span><span><i class="r"></i>Overschrijding maximale hypotheek</span></div>`)).join('');
   const pChart=pagina(['3','Je hypotheek in de tijd'],`<p class="intro">De lijn laat zien hoe je maximale hypotheek (zwart) zich verhoudt tot je schuld min eigen geld (geel). Komt de gele lijn boven de zwarte, dan past de schuld niet meer binnen de leennormen.</p>
     <div class="chart">${chartSVG(ms,720,250)}</div>
-    <div class="legend"><span><i class="k"></i>Maximale hypotheek</span><span><i class="y"></i>Schuld − eigen geld</span><span><i class="g"></i>Belangrijk moment</span></div>
+    <div class="legend"><span><i class="k"></i>Maximale hypotheek</span><span><i class="y"></i>Schuld − eigen geld</span><span><i class="m"></i>Belangrijk moment</span></div>
     <h3>Maandlasten op de belangrijke momenten</h3>
     <table class="lt"><tr><th>Moment</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr>
     <tr><td>Nu <small class="il">${fD(S.peil)}</small></td><td class="r">${fE(nu.bruto)}</td><td class="r">${fE(nu.netto)}</td></tr>
     ${ms.map(m=>{const l=lasten(m.d,S.le.rente);return `<tr><td>${esc(m.txt)} <small class="il">${fD(m.d)}</small></td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`;}).join('')}</table>
     <p class="fine">Na einde rentevast gerekend met ${fP(S.le.rente,2)} marktrente. Netto maandlast is indicatief.</p>`);
   const pLE=pagina(['4','Kun je de hypotheek blijven betalen bij life events?'],`<p class="intro">We hebben getoetst of de huidige hypotheekschuld past bij het inkomen dat overblijft als er iets onverwachts gebeurt. Aannames: arbeidsongeschiktheid ${fP(S.le.ao*100,0)} van het bruto inkomen, werkloosheid ${fP(S.le.ww*100,0)} van het (gemaximeerde) loon${S.partner?', bij overlijden het inkomen van de achterblijvende partner plus nabestaandenpensioen en een eventuele ORV-uitkering, bij scheiding één inkomen voor de volledige schuld':''}.</p>
-    <table class="lt le"><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th></th><th class="r">Ruimte / tekort</th><th class="r">Cijfer</th></tr>${leRows}</table>
+    <div class="legend"><span><i class="d"></i>Hypotheekschuld</span><span><i class="g"></i>Ruimte tot maximale hypotheek</span><span><i class="r"></i>Overschrijding maximale hypotheek</span></div><table class="lt le"><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th></th><th class="r">Ruimte / tekort</th><th class="r">Cijfer</th></tr>${leRows}</table>
     <div class="note">Een tekort betekent dat de schuld in die situatie hoger is dan volgens de leennormen verantwoord is. Dat leidt niet automatisch tot betalingsproblemen, maar is wel een risico. Een adviseur kan bekijken of een verzekering (zoals een woonlastenverzekering, AOV of overlijdensrisicoverzekering), extra aflossen of sparen dit risico verkleint.</div>`);
   const pG=pagina(['5','Je gegevens'],`<div class="two"><div>
     <h3>Persoonlijk</h3>${personen().map(([,p])=>`<table class="gg"><tr class="hd"><th colspan="2">${esc(p.naam)}</th></tr>${rij('Geboortedatum',fD(p.geb))}${rij('AOW-datum',fD(p.aow))}${rij('Bruto jaarinkomen',fE(p.ink))}${rij('AOW + pensioen per jaar',fE(p.pens))}</table>`).join('')}
@@ -1345,60 +1349,80 @@ function rapportHTML(ms,sc,le,nu){
     <div class="opt"><b>De waarde van het huis</b><p>Bij een nieuwe hypotheek kijkt de geldverstrekker ook naar de waarde van het huis. Hoe lager de schuld ten opzichte van de waarde, hoe lager de risicoklasse en vaak de rente.</p></div>
     <div class="opt"><b>Eigen geld gebruiken</b><p>Spaargeld, beleggingen of een erfenis kun je gebruiken om de hypotheek te verlagen. Houd wel een buffer aan voor onverwachte uitgaven.</p></div>
     <div class="opt"><b>Hypotheekrenteaftrek</b><p>Hypotheekrente is maximaal 30 jaar aftrekbaar, als je voldoet aan de voorwaarden van de Belastingdienst. Na het einde van de aftrek stijgt het netto maandbedrag.</p></div></div>
-    <div class="contact"><div><span>Vragen over je rapport?</span><p>Bel met of mail met je adviseur. Hij helpt je graag.</p></div><div><span>Meer over het hypotheekcijfer</span><p>${esc(o.web)}</p></div></div>
+    <h3>Contact</h3><div class="contact"><div><span>Je adviseur</span><p>Bel met of mail met je adviseur. Hij helpt je graag.</p></div><div><span>Opnieuw berekenen</span><p>Verandert je situatie? Doe de hypotheekcheck opnieuw.</p></div><div><span>Meer informatie</span><p>${esc(o.web)}</p></div></div>
     <p class="disc">Dit rapport is gebaseerd op de gegevens die je hebt ingevuld; die zijn niet gecontroleerd. Er is rekening gehouden met de ingevulde financiële verplichtingen. Dit is geen advies. Voor de beoordeling van de betaalbaarheid zijn de leennormen 2027 uit de Tijdelijke regeling hypothecair krediet gehanteerd, met een toetsrente van ${fP(S.toets,1)} als de rentevaste periode korter is dan 10 jaar. Het rapport is een momentopname: verandert je financiële situatie, kijk dan opnieuw naar de betaalbaarheid van je hypotheek.</p>`);
+  const toc=[['1','Samenvatting',1],['2','Belangrijke momenten',2],['3','Je hypotheek in de tijd',2+mChunks.length],['4','Life events',3+mChunks.length],['5','Je gegevens',4+mChunks.length],['6','Wat je kunt doen',5+mChunks.length],['7','Goed om te weten en contact',6+mChunks.length]];
+  const pToc=`<section class="pg"><header class="ph"><div class="phl">${logo}</div><div class="pht">Je hypotheekcijfer nu en later</div></header>
+    <h2 style="margin-top:6mm">Wat lees je in dit rapport</h2><ol class="toc">${toc.map(t=>`<li><span>${t[0]}</span><b>${t[1]}</b><i></i><em>${t[2]}</em></li>`).join('')}</ol>
+    <div class="note" style="margin-top:12mm">Dit rapport is gemaakt op basis van de gegevens die je in de hypotheekcheck hebt ingevuld en de leennormen 2027. Bespreek het met je hypotheekadviseur.</div></section>`;
   return `<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>Je hypotheekcijfer nu en later – ${esc(namen)}</title><style>
   @page{size:A4;margin:0}
   *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   html,body{margin:0;background:#d9d9d9}
   body{font-family:Montserrat,"Gilroy","Segoe UI",Roboto,Arial,sans-serif;color:#010101;font-size:10.5pt;line-height:1.5}
-  .pg{width:210mm;height:297mm;margin:8mm auto;background:#fff;position:relative;overflow:hidden;padding:30mm 16mm 18mm;page-break-after:always;break-after:page;box-shadow:0 2px 14px rgba(0,0,0,.18)}
+  .pg{width:210mm;height:297mm;margin:8mm auto;background:#fff;position:relative;overflow:hidden;padding:34mm 16mm 20mm;page-break-after:always;break-after:page;box-shadow:0 2px 14px rgba(0,0,0,.18)}
   .pg:last-of-type{page-break-after:auto;break-after:auto}
   @media print{html,body{background:#fff}.pg{margin:0;box-shadow:none}.tools{display:none}}
-  .ph{position:absolute;top:0;left:0;right:0;height:18mm;background:#010101;display:flex;align-items:center;justify-content:space-between;padding:0 16mm}
-  .ph .hclogo{height:9mm;width:auto;display:block}.pht{color:#FFD31C;font-weight:700;font-size:9pt;letter-spacing:.3px}
-  .pf{position:absolute;bottom:8mm;left:16mm;right:16mm;display:flex;justify-content:space-between;font-size:8pt;color:#777;border-top:1px solid #e5e5e5;padding-top:3mm}
-  .pf span:last-child{font-weight:800;color:#010101}
-  h2{font-size:22pt;line-height:1.15;margin:0 0 6mm;font-weight:900;display:flex;align-items:center;gap:4mm}
-  h2 .nr{display:inline-grid;place-items:center;width:11mm;height:12.5mm;background:#FFD31C;font-size:15pt;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);flex:none}
-  h3{font-size:12pt;margin:5.5mm 0 2.5mm;font-weight:800}h4{font-size:10.5pt;margin:5mm 0 1mm}
+  .ph{position:absolute;top:0;left:0;right:0;height:22mm;background:#010101;border-bottom:2.2mm solid #FFD31C;display:flex;align-items:center;justify-content:space-between;padding:0 16mm}
+  .ph .hclogo{height:13mm;width:auto;display:block}.pht{color:#FFD31C;font-weight:800;font-size:9.5pt;letter-spacing:.3px;text-transform:uppercase}
+  .pf{position:absolute;bottom:0;left:0;right:0;height:12mm;background:#010101;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 16mm;font-size:8pt}
+  .pf span:last-child{font-weight:900;color:#010101;background:#FFD31C;min-width:9mm;height:9mm;display:grid;place-items:center;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+  h2{font-size:22pt;line-height:1.15;margin:0 0 6mm;font-weight:900;display:flex;align-items:center;gap:4mm;padding-bottom:3mm;border-bottom:1.2mm solid #FFD31C}
+  h2 .nr{display:inline-grid;place-items:center;width:11mm;height:12.5mm;background:#010101;color:#FFD31C;font-size:15pt;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);flex:none}
+  h3{font-size:12pt;margin:5mm 0 2.5mm;font-weight:800;padding-left:3mm;border-left:1.4mm solid #FFD31C}h4{font-size:10.5pt;margin:5mm 0 1mm}
   .intro{margin:0 0 5mm;color:#333}.fine{font-size:8.5pt;color:#777}
-  .ok{color:#1f8a4c;font-weight:800}.bad{color:#E5486B;font-weight:800}
+  .ok{color:#010101;font-weight:800}.bad{color:#E5486B;font-weight:800}
   .cf{display:inline-grid;place-items:center;min-width:8mm;height:8mm;border-radius:50%;background:#FFD31C;font-style:normal;font-weight:900;font-size:10.5pt;padding:0 1mm}.cf.lo{background:#E5486B;color:#fff}
   /* cover */
   .cover{background:#010101;color:#fff;padding:0}
-  .cover .cvlogo{position:absolute;top:18mm;left:18mm}.cover .cvlogo .hclogo{height:16mm;width:auto}
+  .cover .cvlogo{position:absolute;top:18mm;left:18mm}.cover .cvlogo .hclogo{height:24mm;width:auto}
   .hexbg{position:absolute;right:-40mm;top:40mm;width:170mm;height:195mm;background:#FFD31C;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
   .cvbody{position:absolute;left:18mm;right:18mm;bottom:42mm}
   .cvlabel{display:inline-block;background:#FFD31C;color:#010101;font-weight:800;font-size:9pt;padding:1.5mm 3mm;margin-bottom:6mm;text-transform:uppercase;letter-spacing:.6px}
   .cover h1{font-size:40pt;line-height:1.05;margin:0 0 10mm;font-weight:900;text-shadow:0 0 0 #000}
   .cvscore{display:flex;align-items:center;gap:6mm;background:#fff;color:#010101;padding:5mm 7mm;max-width:130mm}
   .cvscore span{display:block;font-size:9.5pt;color:#555}.cvscore b{display:block;font-size:12pt}
-  .bigc{flex:none;width:26mm;height:26mm;border-radius:50%;background:#FFD31C;display:grid;place-items:center;font-size:32pt;font-weight:900;color:#010101}.bigc.lo{background:#E5486B;color:#fff}
+  .bigc{flex:none;width:26mm;height:26mm;border-radius:50%;background:#FFD31C;display:grid;place-items:center;font-size:32pt;font-weight:900;color:#010101}.bigc.lo,.hero .bigc.lo{background:#E5486B;color:#fff}
   .cvfoot{position:absolute;left:18mm;bottom:16mm;color:#FFD31C;font-weight:700;font-size:10pt}
   /* brief */
   .letter{padding-top:34mm}.letter .adr{margin-bottom:10mm;line-height:1.6}
   .meta{border-collapse:collapse;margin-bottom:9mm}.meta th{text-align:left;font-weight:400;color:#777;padding:1mm 8mm 1mm 0}.meta td{padding:1mm 0}
   .letter p{margin:0 0 3mm}.letter ul{margin:0 0 3mm;padding-left:5mm}.groet{margin-top:10mm!important}
   /* samenvatting */
-  .hero{display:flex;gap:6mm;align-items:center;background:#FFF6CC;padding:4.5mm 5mm;border-left:2.5mm solid #FFD31C}
-  .hero .bigc{width:26mm;height:26mm;font-size:32pt}
+  .hero{display:flex;gap:6mm;align-items:center;background:#FFD31C;padding:4mm 5mm;border-left:2.5mm solid #010101}
+  .hero .bigc{background:#010101;color:#FFD31C;width:21mm;height:21mm;font-size:26pt}
   .lbl{margin:0 0 2mm;font-weight:700}.verd{margin:2.5mm 0 0;font-size:12.5pt;font-weight:800}
   .sch{display:grid;grid-template-columns:repeat(10,1fr);border:2px solid #010101;background:#fff}
   .sch span{text-align:center;padding:1.6mm 0;font-weight:800;font-size:9.5pt;color:#555;border-right:1px solid #eee}.sch span:last-child{border:0}
   .sch span.lo{color:#E5486B}.sch span.on{background:#FFD31C;color:#010101}.sch span.lo.on{background:#E5486B;color:#fff}
-  .note{background:#f6f6f6;padding:3mm 4mm;margin:4mm 0;font-size:9pt}
+  .note{background:#f6f6f6;padding:4mm 5mm;margin:5mm 0;font-size:9.5pt}
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm}
-  .kpi{border:2px solid #010101;padding:3mm}.kpi span{display:block;font-size:8.5pt;color:#555}.kpi b{font-size:13pt}.kpi small{display:block;font-size:7.5pt;color:#888}
+  .kpi{background:#010101;color:#fff;padding:2.6mm 3mm}.kpi span{display:block;font-size:8.5pt;color:#ccc}.kpi b{font-size:13pt;color:#FFD31C}.kpi small{display:block;font-size:7.5pt;color:#aaa}
   .tlx{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm}
   .tli{border-top:4px solid #010101;padding-top:2mm;font-size:8.5pt;position:relative}.tli.neg{border-color:#E5486B}
-  .tli .cf{float:right;min-width:7mm;height:7mm;font-size:9pt}.tli b{display:block;font-size:9.5pt}.tli span{display:block;color:#444;min-height:7mm}.tli i{font-style:normal;font-weight:800}.tli i.ok{color:#1f8a4c}.tli i.bad{color:#E5486B}
+  .tli .cf{float:right;min-width:7mm;height:7mm;font-size:9pt}.tli b{display:block;font-size:9.5pt}.tli span{display:block;color:#222;min-height:5mm}.tli i{font-style:normal;font-weight:800}.tli i.ok{color:#010101}.tli i.bad{color:#E5486B}
   .lev{display:grid;grid-template-columns:1fr 1fr;gap:1.5mm 6mm}
-  .lev div{display:grid;grid-template-columns:8mm 1fr auto;align-items:center;gap:3mm;padding:.8mm 0;border-bottom:1px solid #eee;font-size:9pt}
-  .lev .cf{min-width:7mm;height:7mm;font-size:9pt}.lev i{font-style:normal;font-weight:800}.lev i.ok{color:#1f8a4c}.lev i.bad{color:#E5486B}
+  .lev div{display:grid;grid-template-columns:8mm 1fr auto;align-items:center;gap:3mm;padding:.2mm 0;border-bottom:1px solid #eee;font-size:9pt}
+  .lev .cf{min-width:7mm;height:7mm;font-size:9pt}.lev i{font-style:normal;font-weight:800}.lev i.ok{color:#010101}.lev i.bad{color:#E5486B}
   /* momenten */
+  .hb1{display:flex;height:3.4mm;background:#f1f1f1;border:1px solid #010101}.hb1 i{display:block;height:100%}
+  i.d{background:#010101}i.g{background:#FFD31C}
+  .mlist{display:flex;flex-direction:column;gap:3.5mm;margin-bottom:4mm}
+  .mk{display:grid;grid-template-columns:1fr 82mm;gap:5mm;border:0!important;padding:0!important;break-inside:avoid}
+  .mkl{display:flex;gap:3mm}.mkl .dt{display:block;font-size:8.5pt;color:#555}.mkl>div>b{font-size:11.5pt;display:block}.mkl p{font-size:8.4pt;margin:1mm 0 1.6mm;line-height:1.42}
+  .hx{width:8mm;height:8mm;flex:none;fill:none;stroke:#010101;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.hx.neg{stroke:#E5486B}
+  .mkc{display:flex;align-items:center;gap:2mm;font-size:8pt;color:#555}.mkc .cf{min-width:7mm;height:7mm;font-size:9pt}
+  .mkp{background:#FFF6CC;border-left:1.4mm solid #010101;padding:3.5mm;display:grid;grid-template-columns:16mm 1fr;gap:4mm;align-items:stretch}
+  .vb{display:flex;flex-direction:column;height:28mm;background:#fff;border:1px solid #010101}.vb i{display:block;width:100%}
+  .mkv{font-size:8pt;display:grid;grid-template-columns:1fr auto;column-gap:3mm;row-gap:.4mm;align-content:center}.mkv span{color:#555;white-space:nowrap}.mkv b{text-align:right;white-space:nowrap}
+  .calc{display:grid;grid-template-columns:1fr 78mm;gap:5mm;margin:4mm 0}.calc p{font-size:8.3pt;margin:1mm 0 0;color:#333}
+  .calc table{border:2px solid #010101;border-collapse:collapse;font-size:8.8pt;width:100%}.calc th{text-align:left;padding:2mm 3mm;border-bottom:1px solid #ddd}.calc td{padding:1.6mm 3mm;vertical-align:top}.calc td:first-child{font-weight:900;width:10mm}.calc tr.tot td{border-top:1px solid #010101;font-weight:800}
+  .band .cf{background:#010101;color:#FFD31C}.band .cf.lo{background:#E5486B;color:#fff}.band .tli i.bad{color:#b0122f}
+  .band{background:#FFD31C;padding:2mm 5mm 3mm;margin-top:4mm}.band h3{margin:1mm 0 3mm}
+  .band .tlx{position:relative}.band .tli{border-top:2px solid #010101;padding-top:3mm}.band .tli:before{content:"";position:absolute;margin-top:-4.6mm;width:2.4mm;height:2.4mm;border-radius:50%;background:#010101}.band .tli.neg{border-color:#E5486B}.band .tli.neg:before{background:#E5486B}
+  .toc{list-style:none;padding:0;margin:8mm 0 0;font-size:13pt}.toc li{display:flex;align-items:baseline;gap:6mm;padding:3.2mm 0;border-bottom:1px solid #eee}.toc span{width:8mm;font-weight:800}.toc i{flex:1}.toc em{font-style:normal;color:#777}
   .legend{display:flex;gap:6mm;font-size:8.5pt;color:#555;margin:0 0 4mm}.legend i{display:inline-block;width:4mm;height:2.5mm;margin-right:1.5mm;vertical-align:middle}
-  i.k{background:#010101}i.y{background:#FFD31C}i.r{background:#E5486B}i.g{background:#9a9a9a}
+  i.k{background:#010101}i.y{background:#FFD31C}i.r{background:#E5486B}i.m{background:#9a9a9a}
   .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
   .mk{border:2px solid #010101;padding:3.5mm 4mm;break-inside:avoid}.mk.neg{border-color:#E5486B}
   .mkh{display:flex;justify-content:space-between;align-items:flex-start;gap:3mm;margin-bottom:2.5mm}.mkh b{display:block;font-size:11pt}.mkh span{font-size:8.5pt;color:#444}
@@ -1407,23 +1431,23 @@ function rapportHTML(ms,sc,le,nu){
   .kv .tot th,.kv .tot td{border-top:1px solid #ddd;font-weight:800;color:#010101}
   .mku{font-size:7.8pt;color:#666;margin:2mm 0 0;line-height:1.4}
   .chart svg{width:100%;height:auto;display:block}
-  .lt{width:100%;border-collapse:collapse;font-size:9pt}.lt th{text-align:left;font-size:8pt;color:#555;font-weight:700;border-bottom:2px solid #010101;padding:1.5mm 1.5mm}
+  .lt{width:100%;border-collapse:collapse;font-size:9pt}.lt th{text-align:left;font-size:8pt;color:#FFD31C;background:#010101;font-weight:700;padding:1.8mm 1.5mm}
   .lt td{border-bottom:1px solid #eee;padding:1.5mm 1.5mm;vertical-align:middle}.lt .r{text-align:right;white-space:nowrap}.lt small{display:block;color:#888;font-size:7.5pt}.lt small.il{display:inline;margin-left:2mm}
-  .lt.le .bcell{width:32mm}.lt.le .hb{margin:0}.lt.le .hbr{height:2.4mm}.lt .cf{min-width:7mm;height:7mm;font-size:9pt}
+  .lt.le .bcell{width:30mm}.lt .cf{min-width:7mm;height:7mm;font-size:9pt}
   /* gegevens */
   .two{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
   .gg{width:100%;border-collapse:collapse;font-size:9pt;margin-bottom:3mm}.gg th{text-align:left;font-weight:400;color:#555;padding:1.1mm 0;border-bottom:1px solid #eee;width:55%}.gg td{padding:1.1mm 0;border-bottom:1px solid #eee;font-weight:600}
-  .gg tr.hd th{font-weight:800;color:#010101;border-bottom:2px solid #FFD31C;padding-top:2mm}
+  .gg tr.hd th{font-weight:800;color:#FFD31C;background:#010101;border:0;padding:1.6mm 2mm}
   /* plannen / weten */
   .need{background:#010101;color:#fff;padding:5mm 6mm;margin-bottom:2mm}.need span{color:#FFD31C;font-weight:800;font-size:11pt}.need p{margin:1.5mm 0 0}
   .opts{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
   .opt{border-left:2mm solid #FFD31C;background:#fafafa;padding:3mm 4mm;font-size:9pt}.opt b{font-size:10pt}.opt p{margin:1mm 0 0}
-  .contact{display:grid;grid-template-columns:1fr 1fr;gap:4mm;margin-top:7mm}.contact>div{background:#FFD31C;padding:4mm 5mm}.contact span{font-weight:800}.contact p{margin:1mm 0 0}
+  .contact{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;margin-top:2mm}.contact>div{background:#FFD31C;padding:4mm 5mm}.contact span{font-weight:800}.contact p{margin:1mm 0 0}
   .disc{font-size:7.8pt;color:#777;margin-top:6mm;line-height:1.45}
   .tools{position:fixed;top:10px;right:10px;z-index:5}.tools button{background:#FFD31C;color:#010101;border:2px solid #010101;padding:9px 14px;font-weight:700;cursor:pointer}
   </style></head><body>
   <div class="tools"><button onclick="window.print()">Afdrukken / opslaan als PDF</button></div>
-  ${brief}${cover}${p1}${pM}${pChart}${pLE}${pG}${pP}${pW}
+  ${brief}${cover}${pToc}${p1}${pM}${pChart}${pLE}${pG}${pP}${pW}
   <script>setTimeout(function(){try{window.focus();window.print();}catch(e){}},500);<\/script>
   </body></html>`;
 }

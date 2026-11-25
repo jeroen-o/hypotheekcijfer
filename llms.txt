@@ -1,0 +1,20 @@
+# Hypotheekcijfer
+
+> Hypotheekcijfer is een gratis online hypotheekcheck van Blinqx. Je krijgt een cijfer van 1 tot 10 dat laat zien of je hypotheek betaalbaar blijft, nu en later. Dit is geen hypotheekadvies.
+
+## Wat de check doet
+- Toetst volgens de leennormen 2027 (Tijdelijke regeling hypothecair krediet, financieringslastpercentages tabel 1 t/m 4) of de hypotheekschuld past bij het inkomen.
+- Belangrijke momenten: einde rentevaste periode (toetsrente 5% bij rentevast korter dan 10 jaar), einde hypotheekrenteaftrek, AOW-leeftijd van aanvrager en partner, einde looptijd.
+- Life events: arbeidsongeschiktheid, werkloosheid, overlijden en scheiding.
+- Cijfer: 6 is het basiscijfer als de schuld op geen enkel moment te hoog is; 7 bij minder dan 10% ruimte, 8 bij 10-25%, 9 bij 25-50%, 10 daarboven. Bij een overschrijding: 5 (tot 5%), 4 (tot 10%), 3 (tot 20%), 2 (tot 35%), 1 daarboven.
+- Rekent in de browser; gegevens worden niet verstuurd of opgeslagen.
+
+## Pagina's
+- [Bepaal je hypotheekcijfer](https://hypotheekcijfer.nl/bepaal-uw-hypotheekcijfer/): de hypotheekcheck en het persoonlijke rapport
+- [Voor consumenten](https://hypotheekcijfer.nl/voor-consumenten/): uitleg en veelgestelde vragen
+- [Voor hypotheekadviseurs](https://hypotheekcijfer.nl/voor-hypotheekadviseurs/)
+- [Voor geldverstrekkers](https://hypotheekcijfer.nl/voor-geldverstrekkers/) en [use cases](https://hypotheekcijfer.nl/voor-geldverstrekkers/use-cases/)
+- [Contact](https://hypotheekcijfer.nl/contact/)
+
+## Organisatie
+Blinqx, Hullenbergweg 109, 1101 CL Amsterdam, 020 - 758 21 11, https://www.blinqx.tech

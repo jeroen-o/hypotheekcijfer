@@ -1,11 +1,17 @@
 # Hypotheekcijfer
 
-- `index.html` – **Hypotheekcheck – bepaal je hypotheekcijfer** in Blinqx-huisstijl volgens het Figma-ontwerp (Quion): start, invoerkeuze, je situatie, gegevens (4 stappen), life events, controle, resultaat met "Meer informatie" per moment, "Wat ga je nu doen?" met afspraakvoorkeur, rapport.
-- `hypotheekcijfer-nl.html` – **HypotheekCijfer.nl**-site volgens het Sketch-ontwerp (u-vorm) met dezelfde rekentool en Figma-flow (invoerkeuze, uw situatie, controle, afspraakvoorkeur) en "Bereken uw mogelijkheden".
+Statische site (GitHub Pages) in Blinqx-huisstijl met het Hypotheekcijfer-logo. Elke pagina is één losse HTML-file, zonder build-step of externe API's.
 
-Standalone rekentool (één HTML-bestand, geen build-step, geen externe API's, geen localStorage) die de betaalbaarheid van een bestaande hypotheek scoort (1–10) en het rapport **‘Je hypotheek nu en later’** genereert.
-
-Open `index.html` in de browser of embed het in Google Sites. Het rapport opent via `window.open()` en kan als PDF worden opgeslagen.
+| Pagina | Pad |
+|---|---|
+| Home | `index.html` |
+| Bepaal je hypotheekcijfer (de rekentool) | `bepaal-uw-hypotheekcijfer/index.html` |
+| Voor consumenten | `voor-consumenten/index.html` |
+| Voor hypotheekadviseurs | `voor-hypotheekadviseurs/index.html` |
+| Voor geldverstrekkers | `voor-geldverstrekkers/index.html` |
+| Use cases | `voor-geldverstrekkers/use-cases/index.html` |
+| Contact (formulier opent e-mailprogramma) | `contact/index.html` |
+| HypotheekCijfer.nl-variant van de tool (Sketch-ontwerp, u-vorm) | `hypotheekcijfer-nl.html` |
 
 ## Stappenplan
 1. Over jou en je huidige inkomen (aanvrager + optioneel partner)

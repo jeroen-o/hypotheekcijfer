@@ -29,5 +29,5 @@ Financieringslastpercentages uit de **Wijzigingsregeling hypothecair krediet 202
 - Max. hypotheek = (financieringslastpercentage × toetsinkomen / 12 − toetslasten verplichtingen) / annuïteitenfactor (30 jaar).
 - Toetsrente per leningdeel: contractrente bij resterende rentevast ≥ 10 jaar, anders max(5%, contractrente); gewogen naar saldo.
 - AOW binnen 10 jaar: contante waarde van de maandcapaciteit vóór en na AOW (zoals in `Hypotheekcijfer_berekend.xlsx`).
-- Na einde renteaftrek: tabel 3/4 (niet-aftrekbaar) naar rato van het saldo.
+- Niet-aftrekbare delen (na einde renteaftrek, of het niet-aftrekbare % per leningdeel): Nibud-methode — de toetslast wordt gebruteerd met q(tabel 1/2) ÷ q(tabel 3/4); de rest van de toegestane last is de ruimte voor het aftrekbare deel.
 - Cijfer (3 t/m 8): geen overschrijding → 7 (<10% ruimte), 8 (≥10%); overschrijding → 5 (≤5%), 4 (≤10%), 3 (daarboven).

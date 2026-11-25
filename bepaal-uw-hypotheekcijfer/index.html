@@ -1353,9 +1353,9 @@ function rapportHTML(ms,sc,le,nu){
     <div class="chart">${chartSVG(ms,720,250)}</div>
     <div class="legend"><span><i class="k"></i>Maximale hypotheek</span><span><i class="y"></i>Schuld − eigen geld</span><span><i class="m"></i>Belangrijk moment</span></div>
     <h3>Maandlasten op de belangrijke momenten</h3>
-    <table class="lt"><tr><th>Moment</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr>
-    <tr><td>Nu <small class="il">${fD(S.peil)}</small></td><td class="r">${fE(nu.bruto)}</td><td class="r">${fE(nu.netto)}</td></tr>
-    ${ms.map(m=>{const l=lasten(m.d,S.le.rente);return `<tr><td>${esc(m.txt)} <small class="il">${fD(m.d)}</small></td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`;}).join('')}</table>
+    <table class="lt"><tr><th>Datum</th><th>Moment</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr>
+    <tr><td class="dt">${fD(S.peil)}</td><td>Nu</td><td class="r">${fE(nu.bruto)}</td><td class="r">${fE(nu.netto)}</td></tr>
+    ${ms.map(m=>{const l=lasten(m.d,S.le.rente);return `<tr><td class="dt">${fD(m.d)}</td><td>${esc(m.txt)}</td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`;}).join('')}</table>
     <p class="fine">Na einde rentevast gerekend met ${fP(S.le.rente,2)} marktrente. Netto maandlast is indicatief.</p>`);
   const pLE=pagina(['4','Kun je de hypotheek blijven betalen bij life events?'],`<p class="intro">We hebben getoetst of de huidige hypotheekschuld past bij het inkomen dat overblijft als er iets onverwachts gebeurt. Aannames: arbeidsongeschiktheid ${fP(S.le.ao*100,0)} van het bruto inkomen, werkloosheid ${fP(S.le.ww*100,0)} van het (gemaximeerde) loon${S.partner?', bij overlijden het inkomen van de achterblijvende partner plus nabestaandenpensioen en een eventuele ORV-uitkering, bij scheiding één inkomen voor de volledige schuld':''}.</p>
     <div class="legend"><span><i class="d"></i>Hypotheekschuld</span><span><i class="g"></i>Ruimte tot maximale hypotheek</span><span><i class="r"></i>Overschrijding maximale hypotheek</span></div><table class="lt le"><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th></th><th class="r">Ruimte / tekort</th><th class="r">Cijfer</th></tr>${leRows}</table>
@@ -1459,7 +1459,7 @@ function rapportHTML(ms,sc,le,nu){
   .mku{font-size:7.8pt;color:#666;margin:2mm 0 0;line-height:1.4}
   .chart svg{width:100%;height:auto;display:block}
   .lt{width:100%;border-collapse:collapse;font-size:9pt}.lt th{text-align:left;font-size:8pt;color:#3F444C;background:#E2E6EC;font-weight:700;padding:1.8mm 1.5mm}
-  .lt td{border-bottom:1px solid #eee;padding:1.5mm 1.5mm;vertical-align:middle}.lt .r{text-align:right;white-space:nowrap}.lt small{display:block;color:#888;font-size:7.5pt}.lt small.il{display:inline;margin-left:2mm}
+  .lt td{border-bottom:1px solid #eee;padding:1.5mm 1.5mm;vertical-align:middle}.lt .r{text-align:right;white-space:nowrap}.lt small{display:block;color:#888;font-size:7.5pt}.lt small.il{display:inline;margin-left:2mm}.lt td.dt{white-space:nowrap;font-weight:700;width:34mm}
   .lt.le .bcell{width:30mm}.lt .cf{min-width:7mm;height:7mm;font-size:9pt}
   /* gegevens */
   .two{display:grid;grid-template-columns:1fr 1fr;gap:6mm}

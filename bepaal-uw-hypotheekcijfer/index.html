@@ -633,7 +633,7 @@ main.wiz>.intro-step,main.wiz>section[data-step="10"]{background:transparent;pad
       <div><label>Inkomen bij arbeidsongeschiktheid (% van bruto)</label><input class="pct" id="le_ao" value="70"></div>
       <div><label>WW-uitkering (% van dagloon)</label><input class="pct" id="le_ww" value="70"></div>
       <div><label>Maximaal WW-jaarloon</label><input class="eur" id="le_wwmax" inputmode="numeric"></div>
-      <div><label>Marktrente na einde rentevast (voor netto lasten)</label><input class="pct" id="le_rente" value="4,5"></div>
+      <div><label>Rente na einde rentevast (toetsrente)</label><input class="pct" id="le_rente" value="5,0"></div>
     </div>
     <div class="sub-h">Bij overlijden</div>
     <div class="grid g4">
@@ -1165,7 +1165,7 @@ function render(){
   const rows=[['Nu',S.peil,nu]];
   for(const m of ms)rows.push([m.txt,m.d,lasten(m.d,S.le.rente)]);
   $('#lasten').innerHTML=`<div class="kpis"><div class="kpi"><div class="l">Schuld nu</div><div class="v">${fE(schuld(S.peil))}</div></div><div class="kpi"><div class="l">Bruto maandlast nu</div><div class="v">${fE(nu.bruto)}</div></div><div class="kpi"><div class="l">Netto maandlast nu (indicatief)</div><div class="v">${fE(nu.netto)}</div></div></div>
-  <table><thead><tr><th>Moment</th><th class="r">Aftrektarief</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr></thead><tbody>${rows.map(([t,d,l])=>`<tr><td>${esc(t)}<div class="hint">${fD(d)}</div></td><td class="r">${l.tarief?fP(l.tarief*100,2):'–'}</td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`).join('')}</tbody></table><div class="hint">Na einde rentevast gerekend met ${fP(S.le.rente,2)} marktrente. Netto = bruto − renteaftrek na bijtelling eigenwoningforfait. Aftrektarief per inkomen (2027): ${fP(S.t1N*100,2)} in de 1e schijf (AOW: ${fP(S.t1A*100,2)}), ${fP(S.hraT*100,2)} boven ${fE(S.t1Grens)}; aftrek toegerekend aan de partner met het hoogste inkomen.</div>`;
+  <table><thead><tr><th>Moment</th><th class="r">Aftrektarief</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr></thead><tbody>${rows.map(([t,d,l])=>`<tr><td>${esc(t)}<div class="hint">${fD(d)}</div></td><td class="r">${l.tarief?fP(l.tarief*100,2):'–'}</td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`).join('')}</tbody></table><div class="hint">Na einde rentevast gerekend met de toetsrente van ${fP(S.le.rente,1)}. Netto = bruto − renteaftrek na bijtelling eigenwoningforfait. Aftrektarief per inkomen (2027): ${fP(S.t1N*100,2)} in de 1e schijf (AOW: ${fP(S.t1A*100,2)}), ${fP(S.hraT*100,2)} boven ${fE(S.t1Grens)}; aftrek toegerekend aan de partner met het hoogste inkomen.</div>`;
   window.__laatste={ms,sc,le,nu};
   if(typeof miniScore==='function')miniScore();
   if(typeof figRender==='function')figRender();
@@ -1356,7 +1356,7 @@ function rapportHTML(ms,sc,le,nu){
     <table class="lt"><tr><th>Datum</th><th>Moment</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr>
     <tr><td class="dt">${fD(S.peil)}</td><td>Nu</td><td class="r">${fE(nu.bruto)}</td><td class="r">${fE(nu.netto)}</td></tr>
     ${ms.map(m=>{const l=lasten(m.d,S.le.rente);return `<tr><td class="dt">${fD(m.d)}</td><td>${esc(m.txt)}</td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`;}).join('')}</table>
-    <p class="fine">Na einde rentevast gerekend met ${fP(S.le.rente,2)} marktrente. Netto maandlast is indicatief.</p>`);
+    <p class="fine">Na einde rentevast gerekend met de toetsrente van ${fP(S.le.rente,1)}. Netto maandlast is indicatief.</p>`);
   const pLE=pagina(['4','Kun je de hypotheek blijven betalen bij life events?'],`<p class="intro">We hebben getoetst of de huidige hypotheekschuld past bij het inkomen dat overblijft als er iets onverwachts gebeurt. Aannames: arbeidsongeschiktheid ${fP(S.le.ao*100,0)} van het bruto inkomen, werkloosheid ${fP(S.le.ww*100,0)} van het (gemaximeerde) loon${S.partner?', bij overlijden het inkomen van de achterblijvende partner plus nabestaandenpensioen en een eventuele ORV-uitkering, bij scheiding één inkomen voor de volledige schuld':''}.</p>
     <div class="legend"><span><i class="d"></i>Hypotheekschuld</span><span><i class="g"></i>Ruimte tot maximale hypotheek</span><span><i class="r"></i>Overschrijding maximale hypotheek</span></div><table class="lt le"><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th></th><th class="r">Ruimte / tekort</th><th class="r">Cijfer</th></tr>${leRows}</table>
     <div class="note">Een tekort betekent dat de schuld in die situatie hoger is dan volgens de leennormen verantwoord is. Dat leidt niet automatisch tot betalingsproblemen, maar is wel een risico. Een adviseur kan bekijken of een verzekering (zoals een woonlastenverzekering, AOV of overlijdensrisicoverzekering), extra aflossen of sparen dit risico verkleint.</div>`);

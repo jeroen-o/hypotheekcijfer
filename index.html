@@ -23,8 +23,20 @@ header .sp{flex:1}
 .btn-o:hover{filter:brightness(.95)}
 .btn-l{background:#fff;color:#010101}
 .btn-s{padding:6px 10px;font-size:13px}
-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:20px;padding:20px;max-width:1500px;margin:0 auto}
-@media (max-width:1000px){main{grid-template-columns:1fr;padding:12px}}
+main{padding:20px 16px;max-width:980px;margin:0 auto}
+.step{display:none}.step.act{display:block}
+.card>h2 .n{background:var(--orange);color:#010101;border-radius:50%;width:26px;height:26px;display:inline-grid;place-items:center;font-size:14px;margin-right:6px}
+.intro{margin:0 0 12px;font-size:15px}
+.stepper{display:flex;gap:4px;max-width:980px;margin:18px auto 0;padding:0 16px;overflow-x:auto}
+.stepper button{flex:1;min-width:92px;background:#fff;border:0;border-top:5px solid #e4e4e4;padding:8px 4px 4px;text-align:left;font:inherit;font-size:12.5px;color:#666;cursor:pointer}
+.stepper button b{display:block;font-size:11px;color:#999}
+.stepper button.done{border-top-color:#010101;color:#010101}
+.stepper button.act{border-top-color:var(--orange);color:#010101;font-weight:700}
+.mini{max-width:980px;margin:8px auto 0;padding:0 16px;font-size:13px;color:#666}
+.mini b{background:var(--orange);color:#010101;border-radius:50%;display:inline-grid;place-items:center;width:24px;height:24px;margin:0 4px}
+.nav{display:flex;align-items:center;gap:10px;margin:6px 0 20px}
+.nav .navinfo{flex:1;text-align:center;font-size:13px;color:#666}
+.err{outline:2px solid var(--bad)!important}
 .card{background:var(--card);border:2px solid #010101;border-radius:2px;margin-bottom:16px;overflow:hidden}
 .card>h2,.card summary{margin:0;padding:12px 16px;font-size:17px;font-weight:800;background:#fff;color:#010101;border-bottom:2px solid var(--orange);cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
 .card summary::-webkit-details-marker{display:none}
@@ -46,8 +58,6 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--orange);outline-
 .chk input{width:auto;margin-top:3px}
 .flag{background:var(--orange-l);border-left:4px solid var(--orange);padding:8px 12px;font-size:13px;border-radius:6px;margin:10px 0}
 /* resultaat */
-.sticky{position:sticky;top:12px}
-@media (max-width:1000px){.sticky{position:static}}
 .score-wrap{padding:16px}
 .score-scale{display:grid;grid-template-columns:repeat(10,1fr);border:2px solid var(--orange);border-radius:8px;overflow:visible;margin:10px 0 6px}
 .score-scale div{text-align:center;padding:8px 0;font-weight:700;position:relative;color:var(--muted)}
@@ -88,143 +98,173 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
   <div class="sub">Hypotheekcijfer – betaalbaarheid nu en later</div>
   <div class="sp"></div>
   <button class="btn btn-l" id="btnVoorbeeld" type="button">Voorbeeld laden</button>
-  <button class="btn btn-o" id="btnRapport" type="button">Rapport maken</button>
+  <button class="btn btn-l" id="btnInst" type="button">Instellingen</button>
 </header>
 
-<main>
-<!-- ================= INVOER ================= -->
-<section>
-  <details class="card" open>
-    <summary><span class="n">1</span> Persoonlijk en inkomen</summary>
-    <div class="body">
-      <div class="grid">
-        <div><label>Peildatum berekening</label><input type="date" id="peildatum"></div>
-        <div><label>Toetsrente (AFM, rentevast &lt; 10 jaar)</label><input class="pct" id="toetsrente" value="5,0"></div>
-      </div>
-      <div class="sub-h">Aanvrager</div>
-      <div class="grid">
-        <div><label>Naam</label><input id="a_naam"></div>
-        <div><label>Geboortedatum</label><input type="date" id="a_geb"></div>
-        <div><label>Huidig bruto jaarinkomen</label><input class="eur" id="a_ink" inputmode="numeric"></div>
-        <div><label>Bruto AOW + pensioen per jaar (op pensioendatum)</label><input class="eur" id="a_pens" inputmode="numeric"></div>
-        <div><label>AOW-datum (berekend)</label><input id="a_aow" readonly></div>
-      </div>
-      <label class="chk" style="margin-top:12px"><input type="checkbox" id="p_actief"> Er is een partner (medeaanvrager)</label>
-      <div id="partnerBlok" hidden>
-        <div class="sub-h">Partner</div>
-        <div class="grid">
-          <div><label>Naam</label><input id="p_naam"></div>
-          <div><label>Geboortedatum</label><input type="date" id="p_geb"></div>
-          <div><label>Huidig bruto jaarinkomen</label><input class="eur" id="p_ink" inputmode="numeric"></div>
-          <div><label>Bruto AOW + pensioen per jaar (op pensioendatum)</label><input class="eur" id="p_pens" inputmode="numeric"></div>
-          <div><label>AOW-datum (berekend)</label><input id="p_aow" readonly></div>
-        </div>
-      </div>
-      <div class="hint">AOW-leeftijd: 67 jaar, vanaf 2028 67 jaar en 3 maanden (wettelijk vastgesteld t/m 2031; latere verhogingen zijn nog niet bekend).</div>
-    </div>
-  </details>
+<nav class="stepper" id="stepper" aria-label="Stappen"></nav>
+<div class="mini" id="mini"></div>
 
-  <details class="card" open>
-    <summary><span class="n">2</span> Eigen geld en verplichtingen</summary>
-    <div class="body">
-      <div class="grid">
-        <div><label>Eigen geld nu beschikbaar om af te lossen</label><input class="eur" id="eigengeld" inputmode="numeric"></div>
-        <div><label>Verwacht kapitaal (spaar-/beleggingspolis)</label><input class="eur" id="kapitaal" inputmode="numeric"></div>
-        <div><label>Uitkeerdatum kapitaal</label><input type="date" id="kapitaalDatum"></div>
-      </div>
-      <div class="sub-h">Financiële verplichtingen</div>
-      <div id="verplLijst"></div>
-      <button type="button" class="btn btn-l btn-s" id="addVerpl">+ Verplichting toevoegen</button>
-      <div class="hint">Toetslast: krediet 2% van het kredietbedrag per maand; studieschuld 0,75% (oud stelsel) of 0,45% (SF35) van de oorspronkelijke schuld × bruteringsfactor; partneralimentatie verlaagt het toetsinkomen; erfpacht en private lease tellen volledig mee.</div>
-    </div>
-  </details>
+<main class="wiz">
 
-  <details class="card" open>
-    <summary><span class="n">3</span> Hypotheek</summary>
-    <div class="body">
-      <div class="grid">
-        <div><label>Waarde huis (WOZ / marktwaarde)</label><input class="eur" id="woning" inputmode="numeric"></div>
-        <div><label>Hypotheeknummer / contractnummer</label><input id="hypnr"></div>
-      </div>
-      <div class="sub-h">Leningdelen (huidige stand)</div>
-      <div id="delenLijst"></div>
-      <button type="button" class="btn btn-l btn-s" id="addDeel">+ Leningdeel toevoegen</button>
+<section class="card" id="instellingen" hidden>
+  <h2>Rapportinstellingen en normen</h2>
+  <div class="body">
+    <div class="grid">
+      <div><label>Peildatum berekening</label><input type="date" id="peildatum"></div>
+      <div><label>Toetsrente (AFM, rentevast &lt; 10 jaar)</label><input class="pct" id="toetsrente" value="5,0"></div>
+      <div><label>Aftrektarief hypotheekrente (%)</label><input class="pct" id="hra_t" value="37,56"></div>
+      <div><label>Eigenwoningforfait (%)</label><input class="pct" id="ewf" value="0,35"></div>
     </div>
-  </details>
-
-  <details class="card">
-    <summary><span class="n">4</span> Life events – aannames</summary>
-    <div class="body">
-      <div class="grid">
-        <div><label>Inkomen bij arbeidsongeschiktheid (% van bruto)</label><input class="pct" id="le_ao" value="70"></div>
-        <div><label>WW-uitkering (% van dagloon)</label><input class="pct" id="le_ww" value="70"></div>
-        <div><label>Maximaal WW-jaarloon</label><input class="eur" id="le_wwmax" inputmode="numeric"></div>
-        <div><label>Marktrente na einde rentevast (voor netto lasten)</label><input class="pct" id="le_rente" value="4,5"></div>
-      </div>
-      <div class="sub-h">Bij overlijden</div>
-      <div class="grid">
-        <div><label>Nabestaandenpensioen bij overlijden aanvrager (p/j)</label><input class="eur" id="le_np_a" inputmode="numeric"></div>
-        <div><label>ORV-dekking aanvrager</label><input class="eur" id="le_orv_a" inputmode="numeric"></div>
-        <div class="pp"><label>Nabestaandenpensioen bij overlijden partner (p/j)</label><input class="eur" id="le_np_p" inputmode="numeric"></div>
-        <div class="pp"><label>ORV-dekking partner</label><input class="eur" id="le_orv_p" inputmode="numeric"></div>
-      </div>
-      <div class="hint">Life events worden getoetst op de peildatum met de huidige schuld. Arbeidsongeschiktheid en werkloosheid gelden tot de AOW-datum. Bij scheiding wordt getoetst of één inkomen de volledige schuld kan dragen.</div>
+    <div class="sub-h">Rapport</div>
+    <div class="grid">
+      <div><label>Organisatie</label><input id="o_naam" value="Blinqx"></div>
+      <div><label>Telefoon</label><input id="o_tel" value="020 - 758 21 11"></div>
+      <div><label>E-mail</label><input id="o_mail" value="hello@blinqx.tech"></div>
+      <div><label>Website</label><input id="o_web" value="www.blinqx.tech"></div>
+      <div><label>Afzender (naam)</label><input id="o_afz"></div>
+      <div><label>Functie afzender</label><input id="o_fun" value="Hypotheekadviseur"></div>
     </div>
-  </details>
-
-  <details class="card">
-    <summary><span class="n">5</span> Wat ga je doen?</summary>
-    <div class="body" id="plannenBlok"></div>
-  </details>
-
-  <details class="card">
-    <summary><span class="n">6</span> Rapportinstellingen en normen</summary>
-    <div class="body">
-      <div class="grid">
-        <div><label>Organisatie</label><input id="o_naam" value="Blinqx"></div>
-        <div><label>Telefoon</label><input id="o_tel" value="020 - 758 21 11"></div>
-        <div><label>E-mail</label><input id="o_mail" value="hello@blinqx.tech"></div>
-        <div><label>Website</label><input id="o_web" value="www.blinqx.tech"></div>
-        <div><label>Afzender (naam)</label><input id="o_afz"></div>
-        <div><label>Functie afzender</label><input id="o_fun" value="Hypotheekadviseur"></div>
-        <div><label>Adres klant</label><input id="k_adres"></div>
-        <div><label>Postcode en plaats klant</label><input id="k_pc"></div>
-        <div><label>Aanhef</label><input id="k_aanhef" placeholder="Beste meneer Jansen,"></div>
-      </div>
-      <div class="sub-h">Woonquotes (financieringslastpercentages) – kolom 4,501–5,000%</div>
-      <div class="flag"><b>Compliance:</b> onderstaande percentages zijn een <b>indicatieve benadering</b> van de Nibud-normen 2026, geen officiële tabel. Vervang ze door de waarden uit de Regeling hypothecair krediet 2026 (Nibud-Excel) voordat je het rapport extern gebruikt. Andere rentekolommen worden afgeleid met 0,4%-punt per 0,5% rente.</div>
-      <div class="grid">
-        <div><label>Niet AOW-gerechtigd (inkomen;percentage per regel)</label><textarea id="wq_n" rows="9"></textarea></div>
-        <div><label>AOW-gerechtigd (inkomen;percentage per regel)</label><textarea id="wq_a" rows="9"></textarea></div>
-        <div><label>Factor niet-aftrekbaar (box 3)</label><input class="pct" id="wq_b3" value="0,733"><div class="hint">Na einde renteaftrek: woonquote × factor (Nibud: 17,3 / 23,6).</div>
-          <label style="margin-top:10px">Aftrektarief hypotheekrente 2026 (%)</label><input class="pct" id="hra_t" value="37,56">
-          <label style="margin-top:10px">Eigenwoningforfait (%)</label><input class="pct" id="ewf" value="0,35"></div>
-      </div>
-    </div>
-  </details>
-</section>
-
-<!-- ================= RESULTAAT ================= -->
-<section>
-  <div class="sticky">
-    <div class="card">
-      <h2>Resultaat</h2>
-      <div class="score-wrap">
-        <div>De betaalbaarheid van de hypotheek scoort een:</div>
-        <div class="score-scale" id="scale"></div>
-        <div class="score-txt" id="scoreTxt"></div>
-        <div class="expl" id="scoreExpl"></div>
-      </div>
-    </div>
-    <div class="card"><h2>Belangrijke momenten</h2><div class="body" id="momenten"></div></div>
-    <div class="card"><h2>Schuld en maximale hypotheek in de tijd</h2><div class="body"><div id="chart"></div>
-      <div class="legend"><span><i style="background:var(--navy)"></i>Maximale hypotheek</span><span><i style="background:#E6B800"></i>Hypotheekschuld − eigen geld</span><span><i style="background:#9a9a9a"></i>Belangrijk moment</span></div></div></div>
-    <div class="card"><h2>Kun je de hypotheek blijven betalen bij life events?</h2><div class="body" id="life"></div></div>
-    <div class="card"><h2>Maandlasten</h2><div class="body" id="lasten"></div></div>
+    <div class="sub-h">Leennormen</div>
+    <div class="hint" style="font-size:13px">Financieringslastpercentages: <b>Tijdelijke regeling hypothecair krediet, normen 2027</b> (Wijzigingsregeling hypothecair krediet 2027, Stcrt. 2026, 38415), tabellen 1–4: met en zonder fiscaal aftrekbare rente, vóór en na AOW-leeftijd. Toetsinkomen onder € 31.000 valt in de eerste rij; daarboven per € 1.000 naar beneden afgerond. Alleenstaanden met een toetsinkomen boven € 31.000: + € 18.000. Extra bedrag per energielabel volgens Nibud-advies 2027.</div>
   </div>
 </section>
+
+<!-- STAP 1 -->
+<section class="card step" data-step="1" data-title="Over jou">
+  <h2><span class="n">1</span> Over jou en je huidige inkomen</h2>
+  <div class="body">
+    <p class="intro">Vul je gegevens en je huidige bruto jaarinkomen in. Heb je een partner die mee-aanvraagt? Vul dan ook diens gegevens in.</p>
+    <div class="sub-h">Aanvrager</div>
+    <div class="grid">
+      <div><label>Naam</label><input id="a_naam"></div>
+      <div><label>Geboortedatum *</label><input type="date" id="a_geb"></div>
+      <div><label>Huidig bruto jaarinkomen *</label><input class="eur" id="a_ink" inputmode="numeric"></div>
+    </div>
+    <label class="chk" style="margin-top:14px"><input type="checkbox" id="p_actief"> Ik heb een partner (medeaanvrager)</label>
+    <div id="partnerBlok" hidden>
+      <div class="sub-h">Partner</div>
+      <div class="grid">
+        <div><label>Naam</label><input id="p_naam"></div>
+        <div><label>Geboortedatum *</label><input type="date" id="p_geb"></div>
+        <div><label>Huidig bruto jaarinkomen</label><input class="eur" id="p_ink" inputmode="numeric"></div>
+      </div>
+    </div>
+    <div class="sub-h">Adres (voor de brief)</div>
+    <div class="grid">
+      <div><label>Straat en huisnummer</label><input id="k_adres"></div>
+      <div><label>Postcode en plaats</label><input id="k_pc"></div>
+      <div><label>Aanhef</label><input id="k_aanhef" placeholder="Beste meneer Jansen,"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STAP 2 -->
+<section class="card step" data-step="2" data-title="Pensioen">
+  <h2><span class="n">2</span> Je inkomen op pensioendatum</h2>
+  <div class="body">
+    <p class="intro">Vanaf de AOW-datum verandert je inkomen. Vul het totale bruto inkomen in dat je dan verwacht: AOW plus aanvullend pensioen. Je vindt dit op <b>mijnpensioenoverzicht.nl</b>.</p>
+    <div class="grid">
+      <div><label>AOW-datum aanvrager</label><input id="a_aow" readonly></div>
+      <div><label>Bruto AOW + pensioen per jaar *</label><input class="eur" id="a_pens" inputmode="numeric"></div>
+    </div>
+    <div class="grid pp" style="margin-top:10px">
+      <div><label>AOW-datum partner</label><input id="p_aow" readonly></div>
+      <div><label>Bruto AOW + pensioen partner per jaar</label><input class="eur" id="p_pens" inputmode="numeric"></div>
+    </div>
+    <div class="hint">AOW-leeftijd: 67 jaar, vanaf 2028 67 jaar en 3 maanden (wettelijk vastgesteld t/m 2031; latere verhogingen zijn nog niet bekend).</div>
+  </div>
+</section>
+
+<!-- STAP 3 -->
+<section class="card step" data-step="3" data-title="Eigen geld">
+  <h2><span class="n">3</span> Eigen geld en verplichtingen</h2>
+  <div class="body">
+    <p class="intro">Hoeveel eigen geld heb je nu beschikbaar om af te lossen? Denk aan spaargeld of beleggingen. Houd zelf rekening met een buffer voor onverwachte uitgaven.</p>
+    <div class="grid">
+      <div><label>Eigen geld nu beschikbaar om af te lossen</label><input class="eur" id="eigengeld" inputmode="numeric"></div>
+      <div><label>Verwacht kapitaal (spaar-/beleggingspolis)</label><input class="eur" id="kapitaal" inputmode="numeric"></div>
+      <div><label>Uitkeerdatum kapitaal</label><input type="date" id="kapitaalDatum"></div>
+    </div>
+    <div class="sub-h">Financiële verplichtingen</div>
+    <div id="verplLijst"></div>
+    <button type="button" class="btn btn-l btn-s" id="addVerpl">+ Verplichting toevoegen</button>
+    <div class="hint">Toetslast: krediet 2% van het kredietbedrag per maand; studieschuld 0,75% (oud stelsel) of 0,45% (SF35) van de oorspronkelijke schuld × bruteringsfactor; partneralimentatie verlaagt het toetsinkomen; erfpacht en private lease tellen volledig mee.</div>
+  </div>
+</section>
+
+<!-- STAP 4 -->
+<section class="card step" data-step="4" data-title="Hypotheek">
+  <h2><span class="n">4</span> Je hypotheek</h2>
+  <div class="body">
+    <p class="intro">Neem de gegevens over van je jaaroverzicht. Vul per leningdeel de huidige schuld in.</p>
+    <div class="grid">
+      <div><label>Waarde huis (WOZ / marktwaarde)</label><input class="eur" id="woning" inputmode="numeric"></div>
+      <div><label>Energielabel woning</label><select id="label">
+        <option value="0">E, F, G of geen geldig label</option><option value="5000">C of D</option><option value="10000">A of B</option><option value="20000">A+ of A++</option><option value="25000">A+++</option><option value="30000">A++++</option><option value="40000">A++++ met garantie</option></select></div>
+      <div><label>Hypotheeknummer / contractnummer</label><input id="hypnr"></div>
+    </div>
+    <div class="sub-h">Leningdelen (huidige stand) *</div>
+    <div id="delenLijst"></div>
+    <button type="button" class="btn btn-l btn-s" id="addDeel">+ Leningdeel toevoegen</button>
+  </div>
+</section>
+
+<!-- STAP 5 -->
+<section class="card step" data-step="5" data-title="Life events">
+  <h2><span class="n">5</span> Life events</h2>
+  <div class="body">
+    <p class="intro">Wat gebeurt er als je inkomen onverwacht daalt? Controleer de aannames; de standaardwaarden zijn een vereenvoudiging.</p>
+    <div class="grid">
+      <div><label>Inkomen bij arbeidsongeschiktheid (% van bruto)</label><input class="pct" id="le_ao" value="70"></div>
+      <div><label>WW-uitkering (% van dagloon)</label><input class="pct" id="le_ww" value="70"></div>
+      <div><label>Maximaal WW-jaarloon</label><input class="eur" id="le_wwmax" inputmode="numeric"></div>
+      <div><label>Marktrente na einde rentevast (voor netto lasten)</label><input class="pct" id="le_rente" value="4,5"></div>
+    </div>
+    <div class="sub-h">Bij overlijden</div>
+    <div class="grid">
+      <div><label>Nabestaandenpensioen bij overlijden aanvrager (p/j)</label><input class="eur" id="le_np_a" inputmode="numeric"></div>
+      <div><label>ORV-dekking aanvrager</label><input class="eur" id="le_orv_a" inputmode="numeric"></div>
+      <div class="pp"><label>Nabestaandenpensioen bij overlijden partner (p/j)</label><input class="eur" id="le_np_p" inputmode="numeric"></div>
+      <div class="pp"><label>ORV-dekking partner</label><input class="eur" id="le_orv_p" inputmode="numeric"></div>
+    </div>
+    <div class="hint">Life events worden getoetst op de peildatum met de huidige schuld. Arbeidsongeschiktheid en werkloosheid gelden tot de AOW-datum. Bij scheiding wordt getoetst of één inkomen de volledige schuld kan dragen.</div>
+  </div>
+</section>
+
+<!-- STAP 6 -->
+<section class="step" data-step="6" data-title="Resultaat">
+  <div class="card">
+    <h2><span class="n">6</span> Resultaat</h2>
+    <div class="score-wrap">
+      <div>De betaalbaarheid van je hypotheek scoort een:</div>
+      <div class="score-scale" id="scale"></div>
+      <div class="score-txt" id="scoreTxt"></div>
+      <div class="expl" id="scoreExpl"></div>
+    </div>
+  </div>
+  <div class="card"><h2>Belangrijke momenten</h2><div class="body" id="momenten"></div></div>
+  <div class="card"><h2>Schuld en maximale hypotheek in de tijd</h2><div class="body"><div id="chart"></div>
+    <div class="legend"><span><i style="background:var(--navy)"></i>Maximale hypotheek</span><span><i style="background:#E6B800"></i>Hypotheekschuld − eigen geld</span><span><i style="background:#9a9a9a"></i>Belangrijk moment</span></div></div></div>
+  <div class="card"><h2>Kun je de hypotheek blijven betalen bij life events?</h2><div class="body" id="life"></div></div>
+  <div class="card"><h2>Maandlasten</h2><div class="body" id="lasten"></div></div>
+</section>
+
+<!-- STAP 7 -->
+<section class="card step" data-step="7" data-title="Wat ga je doen?">
+  <h2><span class="n">7</span> Wat ga je doen?</h2>
+  <div class="body">
+    <div id="plannenBlok"></div>
+  </div>
+</section>
+
+<div class="nav">
+  <button class="btn btn-l" id="btnPrev" type="button">← Vorige</button>
+  <span class="navinfo" id="navInfo"></span>
+  <button class="btn btn-o" id="btnNext" type="button">Volgende →</button>
+  <button class="btn btn-o" id="btnRapport" type="button" hidden>Download rapport →</button>
+</div>
 </main>
-<footer>Indicatieve berekening op basis van de ingevulde gegevens en de leennormen zoals ingesteld. Dit is geen hypotheekadvies.</footer>
+<footer>Indicatieve berekening op basis van de ingevulde gegevens en de leennormen 2027 (Tijdelijke regeling hypothecair krediet). Dit is geen hypotheekadvies.</footer>
 
 <template id="tplDeel">
   <div class="row-card deel">
@@ -298,50 +338,19 @@ function aowDatum(geb){
   return at67<D('2028-01-01')?at67:addM(geb,67*12+3);
 }
 
-/* ---------- woonquotes (indicatief) ---------- */
-const WQ_N_DEF=`20000;13,0
-25000;16,5
-30000;19,0
-35000;21,0
-40000;22,5
-45000;23,4
-50000;24,0
-55000;24,2
-60000;24,3
-65000;24,4
-70000;24,6
-75000;25,4
-80000;26,3
-90000;27,4
-100000;28,2
-110000;28,6
-125000;29,0`;
-const WQ_A_DEF=`29000;21,0
-35000;24,5
-40000;26,5
-50000;29,0
-60000;30,5
-75000;32,0
-90000;32,5
-110000;33,0`;
-function parseTab(txt){
-  return txt.split(/\n/).map(l=>l.split(/[;\t]/)).filter(a=>a.length>=2).map(a=>[pE(a[0]),pP(a[1])]).filter(a=>a[0]>0).sort((x,y)=>x[0]-y[0]);
-}
-function interp(tab,x){
-  if(!tab.length)return 0;
-  if(x<=tab[0][0])return tab[0][1]*Math.max(0,x)/tab[0][0];
-  for(let k=1;k<tab.length;k++){if(x<=tab[k][0]){const [x0,y0]=tab[k-1],[x1,y1]=tab[k];return y0+(y1-y0)*(x-x0)/(x1-x0);}}
-  return tab[tab.length-1][1];
-}
+/* ---------- woonquotes: Tijdelijke regeling hypothecair krediet 2027 (Stcrt. 2026, 38415) ----------
+   T1 niet-AOW aftrekbaar, T2 AOW aftrekbaar, T3 niet-AOW niet-aftrekbaar, T4 AOW niet-aftrekbaar.
+   Rij: [toetsinkomen, 12 rentekolommen (<=1,5% ... >=6,501%)] */
+const TRHK={"T1":[[31000,16.8,17.8,18.8,19.8,20.7,21.5,22.3,22.9,23.6,24.1,24.6,25.0],[32000,17.4,18.6,19.7,20.7,21.6,22.5,23.4,24.1,24.8,25.4,25.9,26.4],[33000,17.8,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.8,26.4,27.0,27.6],[34000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.6],[35000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[36000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[37000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[38000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[39000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[40000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[41000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[42000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[43000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[44000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[45000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[46000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[47000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[48000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[49000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[50000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[51000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[52000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[53000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[54000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[55000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[56000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[57000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[58000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[59000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[60000,18.0,19.0,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[61000,18.0,19.1,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[62000,18.1,19.1,20.1,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[63000,18.1,19.1,20.2,21.1,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[64000,18.1,19.2,20.2,21.2,22.1,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[65000,18.2,19.2,20.2,21.2,22.2,23.1,24.1,25.0,25.9,26.8,27.8,28.7],[66000,18.2,19.3,20.3,21.3,22.2,23.2,24.1,25.0,25.9,26.8,27.8,28.7],[67000,18.4,19.4,20.4,21.4,22.4,23.3,24.2,25.1,26.0,26.9,27.8,28.7],[68000,18.5,19.6,20.6,21.6,22.6,23.5,24.4,25.3,26.2,27.1,27.9,28.7],[69000,18.7,19.7,20.8,21.8,22.8,23.7,24.6,25.5,26.3,27.2,28.1,28.9],[70000,18.8,19.9,21.0,22.0,23.0,23.9,24.8,25.7,26.5,27.4,28.2,29.0],[71000,19.0,20.1,21.1,22.2,23.2,24.1,25.0,25.9,26.7,27.5,28.4,29.2],[72000,19.2,20.3,21.3,22.4,23.4,24.3,25.2,26.1,26.9,27.7,28.6,29.4],[73000,19.3,20.4,21.5,22.6,23.6,24.5,25.5,26.3,27.2,28.0,28.7,29.6],[74000,19.5,20.6,21.7,22.8,23.8,24.8,25.7,26.6,27.4,28.2,28.9,29.7],[75000,19.7,20.8,21.9,22.9,24.0,25.0,25.9,26.8,27.6,28.4,29.2,29.9],[76000,19.8,20.9,22.0,23.1,24.2,25.1,26.1,27.0,27.9,28.7,29.4,30.1],[77000,19.9,21.1,22.2,23.3,24.3,25.3,26.3,27.2,28.1,28.9,29.6,30.3],[78000,20.1,21.2,22.3,23.5,24.5,25.5,26.5,27.4,28.3,29.1,29.9,30.6],[79000,20.2,21.3,22.5,23.6,24.6,25.7,26.6,27.6,28.4,29.2,30.0,30.7],[80000,20.3,21.5,22.6,23.7,24.8,25.8,26.8,27.7,28.6,29.4,30.2,30.9],[81000,20.4,21.5,22.7,23.8,24.9,25.9,26.9,27.8,28.7,29.5,30.3,31.1],[82000,20.4,21.6,22.8,23.9,24.9,26.0,27.0,27.9,28.8,29.6,30.4,31.2],[83000,20.5,21.7,22.8,23.9,25.0,26.0,27.0,28.0,28.9,29.7,30.5,31.2],[84000,20.5,21.7,22.8,24.0,25.0,26.1,27.1,28.0,28.9,29.8,30.6,31.3],[85000,20.6,21.7,22.9,24.0,25.1,26.1,27.1,28.0,29.0,29.8,30.6,31.3],[86000,20.6,21.7,22.9,24.0,25.1,26.1,27.1,28.1,29.0,29.8,30.6,31.4],[87000,20.6,21.8,22.9,24.0,25.1,26.2,27.2,28.1,29.0,29.9,30.7,31.4],[88000,20.7,21.8,23.0,24.1,25.2,26.2,27.2,28.1,29.0,29.9,30.7,31.5],[89000,20.8,21.9,23.0,24.1,25.2,26.2,27.2,28.2,29.1,29.9,30.7,31.5],[90000,20.8,21.9,23.0,24.1,25.2,26.3,27.3,28.2,29.1,30.0,30.8,31.5],[91000,20.9,22.0,23.1,24.2,25.2,26.3,27.3,28.2,29.1,30.0,30.8,31.6],[92000,20.9,22.0,23.1,24.2,25.3,26.3,27.3,28.3,29.2,30.0,30.8,31.6],[93000,21.0,22.1,23.1,24.2,25.3,26.4,27.4,28.3,29.2,30.1,30.9,31.6],[94000,21.1,22.1,23.2,24.3,25.3,26.4,27.4,28.3,29.2,30.1,30.9,31.6],[95000,21.1,22.2,23.3,24.3,25.4,26.4,27.4,28.4,29.3,30.1,30.9,31.7],[96000,21.2,22.3,23.3,24.3,25.4,26.4,27.4,28.4,29.3,30.1,31.0,31.7],[97000,21.3,22.3,23.4,24.4,25.4,26.5,27.5,28.4,29.3,30.2,31.0,31.7],[98000,21.3,22.4,23.5,24.5,25.5,26.5,27.5,28.4,29.4,30.2,31.0,31.8],[99000,21.4,22.5,23.5,24.5,25.5,26.5,27.5,28.5,29.4,30.2,31.0,31.8],[100000,21.4,22.5,23.6,24.6,25.6,26.6,27.6,28.5,29.4,30.3,31.1,31.8],[101000,21.5,22.6,23.6,24.7,25.6,26.6,27.6,28.5,29.4,30.3,31.1,31.9],[102000,21.5,22.6,23.7,24.7,25.7,26.7,27.6,28.6,29.5,30.3,31.1,31.9],[103000,21.6,22.7,23.8,24.8,25.8,26.7,27.6,28.6,29.5,30.3,31.2,31.9],[104000,21.6,22.7,23.8,24.8,25.8,26.8,27.7,28.6,29.5,30.4,31.2,31.9],[105000,21.7,22.8,23.9,24.9,25.9,26.8,27.7,28.6,29.5,30.4,31.2,32.0],[106000,21.7,22.8,23.9,25.0,25.9,26.9,27.8,28.7,29.5,30.4,31.2,32.0],[107000,21.8,22.9,24.0,25.0,26.0,26.9,27.8,28.7,29.6,30.4,31.2,32.0],[108000,21.8,22.9,24.0,25.1,26.1,27.0,27.9,28.8,29.6,30.5,31.3,32.0],[109000,21.9,23.0,24.1,25.1,26.1,27.1,28.0,28.8,29.7,30.5,31.3,32.0],[110000,21.9,23.0,24.1,25.1,26.2,27.1,28.0,28.9,29.7,30.5,31.3,32.1],[111000,22.0,23.1,24.2,25.2,26.2,27.2,28.1,28.9,29.7,30.5,31.3,32.1],[112000,22.0,23.1,24.2,25.2,26.2,27.2,28.1,29.0,29.8,30.6,31.4,32.1],[113000,22.0,23.2,24.3,25.3,26.3,27.3,28.2,29.0,29.8,30.6,31.4,32.2],[114000,22.1,23.2,24.3,25.3,26.3,27.3,28.2,29.1,29.9,30.7,31.4,32.2],[115000,22.1,23.3,24.3,25.4,26.4,27.4,28.3,29.1,30.0,30.7,31.5,32.2],[116000,22.2,23.3,24.4,25.4,26.4,27.4,28.3,29.2,30.0,30.8,31.5,32.2],[117000,22.2,23.3,24.4,25.5,26.5,27.5,28.4,29.3,30.1,30.8,31.6,32.3],[118000,22.3,23.4,24.5,25.5,26.5,27.5,28.4,29.3,30.1,30.9,31.6,32.3],[119000,22.3,23.4,24.5,25.6,26.6,27.6,28.5,29.4,30.2,30.9,31.7,32.3],[120000,22.3,23.5,24.6,25.6,26.6,27.6,28.5,29.4,30.2,31.0,31.7,32.4],[121000,22.3,23.5,24.6,25.7,26.7,27.7,28.6,29.4,30.3,31.0,31.8,32.4],[122000,22.3,23.5,24.7,25.7,26.7,27.7,28.6,29.5,30.3,31.1,31.8,32.5],[123000,22.3,23.6,24.7,25.8,26.8,27.7,28.7,29.5,30.3,31.1,31.9,32.5],[124000,22.4,23.6,24.7,25.8,26.8,27.8,28.7,29.6,30.4,31.2,31.9,32.6],[125000,22.5,23.6,24.8,25.8,26.9,27.8,28.8,29.6,30.4,31.2,32.0,32.6]],"T2":[[31000,19.6,19.9,20.2,20.5,20.7,21.0,21.2,21.4,21.7,21.8,22.0,22.2],[32000,20.9,21.3,21.4,21.9,22.2,22.5,22.8,23.0,23.3,23.5,23.7,23.9],[33000,21.4,22.1,22.7,23.2,23.5,23.8,24.1,24.4,24.6,24.9,25.1,25.2],[34000,21.8,22.5,23.1,23.7,24.2,24.7,25.1,25.4,25.7,26.0,26.3,26.5],[35000,22.1,22.9,23.6,24.2,24.8,25.3,25.7,26.1,26.4,26.7,27.0,27.3],[36000,22.4,23.3,24.1,24.7,25.3,25.9,26.4,26.8,27.1,27.5,27.8,28.0],[37000,22.6,23.6,24.4,25.2,25.8,26.4,26.9,27.4,27.8,28.1,28.4,28.7],[38000,22.7,23.8,24.7,25.5,26.2,26.8,27.4,27.9,28.3,28.7,29.0,29.3],[39000,22.8,23.9,24.9,25.8,26.5,27.2,27.8,28.3,28.8,29.2,29.6,29.9],[40000,22.9,24.0,25.0,26.0,26.8,27.5,28.2,28.7,29.2,29.7,30.1,30.4],[41000,23.0,24.1,25.1,26.1,27.0,27.8,28.5,29.1,29.6,30.1,30.5,30.9],[42000,23.1,24.1,25.2,26.2,27.1,28.0,28.7,29.4,29.9,30.4,30.9,31.3],[43000,23.1,24.2,25.3,26.3,27.2,28.1,28.9,29.6,30.2,30.8,31.2,31.6],[44000,23.2,24.3,25.3,26.3,27.3,28.2,29.0,29.8,30.5,31.1,31.6,32.0],[45000,23.3,24.4,25.4,26.4,27.4,28.3,29.1,29.9,30.7,31.3,31.8,32.3],[46000,23.3,24.5,25.5,26.5,27.5,28.4,29.2,30.0,30.8,31.5,32.1,32.6],[47000,23.4,24.5,25.6,26.6,27.6,28.5,29.4,30.2,30.9,31.6,32.3,32.8],[48000,23.4,24.6,25.7,26.7,27.7,28.6,29.5,30.3,31.0,31.7,32.4,33.0],[49000,23.5,24.6,25.7,26.8,27.8,28.7,29.6,30.4,31.1,31.8,32.5,33.1],[50000,23.6,24.7,25.9,26.9,27.9,28.9,29.8,30.6,31.3,32.1,32.7,33.3],[51000,23.8,25.0,26.1,27.1,28.2,29.1,30.0,30.9,31.6,32.4,33.0,33.7],[52000,24.2,25.2,26.4,27.4,28.5,29.5,30.4,31.2,32.0,32.8,33.4,34.1],[53000,24.5,25.6,26.7,27.8,28.8,29.8,30.8,31.6,32.4,33.1,33.8,34.5],[54000,24.9,26.0,27.0,28.1,29.1,30.2,31.1,32.0,32.8,33.6,34.3,34.9],[55000,25.2,26.3,27.4,28.4,29.5,30.5,31.5,32.4,33.2,34.0,34.7,35.4],[56000,25.5,26.7,27.8,28.8,29.9,30.9,31.9,32.8,33.6,34.5,35.2,35.8],[57000,25.8,27.1,28.1,29.2,30.2,31.3,32.3,33.2,34.0,34.8,35.6,36.3],[58000,25.9,27.4,28.5,29.6,30.6,31.6,32.6,33.5,34.4,35.2,36.0,36.7],[59000,26.1,27.6,28.9,29.9,31.0,31.9,33.0,33.9,34.8,35.6,36.4,37.1],[60000,26.2,27.7,29.1,30.3,31.4,32.3,33.3,34.3,35.2,36.0,36.8,37.5],[61000,26.4,27.9,29.4,30.6,31.7,32.7,33.6,34.6,35.5,36.4,37.2,37.9],[62000,26.5,28.1,29.6,30.9,32.0,33.1,34.0,35.0,35.9,36.7,37.5,38.3],[63000,26.6,28.2,29.7,31.2,32.4,33.4,34.4,35.3,36.2,37.1,37.9,38.6],[64000,26.7,28.4,29.9,31.4,32.7,33.7,34.7,35.6,36.5,37.4,38.2,39.0],[65000,26.7,28.5,30.1,31.5,32.9,34.1,35.0,36.0,36.9,37.7,38.6,39.3],[66000,26.7,28.6,30.2,31.7,33.1,34.4,35.3,36.3,37.1,38.0,38.9,39.7],[67000,26.7,28.6,30.3,31.9,33.3,34.6,35.7,36.6,37.5,38.3,39.2,40.0],[68000,26.8,28.6,30.4,32.0,33.5,34.8,36.0,36.9,37.8,38.6,39.5,40.3],[69000,26.8,28.6,30.5,32.1,33.6,35.0,36.2,37.2,38.1,38.9,39.7,40.6],[70000,26.8,28.6,30.5,32.2,33.7,35.2,36.5,37.5,38.4,39.3,40.0,40.8],[71000,26.8,28.6,30.5,32.3,33.9,35.3,36.7,37.8,38.7,39.6,40.3,41.1],[72000,26.9,28.7,30.5,32.3,34.0,35.4,36.8,38.0,39.0,39.8,40.6,41.3],[73000,26.9,28.7,30.5,32.3,34.1,35.6,36.9,38.2,39.2,40.1,40.9,41.6],[74000,26.9,28.7,30.5,32.3,34.1,35.6,37.0,38.3,39.5,40.3,41.2,41.9],[75000,26.9,28.7,30.5,32.3,34.1,35.6,37.1,38.4,39.7,40.6,41.4,42.2],[76000,27.0,28.8,30.5,32.3,34.1,35.6,37.1,38.4,39.7,40.8,41.6,42.4],[77000,27.0,28.8,30.5,32.3,34.1,35.6,37.1,38.4,39.7,40.9,41.9,42.6],[78000,27.1,28.8,30.6,32.3,34.1,35.6,37.1,38.4,39.7,40.9,42.0,42.9],[79000,27.2,28.8,30.6,32.3,34.1,35.6,37.1,38.4,39.7,40.9,42.0,43.1],[80000,27.3,28.9,30.6,32.4,34.1,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[81000,27.5,29.0,30.7,32.4,34.1,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[82000,27.6,29.1,30.7,32.5,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[83000,27.7,29.2,30.8,32.5,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[84000,27.8,29.3,30.8,32.5,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[85000,27.9,29.4,30.9,32.5,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[86000,28.0,29.5,31.0,32.5,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[87000,28.1,29.6,31.1,32.6,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[88000,28.2,29.7,31.2,32.6,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[89000,28.2,29.8,31.2,32.7,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[90000,28.3,29.8,31.3,32.7,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[91000,28.3,29.8,31.3,32.8,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[92000,28.3,29.9,31.4,32.8,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[93000,28.4,29.9,31.4,32.8,34.2,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[94000,28.4,29.9,31.4,32.9,34.3,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[95000,28.5,30.0,31.5,32.9,34.3,35.6,37.1,38.4,39.7,40.9,42.0,43.2],[96000,28.5,30.0,31.5,33.0,34.3,35.7,37.1,38.4,39.7,40.9,42.0,43.2],[97000,28.6,30.1,31.5,33.0,34.4,35.7,37.1,38.4,39.7,40.9,42.0,43.2],[98000,28.6,30.1,31.6,33.0,34.4,35.8,37.1,38.4,39.7,40.9,42.0,43.2],[99000,28.7,30.1,31.6,33.1,34.5,35.8,37.1,38.4,39.7,40.9,42.0,43.2],[100000,28.7,30.2,31.7,33.1,34.5,35.8,37.1,38.4,39.7,40.9,42.0,43.2],[101000,28.8,30.2,31.7,33.1,34.5,35.9,37.2,38.4,39.7,40.9,42.0,43.2],[102000,28.8,30.3,31.7,33.2,34.6,35.9,37.2,38.4,39.7,40.9,42.0,43.2],[103000,28.9,30.3,31.8,33.2,34.6,36.0,37.2,38.4,39.7,40.9,42.0,43.2],[104000,28.9,30.4,31.8,33.3,34.7,36.0,37.3,38.5,39.7,40.9,42.0,43.2],[105000,29.0,30.4,31.9,33.3,34.7,36.0,37.3,38.5,39.7,40.9,42.0,43.2],[106000,29.0,30.5,31.9,33.3,34.7,36.1,37.3,38.6,39.7,40.9,42.0,43.2],[107000,29.1,30.5,32.0,33.4,34.8,36.1,37.4,38.6,39.7,40.9,42.0,43.2],[108000,29.1,30.6,32.0,33.4,34.8,36.1,37.4,38.6,39.8,40.9,42.0,43.2],[109000,29.2,30.6,32.1,33.5,34.8,36.2,37.5,38.7,39.8,40.9,42.0,43.2],[110000,29.2,30.7,32.1,33.5,34.9,36.2,37.5,38.7,39.9,40.9,42.0,43.2]],"T3":[[31000,15.2,15.4,15.7,15.9,16.1,16.3,16.5,16.7,16.9,17.0,17.2,17.3],[32000,15.7,15.9,16.2,16.4,16.6,16.8,17.0,17.2,17.4,17.5,17.7,17.8],[33000,16.0,16.3,16.5,16.8,17.0,17.2,17.4,17.6,17.8,17.9,18.1,18.2],[34000,16.3,16.6,16.8,17.1,17.3,17.5,17.7,17.9,18.1,18.3,18.4,18.6],[35000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[36000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[37000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[38000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[39000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[40000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[41000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[42000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[43000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[44000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[45000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[46000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[47000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[48000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[49000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[50000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[51000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[52000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[53000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[54000,16.4,16.7,17.0,17.2,17.4,17.7,17.9,18.1,18.2,18.4,18.6,18.7],[55000,16.4,16.7,17.0,17.2,17.5,17.7,17.9,18.1,18.3,18.4,18.6,18.7],[56000,16.5,16.8,17.0,17.3,17.5,17.7,17.9,18.1,18.3,18.5,18.6,18.8],[57000,16.5,16.8,17.0,17.3,17.5,17.7,17.9,18.1,18.3,18.5,18.6,18.8],[58000,16.5,16.8,17.1,17.3,17.5,17.8,18.0,18.2,18.3,18.5,18.7,18.8],[59000,16.5,16.8,17.1,17.3,17.6,17.8,18.0,18.2,18.4,18.5,18.7,18.8],[60000,16.6,16.9,17.1,17.4,17.6,17.8,18.0,18.2,18.4,18.6,18.7,18.9],[61000,16.6,16.9,17.2,17.4,17.6,17.9,18.1,18.3,18.4,18.6,18.8,18.9],[62000,16.6,16.9,17.2,17.4,17.7,17.9,18.1,18.3,18.5,18.6,18.8,19.0],[63000,16.7,17.0,17.2,17.5,17.7,17.9,18.1,18.3,18.5,18.7,18.8,19.0],[64000,16.7,17.0,17.3,17.5,17.8,18.0,18.2,18.4,18.6,18.7,18.9,19.0],[65000,16.8,17.1,17.3,17.6,17.8,18.0,18.2,18.4,18.6,18.8,18.9,19.1],[66000,16.8,17.1,17.4,17.6,17.9,18.1,18.3,18.5,18.7,18.8,19.0,19.1],[67000,16.9,17.2,17.5,17.7,18.0,18.2,18.4,18.6,18.8,19.0,19.1,19.3],[68000,17.0,17.4,17.6,17.9,18.1,18.4,18.6,18.8,18.9,19.1,19.3,19.4],[69000,17.2,17.5,17.8,18.1,18.3,18.5,18.7,18.9,19.1,19.3,19.5,19.6],[70000,17.3,17.6,17.9,18.2,18.4,18.7,18.9,19.1,19.3,19.5,19.6,19.8],[71000,17.5,17.8,18.1,18.4,18.6,18.8,19.0,19.3,19.4,19.6,19.8,19.9],[72000,17.6,17.9,18.2,18.5,18.8,19.0,19.2,19.4,19.6,19.8,20.0,20.1],[73000,17.8,18.1,18.4,18.7,18.9,19.2,19.4,19.6,19.8,20.0,20.1,20.3],[74000,17.9,18.3,18.5,18.8,19.1,19.3,19.6,19.8,20.0,20.2,20.3,20.5],[75000,18.1,18.4,18.7,19.0,19.3,19.5,19.7,19.9,20.1,20.3,20.5,20.6],[76000,18.2,18.6,18.9,19.1,19.4,19.7,19.9,20.1,20.3,20.5,20.7,20.8],[77000,18.4,18.7,19.0,19.3,19.5,19.8,20.0,20.3,20.5,20.6,20.8,21.0],[78000,18.5,18.8,19.1,19.4,19.7,19.9,20.2,20.4,20.6,20.8,21.0,21.1],[79000,18.6,19.0,19.3,19.6,19.8,20.1,20.3,20.6,20.8,20.9,21.1,21.3],[80000,18.7,19.1,19.4,19.7,20.0,20.2,20.5,20.7,20.9,21.1,21.3,21.4],[81000,18.8,19.2,19.5,19.8,20.1,20.3,20.6,20.8,21.0,21.2,21.4,21.6],[82000,18.9,19.3,19.6,19.9,20.2,20.4,20.7,20.9,21.1,21.3,21.5,21.7],[83000,19.0,19.4,19.7,20.0,20.3,20.5,20.8,21.0,21.2,21.4,21.6,21.8],[84000,19.1,19.5,19.8,20.1,20.4,20.6,20.9,21.1,21.3,21.5,21.7,21.9],[85000,19.2,19.5,19.9,20.2,20.5,20.7,21.0,21.2,21.4,21.6,21.8,22.0],[86000,19.3,19.6,19.9,20.3,20.5,20.8,21.0,21.3,21.5,21.7,21.9,22.1],[87000,19.3,19.7,20.0,20.3,20.6,20.9,21.1,21.3,21.6,21.8,22.0,22.1],[88000,19.4,19.8,20.1,20.4,20.7,20.9,21.2,21.4,21.6,21.9,22.0,22.2],[89000,19.5,19.8,20.1,20.5,20.8,21.0,21.3,21.5,21.7,21.9,22.1,22.3],[90000,19.5,19.9,20.2,20.5,20.8,21.1,21.3,21.6,21.8,22.0,22.2,22.4],[91000,19.6,20.0,20.3,20.6,20.9,21.2,21.4,21.6,21.9,22.1,22.3,22.4],[92000,19.7,20.0,20.3,20.7,21.0,21.2,21.5,21.7,21.9,22.1,22.3,22.5],[93000,19.7,20.1,20.4,20.7,21.0,21.3,21.5,21.8,22.0,22.2,22.4,22.6],[94000,19.8,20.1,20.5,20.8,21.1,21.4,21.6,21.9,22.1,22.3,22.5,22.7],[95000,19.8,20.2,20.5,20.8,21.1,21.4,21.7,21.9,22.1,22.3,22.5,22.7],[96000,19.9,20.3,20.6,20.9,21.2,21.5,21.7,22.0,22.2,22.4,22.6,22.8],[97000,19.9,20.3,20.7,21.0,21.3,21.5,21.8,22.0,22.3,22.5,22.7,22.8],[98000,20.0,20.4,20.7,21.0,21.3,21.6,21.9,22.1,22.3,22.5,22.7,22.9],[99000,20.1,20.4,20.8,21.1,21.4,21.7,21.9,22.2,22.4,22.6,22.8,23.0],[100000,20.1,20.5,20.8,21.1,21.4,21.7,22.0,22.2,22.4,22.7,22.9,23.0],[101000,20.2,20.5,20.9,21.2,21.5,21.8,22.0,22.3,22.5,22.7,22.9,23.1],[102000,20.2,20.6,20.9,21.2,21.5,21.8,22.1,22.3,22.6,22.8,23.0,23.2],[103000,20.3,20.6,21.0,21.3,21.6,21.9,22.1,22.4,22.6,22.8,23.0,23.2],[104000,20.3,20.7,21.0,21.3,21.6,21.9,22.2,22.4,22.7,22.9,23.1,23.3],[105000,20.4,20.7,21.1,21.4,21.7,22.0,22.2,22.5,22.7,22.9,23.1,23.3],[106000,20.4,20.8,21.1,21.4,21.7,22.0,22.3,22.5,22.8,23.0,23.2,23.4],[107000,20.5,20.8,21.2,21.5,21.8,22.1,22.3,22.6,22.8,23.0,23.2,23.4],[108000,20.5,20.9,21.2,21.5,21.8,22.1,22.4,22.6,22.8,23.0,23.2,23.4],[109000,20.5,20.9,21.2,21.6,21.9,22.1,22.4,22.6,22.8,23.0,23.2,23.4],[110000,20.6,20.9,21.3,21.6,21.9,22.1,22.4,22.6,22.8,23.0,23.2,23.4],[111000,20.6,21.0,21.3,21.6,21.9,22.1,22.4,22.6,22.8,23.0,23.2,23.4],[112000,20.6,21.0,21.3,21.6,21.9,22.1,22.4,22.6,22.8,23.0,23.2,23.4],[113000,20.7,21.0,21.3,21.6,21.9,22.1,22.4,22.6,22.8,23.0,23.2,23.4],[114000,20.7,21.0,21.3,21.6,21.9,22.2,22.4,22.6,22.9,23.0,23.3,23.4],[115000,20.7,21.0,21.3,21.7,21.9,22.2,22.4,22.6,22.9,23.1,23.3,23.5],[116000,20.8,21.1,21.4,21.7,22.0,22.3,22.5,22.7,23.0,23.1,23.4,23.5],[117000,20.8,21.2,21.5,21.7,22.1,22.3,22.5,22.8,23.0,23.2,23.4,23.6],[118000,20.9,21.2,21.6,21.8,22.2,22.4,22.6,22.9,23.1,23.3,23.5,23.7],[119000,20.9,21.3,21.6,21.9,22.2,22.5,22.7,23.0,23.2,23.4,23.6,23.7],[120000,21.0,21.3,21.7,22.0,22.3,22.6,22.8,23.0,23.2,23.4,23.6,23.8],[121000,21.0,21.4,21.7,22.1,22.3,22.6,22.9,23.1,23.3,23.5,23.7,23.9],[122000,21.0,21.4,21.7,22.1,22.4,22.7,22.9,23.2,23.3,23.6,23.8,23.9],[123000,21.1,21.4,21.8,22.1,22.4,22.7,23.0,23.2,23.4,23.7,23.8,24.0],[124000,21.1,21.5,21.8,22.1,22.5,22.8,23.0,23.3,23.5,23.7,23.9,24.1],[125000,21.1,21.5,21.8,22.2,22.5,22.8,23.1,23.3,23.6,23.8,24.0,24.2]],"T4":[[31000,19.5,19.8,20.1,20.4,20.7,20.9,21.2,21.4,21.6,21.8,22.0,22.1],[32000,20.2,20.6,20.9,21.2,21.5,21.7,22.0,22.2,22.4,22.6,22.8,23.0],[33000,20.6,20.9,21.3,21.6,21.9,22.1,22.4,22.6,22.8,23.0,23.2,23.4],[34000,20.8,21.2,21.5,21.8,22.1,22.4,22.7,22.9,23.1,23.3,23.5,23.7],[35000,21.0,21.4,21.7,22.0,22.3,22.6,22.8,23.1,23.3,23.5,23.7,23.9],[36000,21.1,21.5,21.8,22.1,22.4,22.7,23.0,23.2,23.5,23.7,23.9,24.0],[37000,21.2,21.6,21.9,22.3,22.6,22.8,23.1,23.3,23.6,23.8,24.0,24.2],[38000,21.3,21.7,22.1,22.4,22.7,23.0,23.2,23.5,23.7,23.9,24.1,24.3],[39000,21.4,21.8,22.1,22.4,22.7,23.0,23.3,23.5,23.8,24.0,24.2,24.4],[40000,21.5,21.9,22.2,22.5,22.8,23.1,23.4,23.6,23.9,24.1,24.3,24.5],[41000,21.6,21.9,22.3,22.6,22.9,23.2,23.4,23.7,23.9,24.1,24.3,24.5],[42000,21.6,22.0,22.3,22.7,23.0,23.3,23.5,23.8,24.0,24.2,24.4,24.6],[43000,21.7,22.0,22.4,22.7,23.0,23.3,23.6,23.8,24.1,24.3,24.5,24.7],[44000,21.7,22.1,22.4,22.8,23.1,23.4,23.6,23.9,24.1,24.3,24.5,24.7],[45000,21.8,22.1,22.5,22.8,23.1,23.4,23.7,23.9,24.2,24.4,24.6,24.8],[46000,21.8,22.2,22.5,22.9,23.2,23.5,23.7,24.0,24.2,24.4,24.6,24.8],[47000,21.9,22.3,22.6,22.9,23.2,23.5,23.8,24.1,24.3,24.5,24.7,24.9],[48000,22.0,22.4,22.7,23.0,23.3,23.6,23.9,24.2,24.4,24.6,24.8,25.0],[49000,22.1,22.5,22.8,23.2,23.5,23.8,24.0,24.3,24.5,24.7,25.0,25.2],[50000,22.2,22.7,23.0,23.4,23.7,24.0,24.2,24.5,24.7,25.0,25.2,25.4],[51000,22.5,22.9,23.3,23.6,23.9,24.2,24.5,24.8,25.0,25.2,25.5,25.7],[52000,22.8,23.2,23.6,24.0,24.3,24.6,24.9,25.1,25.4,25.6,25.8,26.0],[53000,23.1,23.5,23.9,24.2,24.5,24.9,25.1,25.4,25.7,25.9,26.1,26.3],[54000,23.2,23.6,24.0,24.4,24.7,25.0,25.3,25.6,25.8,26.1,26.3,26.5],[55000,23.4,23.8,24.2,24.6,24.9,25.2,25.5,25.8,26.0,26.2,26.5,26.7],[56000,23.5,24.0,24.3,24.7,25.1,25.4,25.7,25.9,26.2,26.4,26.7,26.9],[57000,23.7,24.1,24.5,24.9,25.2,25.5,25.8,26.1,26.4,26.6,26.8,27.0],[58000,23.8,24.2,24.6,25.0,25.4,25.7,26.0,26.3,26.5,26.8,27.0,27.2],[59000,23.9,24.3,24.7,25.1,25.5,25.8,26.1,26.4,26.6,26.9,27.1,27.3],[60000,24.0,24.4,24.8,25.2,25.5,25.9,26.2,26.4,26.7,27.0,27.2,27.4],[61000,24.0,24.4,24.8,25.2,25.5,25.9,26.2,26.5,26.7,27.0,27.2,27.4],[62000,24.0,24.4,24.8,25.2,25.6,25.9,26.2,26.5,26.8,27.0,27.2,27.4],[63000,24.0,24.5,24.9,25.2,25.6,25.9,26.2,26.5,26.8,27.0,27.3,27.5],[64000,24.0,24.5,24.9,25.2,25.6,25.9,26.2,26.5,26.8,27.0,27.3,27.5],[65000,24.0,24.5,24.9,25.3,25.6,25.9,26.2,26.6,26.8,27.1,27.3,27.5],[66000,24.1,24.5,24.9,25.3,25.7,26.0,26.3,26.6,26.9,27.1,27.3,27.6],[67000,24.1,24.6,25.0,25.4,25.7,26.0,26.3,26.7,26.9,27.2,27.4,27.6],[68000,24.2,24.6,25.0,25.4,25.8,26.1,26.4,26.7,27.0,27.2,27.5,27.7],[69000,24.2,24.6,25.1,25.5,25.8,26.1,26.4,26.7,27.0,27.3,27.5,27.7],[70000,24.3,24.7,25.1,25.5,25.9,26.2,26.5,26.8,27.0,27.3,27.6,27.8],[71000,24.3,24.7,25.1,25.6,25.9,26.2,26.5,26.8,27.1,27.4,27.6,27.8],[72000,24.4,24.8,25.2,25.6,26.0,26.3,26.6,26.9,27.2,27.4,27.7,27.9],[73000,24.5,24.9,25.3,25.7,26.1,26.4,26.7,27.0,27.3,27.5,27.8,28.0],[74000,24.6,25.0,25.4,25.8,26.2,26.5,26.8,27.1,27.4,27.7,27.9,28.1],[75000,24.7,25.2,25.6,26.0,26.3,26.7,27.0,27.3,27.6,27.8,28.1,28.3],[76000,24.8,25.3,25.7,26.1,26.5,26.8,27.1,27.4,27.7,28.0,28.2,28.4],[77000,25.0,25.4,25.8,26.2,26.6,26.9,27.3,27.6,27.9,28.1,28.4,28.6],[78000,25.1,25.5,26.0,26.4,26.7,27.1,27.4,27.7,28.0,28.2,28.5,28.7],[79000,25.2,25.7,26.1,26.5,26.9,27.2,27.5,27.8,28.1,28.4,28.6,28.9],[80000,25.3,25.8,26.2,26.6,27.0,27.3,27.7,28.0,28.3,28.5,28.8,29.0],[81000,25.5,25.9,26.3,26.8,27.1,27.5,27.8,28.1,28.4,28.7,28.9,29.1],[82000,25.6,26.0,26.5,26.9,27.3,27.6,27.9,28.2,28.5,28.8,29.1,29.3],[83000,25.7,26.1,26.6,27.0,27.4,27.7,28.1,28.4,28.7,28.9,29.2,29.4],[84000,25.8,26.3,26.7,27.1,27.5,27.9,28.2,28.5,28.8,29.1,29.3,29.6],[85000,25.9,26.4,26.8,27.2,27.6,28.0,28.3,28.6,28.9,29.2,29.4,29.7],[86000,26.0,26.5,26.9,27.3,27.7,28.1,28.4,28.7,29.0,29.3,29.6,29.8],[87000,26.1,26.6,27.0,27.4,27.8,28.2,28.5,28.8,29.1,29.4,29.7,29.9],[88000,26.2,26.7,27.1,27.5,27.9,28.3,28.6,28.9,29.2,29.5,29.8,30.0],[89000,26.3,26.7,27.2,27.6,28.0,28.4,28.7,29.0,29.3,29.6,29.9,30.1],[90000,26.4,26.8,27.3,27.7,28.1,28.5,28.8,29.1,29.4,29.7,30.0,30.2],[91000,26.4,26.9,27.4,27.8,28.2,28.5,28.9,29.2,29.5,29.8,30.0,30.3],[92000,26.5,27.0,27.4,27.8,28.2,28.6,29.0,29.3,29.6,29.9,30.1,30.4],[93000,26.6,27.0,27.5,27.9,28.3,28.7,29.0,29.3,29.6,29.9,30.2,30.4],[94000,26.6,27.1,27.5,28.0,28.3,28.7,29.0,29.4,29.7,30.0,30.2,30.5],[95000,26.7,27.1,27.6,28.0,28.4,28.8,29.1,29.5,29.8,30.0,30.3,30.5],[96000,26.7,27.2,27.6,28.1,28.5,28.8,29.2,29.5,29.8,30.1,30.4,30.6],[97000,26.8,27.2,27.7,28.1,28.5,28.9,29.2,29.6,29.9,30.2,30.4,30.7],[98000,26.8,27.3,27.7,28.2,28.6,28.9,29.3,29.6,29.9,30.2,30.5,30.7],[99000,26.9,27.4,27.8,28.2,28.6,29.0,29.3,29.7,30.0,30.3,30.5,30.8],[100000,26.9,27.4,27.9,28.3,28.7,29.1,29.4,29.7,30.1,30.3,30.6,30.8],[101000,27.0,27.5,27.9,28.3,28.7,29.1,29.5,29.8,30.1,30.4,30.7,30.9],[102000,27.0,27.5,28.0,28.4,28.8,29.2,29.5,29.8,30.1,30.4,30.7,31.0],[103000,27.1,27.6,28.0,28.4,28.8,29.2,29.6,29.9,30.2,30.5,30.8,31.0],[104000,27.1,27.6,28.1,28.5,28.9,29.3,29.6,29.9,30.2,30.6,30.8,31.1],[105000,27.2,27.7,28.1,28.5,28.9,29.3,29.7,30.0,30.3,30.6,30.9,31.1],[106000,27.2,27.7,28.2,28.6,29.0,29.3,29.7,30.0,30.3,30.6,30.9,31.2],[107000,27.3,27.7,28.2,28.6,29.0,29.4,29.8,30.1,30.4,30.7,31.0,31.2],[108000,27.3,27.8,28.2,28.7,29.1,29.4,29.8,30.1,30.4,30.7,31.0,31.3],[109000,27.3,27.8,28.3,28.7,29.1,29.5,29.9,30.2,30.5,30.8,31.1,31.3],[110000,27.4,27.9,28.3,28.8,29.2,29.5,29.9,30.2,30.5,30.8,31.1,31.4]]};
 function rentekolom(r){ // 0: <=1,5 ... 11: >6,5
   if(r<=1.5)return 0; return Math.min(11,Math.ceil((r-1.5)/0.5-1e-9));
 }
-function woonquote(inc,r,aow){
-  const base=interp(aow?S.wqA:S.wqN,inc);
-  if(base<=0)return 0;
-  const v=base+(rentekolom(r)-7)*0.4;
-  return Math.max(0,Math.round(v*10)/10);
+function woonquote(inc,r,aow,nietAftrekbaar){
+  const tab=TRHK[nietAftrekbaar?(aow?'T4':'T3'):(aow?'T2':'T1')];
+  let row=tab[0];for(const rw of tab){if(rw[0]<=inc)row=rw;else break;}
+  return row[1+rentekolom(r)];
 }
+const ALLEENSTAAND_EXTRA=18000, ALLEENSTAAND_GRENS=31000;
 const bruteringStudie=r=>{const t=[1.05,1.05,1.10,1.15,1.20,1.20,1.25,1.30,1.30,1.35,1.40,1.40];return t[rentekolom(r)];};
 
 /* ---------- state ---------- */
@@ -361,7 +370,7 @@ function readState(){
     le:{ao:pP(g('le_ao').value)/100,ww:pP(g('le_ww').value)/100,wwmax:pE(g('le_wwmax').value)||1e12,rente:pP(g('le_rente').value),npA:pE(g('le_np_a').value),orvA:pE(g('le_orv_a').value),npP:pE(g('le_np_p').value),orvP:pE(g('le_orv_p').value)},
     plannen:$$('#plannenBlok input[type=checkbox]').filter(c=>c.checked).map(c=>c.value),
     plannenTxt:{anders:($('#plan_anders_txt')||{}).value||'',niets:($('#plan_niets_txt')||{}).value||''},
-    wqN:parseTab(g('wq_n').value),wqA:parseTab(g('wq_a').value),b3:pP(g('wq_b3').value)||0.733,
+    labelExtra:+g('label').value||0,
     hraT:pP(g('hra_t').value)/100,ewf:pP(g('ewf').value)/100,
     org:{naam:g('o_naam').value,tel:g('o_tel').value,mail:g('o_mail').value,web:g('o_web').value,afz:g('o_afz').value,fun:g('o_fun').value},
     klant:{adres:g('k_adres').value,pc:g('k_pc').value,aanhef:g('k_aanhef').value}
@@ -387,10 +396,10 @@ const vermogen=d=>S.eigen+(S.kapitaal>0&&S.kapDatum&&d>=S.kapDatum?S.kapitaal:0)
 function toetsR(p,d){const rest=p.rvp?mdiff(d,p.rvp):0;return rest>=120?p.rente:Math.max(S.toets,p.rente);}
 
 function inkomenOp(date,sc){
-  let inc=0,allAow=true,any=false;
+  let inc=0,allAow=true,any=false,n=0;
   for(const [k,p] of personen()){
     if(sc.dood===k||(sc.alleen&&sc.alleen!==k))continue;
-    any=true;
+    any=true;n++;
     const aow=p.aow&&date>=p.aow;
     if(!aow)allAow=false;
     let v=aow?p.pens:p.ink;
@@ -400,7 +409,7 @@ function inkomenOp(date,sc){
   }
   if(sc.dood)inc+=sc.dood==='A'?S.le.npA:S.le.npP;
   for(const v of S.verpl)if(v.soort==='alimentatie'&&(!v.eind||v.eind>date))inc-=v.bedrag*12;
-  return {inc:Math.max(0,inc),aow:any&&allAow};
+  return {inc:Math.max(0,inc),aow:any&&allAow,n};
 }
 function verplMaand(d,r){
   let t=0;
@@ -422,7 +431,7 @@ function maxHyp(d,sc={}){
   const r=tot>0?wr/tot:S.toets, shareD=tot>0?ded/tot:1;
   const i=r/100/12, af=i/(1-Math.pow(1+i,-360));
   const obl=verplMaand(d,r);
-  const cap=dt=>{const {inc,aow}=inkomenOp(dt,sc);const q=woonquote(inc,r,aow)/100*(shareD+(1-shareD)*S.b3);return {c:Math.max(0,q*inc/12-obl),q,inc};};
+  const cap=dt=>{const {inc,aow}=inkomenOp(dt,sc);const q=(shareD*woonquote(inc,r,aow,false)+(1-shareD)*woonquote(inc,r,aow,true))/100;return {c:Math.max(0,q*inc/12-obl),q,inc};};
   const c0=cap(d);
   const aows=personen().filter(([k])=>sc.dood!==k&&(!sc.alleen||sc.alleen===k)).map(([,p])=>p.aow).filter(a=>a&&a>d&&mdiff(d,a)<=120).sort((a,b)=>a-b);
   let max;
@@ -434,7 +443,10 @@ function maxHyp(d,sc={}){
     for(let m=0;m<360;m++){while(seg<bps.length&&m>=bps[seg])seg++;f*=v;pv+=caps[seg]*f;}
     max=pv;
   }
-  return {max:Math.max(0,Math.round(max)),rente:r,wq:c0.q*100,inc:c0.inc,blend:aows.length>0};
+  const hh=inkomenOp(d,sc);
+  const extraAlleen=(hh.n===1&&hh.inc>ALLEENSTAAND_GRENS&&max>0)?ALLEENSTAAND_EXTRA:0;
+  max+=extraAlleen+(max>0?S.labelExtra:0);
+  return {max:Math.max(0,Math.round(max)),rente:r,wq:c0.q*100,inc:c0.inc,blend:aows.length>0,extra:extraAlleen+S.labelExtra};
 }
 
 /* ---------- belangrijke momenten ---------- */
@@ -538,13 +550,14 @@ function render(){
   $('#lasten').innerHTML=`<div class="kpis"><div class="kpi"><div class="l">Schuld nu</div><div class="v">${fE(schuld(S.peil))}</div></div><div class="kpi"><div class="l">Bruto maandlast nu</div><div class="v">${fE(nu.bruto)}</div></div><div class="kpi"><div class="l">Netto maandlast nu (indicatief)</div><div class="v">${fE(nu.netto)}</div></div></div>
   <table><thead><tr><th>Moment</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr></thead><tbody>${rows.map(([t,d,l])=>`<tr><td>${esc(t)}<div class="hint">${fD(d)}</div></td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`).join('')}</tbody></table><div class="hint">Na einde rentevast gerekend met ${fP(S.le.rente,2)} marktrente. Netto = bruto − renteaftrek (${fP(S.hraT*100,2)}) na bijtelling eigenwoningforfait.</div>`;
   window.__laatste={ms,sc,le,nu};
+  if(typeof miniScore==='function')miniScore();
 }
 function momHTML(m){
   const ok=m.ruimte>=0;const krap=ok&&m.pct<0.10;
   const tot=Math.max(m.max+m.verm,m.schuld)||1;
   return `<div class="mom"><div class="ic ${ok?(krap?'w':'ok'):'bad'}">${ok?'✓':'!'}</div>
   <div><div class="t1">${fD(m.d)}</div><div class="t2 ${ok?'':'bad'}">${esc(m.txt)}</div>
-  <div class="hint">Schuld ${fE(m.schuld)}${m.verm?` · eigen geld ${fE(m.verm)}`:''} · max. hypotheek ${fE(m.max)} · toetsrente ${fP(m.rente,2)} · woonquote ${fP(m.wq,1)}${m.blend?' · pensioenmenging':''}</div></div>
+  <div class="hint">Schuld ${fE(m.schuld)}${m.verm?` · eigen geld ${fE(m.verm)}`:''} · max. hypotheek ${fE(m.max)} · toetsrente ${fP(m.rente,2)} · woonquote ${fP(m.wq,1)}${m.blend?' · pensioenmenging':''}${m.extra?` · incl. extra ${fE(m.extra)} (alleenstaande/energielabel)`:''}</div></div>
   <div class="amt">${ok?'Leenruimte':'Overschrijding'}<br><b style="color:${ok?'var(--ok)':'var(--bad)'}">${fE(Math.abs(m.ruimte))}</b></div>
   <div class="bar"><i style="width:${Math.min(100,(m.max+m.verm)/tot*100)}%;background:var(--navy)"></i><i style="width:${Math.min(100,m.schuld/tot*100)}%;background:${ok?'var(--orange)':'var(--bad)'};height:4px;top:3px"></i></div></div>`;
 }
@@ -613,7 +626,6 @@ function voorbeeld(){
 function togglePartner(){const on=$('#p_actief').checked;$('#partnerBlok').hidden=!on;$$('.pp').forEach(e=>e.style.display=on?'':'none');}
 $('#p_actief').addEventListener('change',togglePartner);
 $('#btnVoorbeeld').onclick=voorbeeld;
-$('#wq_n').value=WQ_N_DEF;$('#wq_a').value=WQ_A_DEF;
 
 let tmr;document.addEventListener('input',()=>{clearTimeout(tmr);tmr=setTimeout(render,180);});
 document.addEventListener('change',()=>{clearTimeout(tmr);tmr=setTimeout(render,50);});
@@ -714,7 +726,7 @@ function rapportHTML(ms,sc,le,nu){
   <h4>De waarde van het huis</h4><p>Bij een nieuwe hypotheek kijkt de geldverstrekker ook naar de waarde van het huis. Hoe lager de schuld ten opzichte van de waarde, hoe lager de risicoklasse en vaak de rente.</p>
   <h4>Eigen geld gebruiken</h4><p>Spaargeld, beleggingen of een erfenis kun je gebruiken om de hypotheek te verlagen. Houd wel een buffer aan voor onverwachte uitgaven.</p>
   <h4>Hypotheekrenteaftrek</h4><p>Hypotheekrente is maximaal 30 jaar aftrekbaar, als je voldoet aan de voorwaarden van de Belastingdienst. Na het einde van de aftrek stijgt het netto maandbedrag.</p></div></div>
-  <div class="disc">Dit rapport is gebaseerd op de gegevens die je hebt ingevuld; die zijn niet gecontroleerd. Er is rekening gehouden met de ingevulde financiële verplichtingen. Dit is geen advies. Voor de beoordeling van de betaalbaarheid zijn leennormen gehanteerd zoals ingesteld in de rekentool, met een toetsrente van ${fP(S.toets,1)} als de rentevaste periode korter is dan 10 jaar. Het rapport is een momentopname: verandert je financiële situatie, kijk dan opnieuw naar de betaalbaarheid van je hypotheek.</div></div>
+  <div class="disc">Dit rapport is gebaseerd op de gegevens die je hebt ingevuld; die zijn niet gecontroleerd. Er is rekening gehouden met de ingevulde financiële verplichtingen. Dit is geen advies. Voor de beoordeling van de betaalbaarheid zijn de leennormen 2027 uit de Tijdelijke regeling hypothecair krediet gehanteerd, met een toetsrente van ${fP(S.toets,1)} als de rentevaste periode korter is dan 10 jaar. Het rapport is een momentopname: verandert je financiële situatie, kijk dan opnieuw naar de betaalbaarheid van je hypotheek.</div></div>
   <!-- contact -->
   <div class="pg"><h2>7 Contact</h2><p>Heb je meer uitleg nodig? Laat het ons weten.</p><div class="two"><div><h4>Bellen</h4><p>${esc(o.tel)}</p><h4>Mailen</h4><p>${esc(o.mail)}</p></div><div><h4>Advies</h4><p>Neem contact op met je hypotheekadviseur, of kijk op ${esc(o.web)}.</p></div></div></div>
   <script>setTimeout(function(){try{window.focus();window.print();}catch(e){}},400);<\/script>
@@ -722,7 +734,36 @@ function rapportHTML(ms,sc,le,nu){
 }
 function maandDeel(p){const n=Math.max(1,mdiff(S.peil,p.eind)),i=p.rente/100/12;if(p.vorm==='af')return p.bedrag*i;if(p.vorm==='lin')return p.bedrag/n+p.bedrag*i;return i===0?p.bedrag/n:p.bedrag*i/(1-Math.pow(1+i,-n));}
 
-voorbeeld();
+/* ---------- stappenplan ---------- */
+let stap=1;const STAPPEN=$$('.step');const N=STAPPEN.length;
+function valideer(n){
+  const fout=[];const req=(id,ok)=>{const el=$('#'+id);el.classList.toggle('err',!ok);if(!ok)fout.push(el);};
+  if(n===1){req('a_geb',!!$('#a_geb').value);req('a_ink',pE($('#a_ink').value)>0);if($('#p_actief').checked)req('p_geb',!!$('#p_geb').value);}
+  if(n===2){req('a_pens',pE($('#a_pens').value)>0);}
+  if(n===4){const ok=$$('#delenLijst .deel').some(c=>pE(c.querySelector('[data-k="bedrag"]').value)>0&&c.querySelector('[data-k="eind"]').value);
+    if(!ok){alert('Vul minimaal één leningdeel in met schuld en einddatum.');return false;}}
+  if(fout.length){fout[0].focus();return false;}
+  return true;
+}
+function toon(n){
+  stap=Math.max(1,Math.min(N,n));
+  STAPPEN.forEach(s=>s.classList.toggle('act',+s.dataset.step===stap));
+  $('#stepper').innerHTML=STAPPEN.map(s=>{const k=+s.dataset.step;return `<button type="button" data-go="${k}" class="${k===stap?'act':k<stap?'done':''}"><b>Stap ${k}</b>${s.dataset.title}</button>`;}).join('');
+  $('#btnPrev').style.visibility=stap===1?'hidden':'visible';
+  $('#btnNext').hidden=stap===N;$('#btnRapport').hidden=stap!==N;
+  $('#btnNext').textContent=stap===N-2?'Bekijk resultaat →':'Volgende →';
+  $('#navInfo').textContent=`Stap ${stap} van ${N}`;
+  render();window.scrollTo({top:0,behavior:'smooth'});
+}
+$('#stepper').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(!b)return;const k=+b.dataset.go;
+  if(k>stap){for(let i=stap;i<k;i++)if(!valideer(i)){toon(i);return;}}toon(k);});
+$('#btnNext').onclick=()=>{if(valideer(stap))toon(stap+1);};
+$('#btnPrev').onclick=()=>toon(stap-1);
+$('#btnInst').onclick=()=>{const p=$('#instellingen');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({behavior:'smooth'});};
+function miniScore(){const sc=window.__laatste&&window.__laatste.sc;
+  $('#mini').innerHTML=stap<6&&sc&&sc.c?`Voorlopig hypotheekcijfer: <b>${sc.c}</b> <span>(wordt bijgewerkt terwijl je invult)</span>`:'';}
+
+voorbeeld();toon(1);
 })();
 </script>
 </body>

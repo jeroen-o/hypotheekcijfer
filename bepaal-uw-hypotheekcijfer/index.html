@@ -243,6 +243,12 @@ main.wiz>.intro-step,main.wiz>section[data-step="10"]{background:transparent;pad
 #controle .ylist{background:#fff}
 .afspraak{border:0!important;background:#FFF6CC}
 </style>
+<script>
+/* gemarkeerd cijfer in het logo: volgt het cijfer in de zeshoek van deze pagina */
+function zetLogoCijfer(c){document.querySelectorAll('.hclogo').forEach(function(svg){var b=[].slice.call(svg.querySelectorAll('path')).find(function(p){return (p.getAttribute('d')||'').indexOf('M140.5,34.4')===0;});
+ if(!b||!(c>=1&&c<=10))return;var x=function(n){return 9.2+18.17*(n-1);};b.setAttribute('transform','translate('+(x(c)-x(8)).toFixed(2)+',0)');b.style.fill='#FFD31C';b.style.transition='transform .4s';});}
+
+</script>
 </head>
 <body>
 <div class="sitehead"><div class="in"><a href="../" aria-label="Home"><svg class="hclogo" role="img" aria-label="Hypotheekcijfer.nl" version="1.1" id="Layer_d" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1170,6 +1176,7 @@ function render(){
   $('#lasten').innerHTML=`<div class="kpis"><div class="kpi"><div class="l">Schuld nu</div><div class="v">${fE(schuld(S.peil))}</div></div><div class="kpi"><div class="l">Bruto maandlast nu</div><div class="v">${fE(nu.bruto)}</div></div><div class="kpi"><div class="l">Netto maandlast nu (indicatief)</div><div class="v">${fE(nu.netto)}</div></div></div>
   <table><thead><tr><th>Datum</th><th>Moment</th><th class="r">Aftrektarief</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr></thead><tbody>${rows.map(([t,d,l])=>`<tr><td style="white-space:nowrap;font-weight:700">${fD(d)}</td><td>${esc(t)}</td><td class="r">${l.tarief?fP(l.tarief*100,2):'–'}</td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`).join('')}</tbody></table><div class="hint">Na einde rentevast gerekend met een rente van ${fP(S.le.rente,1)}${S.le.rente===S.toets?' (toetsrente)':''}. Netto = bruto − renteaftrek na bijtelling eigenwoningforfait. Aftrektarief per inkomen (2027): ${fP(S.t1N*100,2)} in de 1e schijf (AOW: ${fP(S.t1A*100,2)}), ${fP(S.hraT*100,2)} boven ${fE(S.t1Grens)}; aftrek toegerekend aan de partner met het hoogste inkomen.</div>`;
   window.__laatste={ms,sc,le,nu};
+  if(typeof zetLogoCijfer==='function')zetLogoCijfer(sc&&sc.c?sc.c:5);
   if(typeof miniScore==='function')miniScore();
   if(typeof figRender==='function')figRender();
 }

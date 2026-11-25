@@ -204,6 +204,23 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
 .meer .mi table td{border:0;padding:2px 4px}
 .afspraak{border:2px solid #334659;padding:14px 16px;margin-top:14px;background:#fff}
 .stepper{gap:3px}.stepper button{min-width:62px;font-size:11.5px;padding:6px 2px 2px}
+
+/* ===== vast raster en uitlijning ===== */
+.grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px 16px}
+.grid.g2{grid-template-columns:repeat(2,minmax(0,1fr))!important;max-width:66.6%}
+.grid.g4{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+@media (max-width:760px){.grid,.grid.g4{grid-template-columns:repeat(2,minmax(0,1fr))!important}.grid.g2{max-width:none}}
+@media (max-width:480px){.grid,.grid.g2,.grid.g4{grid-template-columns:1fr!important}}
+.sub-h{margin:20px 0 8px}
+.row-card{padding:14px 34px 14px 14px}
+.row-card .del{top:8px;right:8px}
+.mgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+@media (max-width:620px){.mgrid{grid-template-columns:1fr!important}}
+.two-c>.card{display:flex;flex-direction:column}
+#plannenBlok .chk{display:grid;grid-template-columns:20px 1fr;align-items:start;gap:8px;margin:0;padding:9px 0;border-bottom:1px solid #ececec}
+#plannenBlok .chk>input{margin:2px 0 0;width:16px;height:16px}
+#plannenBlok .chk span input{display:block;margin-top:8px;width:100%;max-width:440px}
+.nav{margin-top:18px}
 </style>
 </head>
 <body>
@@ -416,11 +433,11 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
   <h2><span class="n">2</span> Uw inkomen op pensioendatum</h2>
   <div class="body">
     <p class="intro">Vanaf de AOW-datum verandert uw inkomen. Vul het totale bruto inkomen in dat u dan verwacht: AOW plus aanvullend pensioen. U vindt dit op <b>mijnpensioenoverzicht.nl</b>.</p>
-    <div class="grid">
+    <div class="grid g2">
       <div><label>AOW-datum aanvrager</label><input id="a_aow" readonly></div>
       <div><label>Bruto AOW + pensioen per jaar *</label><input class="eur" id="a_pens" inputmode="numeric"></div>
     </div>
-    <div class="grid pp" style="margin-top:10px">
+    <div class="grid g2 pp" style="margin-top:10px">
       <div><label>AOW-datum partner</label><input id="p_aow" readonly></div>
       <div><label>Bruto AOW + pensioen partner per jaar</label><input class="eur" id="p_pens" inputmode="numeric"></div>
     </div>
@@ -467,14 +484,14 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
   <h2><span class="n">5</span> Life events</h2>
   <div class="body">
     <p class="intro">Wat gebeurt er als uw inkomen onverwacht daalt? Controleer de aannames; de standaardwaarden zijn een vereenvoudiging.</p>
-    <div class="grid">
+    <div class="grid g4">
       <div><label>Inkomen bij arbeidsongeschiktheid (% van bruto)</label><input class="pct" id="le_ao" value="70"></div>
       <div><label>WW-uitkering (% van dagloon)</label><input class="pct" id="le_ww" value="70"></div>
       <div><label>Maximaal WW-jaarloon</label><input class="eur" id="le_wwmax" inputmode="numeric"></div>
       <div><label>Marktrente na einde rentevast (voor netto lasten)</label><input class="pct" id="le_rente" value="4,5"></div>
     </div>
     <div class="sub-h">Bij overlijden</div>
-    <div class="grid">
+    <div class="grid g4">
       <div><label>Nabestaandenpensioen bij overlijden aanvrager (p/j)</label><input class="eur" id="le_np_a" inputmode="numeric"></div>
       <div><label>ORV-dekking aanvrager</label><input class="eur" id="le_orv_a" inputmode="numeric"></div>
       <div class="pp"><label>Nabestaandenpensioen bij overlijden partner (p/j)</label><input class="eur" id="le_np_p" inputmode="numeric"></div>
@@ -519,7 +536,7 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
     <div id="plannenBlok"></div>
     <div class="afspraak" id="afspraak" hidden>
       <h3 style="margin:0 0 8px">Afspraak voor een toelichting</h3>
-      <div class="grid">
+      <div class="grid g4">
         <div><label>Voorkeursdag</label><select id="af_dag"><option>maandag</option><option>dinsdag</option><option>woensdag</option><option>donderdag</option><option>vrijdag</option><option>geen voorkeur</option></select></div>
         <div><label>Dagdeel</label><select id="af_deel"><option>ochtend</option><option>middag</option><option>geen voorkeur</option></select></div>
         <div><label>Telefoonnummer</label><input id="af_tel" inputmode="tel"></div>
@@ -577,7 +594,7 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
 <template id="tplDeel">
   <div class="row-card deel">
     <button type="button" class="del" title="Verwijderen">×</button>
-    <div class="grid">
+    <div class="grid g4">
       <div><label>Omschrijving</label><input data-k="naam"></div>
       <div><label>Huidige schuld</label><input class="eur" data-k="bedrag" inputmode="numeric"></div>
       <div><label>Aflosvorm</label><select data-k="vorm"><option value="af">Aflossingsvrij</option><option value="ann">Annuïtair</option><option value="lin">Lineair</option></select></div>

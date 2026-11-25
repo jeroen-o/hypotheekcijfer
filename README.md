@@ -30,4 +30,4 @@ Financieringslastpercentages uit de **Wijzigingsregeling hypothecair krediet 202
 - Toetsrente per leningdeel: contractrente bij resterende rentevast ≥ 10 jaar, anders max(5%, contractrente); gewogen naar saldo.
 - AOW binnen 10 jaar: contante waarde van de maandcapaciteit vóór en na AOW (zoals in `Hypotheekcijfer_berekend.xlsx`).
 - Na einde renteaftrek: tabel 3/4 (niet-aftrekbaar) naar rato van het saldo.
-- Cijfer: geen overschrijding → 7 (<10% ruimte), 8 (<25%), 9 (<50%), 10; overschrijding → 5 (≤5%), 4 (≤10%), 3 (≤20%), 2 (≤35%), 1.
+- Cijfer (3 t/m 8): geen overschrijding → 7 (<10% ruimte), 8 (≥10%); overschrijding → 5 (≤5%), 4 (≤10%), 3 (daarboven).

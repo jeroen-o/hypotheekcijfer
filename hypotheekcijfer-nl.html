@@ -826,20 +826,21 @@ const UITLEG={
 
 /* ---------- cijfer ---------- */
 /* cijfer per event: zelfde schaal als het totaalcijfer */
-function cijferPct(p){if(p>=0)return p<0.10?7:p<0.25?8:p<0.50?9:10;const t=-p;return t<=0.05?5:t<=0.10?4:t<=0.20?3:t<=0.35?2:1;}
+/* cijfers lopen van 3 tot en met 8: lager dan 3 wordt 3, hoger dan 8 wordt 8 */
+function cijferPct(p){if(p>=0)return p<0.10?7:8;const t=-p;return t<=0.05?5:t<=0.10?4:3;}
 const badge=c=>`<span class="sc ${c<6?'lo':''}" title="Cijfer voor dit event">${c}</span>`;
 function cijfer(ms){
   if(!ms.length||!S.delen.length)return{c:null,txt:'Vul hypotheekgegevens in',expl:''};
   const w=ms.reduce((a,b)=>b.pct<a.pct?b:a);
   const p=w.pct;let c,txt,expl;
   if(p>=0){
-    c=p<0.10?7:p<0.25?8:p<0.50?9:10;
-    txt=c===7?'De score is maar net voldoende.':c===8?'De score is ruim voldoende.':'De score is goed.';
-    expl=`Basiscijfer 6: op geen enkel belangrijk moment is de schuld hoger dan de maximale hypotheek. +${c-6} omdat de kleinste ruimte (${fD(w.d)}, ${lc1(w.txt)}) ${fP(p*100,1)} van de schuld is (${p<0.10?'minder dan 10%':p<0.25?'10–25%':p<0.50?'25–50%':'meer dan 50%'}).`;
+    c=cijferPct(p);
+    txt=c===7?'De score is maar net voldoende.':'De score is goed.';
+    expl=`Basiscijfer 6: op geen enkel belangrijk moment is de schuld hoger dan de maximale hypotheek. +${c-6} omdat de kleinste ruimte (${fD(w.d)}, ${lc1(w.txt)}) ${fP(p*100,1)} van de schuld is (${p<0.10?'minder dan 10%':'10% of meer'}). Het hoogste cijfer is een 8.`;
   }else{
-    const t=-p;c=t<=0.05?5:t<=0.10?4:t<=0.20?3:t<=0.35?2:1;
+    const t=-p;c=cijferPct(p);
     txt=c>=4?'De score is onvoldoende.':'De score is ruim onvoldoende.';
-    expl=`Op ${fD(w.d)} (${lc1(w.txt)}) is de schuld ${fE(-w.ruimte)} hoger dan de maximale hypotheek plus eigen geld: een overschrijding van ${fP(t*100,1)}. Cijfer: ≤5% → 5, ≤10% → 4, ≤20% → 3, ≤35% → 2, daarboven 1.`;
+    expl=`Op ${fD(w.d)} (${lc1(w.txt)}) is de schuld ${fE(-w.ruimte)} hoger dan de maximale hypotheek plus eigen geld: een overschrijding van ${fP(t*100,1)}. Cijfer: tot 5% → 5, tot 10% → 4, daarboven 3. Het laagste cijfer is een 3.`;
   }
   return{c,txt,expl,w};
 }
@@ -1235,17 +1236,41 @@ function rapportHTML(ms,sc,le,nu){
   <script>
   (function(){
     var btn=document.getElementById('pdfBtn'),msg=document.getElementById('pdfMsg');
+    /* onzichtbare tekstlaag: maakt de PDF doorzoekbaar en tekst selecteerbaar */
+    var MAP={'→':'->','≤':'<=','≥':'>=','−':'-',' ':' ','–':'-','—':'-','‘':"'",'’':"'",'“':'"','”':'"','…':'...','•':'-','·':'-'};
+    function schoon(t){return t.replace(/[→≤≥− –—‘’“”…•·]/g,function(c){return MAP[c];}).replace(/[^\x20-\x7E -ÿ€]/g,'');}
+    function tekstlaag(pdf,pg){
+      var pr=pg.getBoundingClientRect(),k=210/pr.width;
+      var w=document.createTreeWalker(pg,NodeFilter.SHOW_TEXT,null);var n;
+      while((n=w.nextNode())){
+        var txt=n.nodeValue;if(!txt||!txt.trim())continue;
+        var el=n.parentElement;if(!el)continue;var cs=getComputedStyle(el);
+        if(cs.visibility==='hidden'||cs.display==='none')continue;
+        var re=/[^\\s]+/g,m;
+        while((m=re.exec(txt))){
+          var r=document.createRange();r.setStart(n,m.index);r.setEnd(n,m.index+m[0].length);
+          var b=r.getBoundingClientRect();if(!b.width||!b.height)continue;
+          var x=(b.left-pr.left)*k,y=(b.top-pr.top)*k,hmm=b.height*k;
+          if(x<0||y<0||x>210||y>297)continue;
+          var woord=schoon(m[0]);if(!woord)continue;
+          var pt=Math.max(4,hmm*2.835*0.82);pdf.setFontSize(pt);
+          var wmm=pdf.getTextWidth(woord),hs=wmm>0?(b.width*k)/wmm:1;
+          pdf.text(woord+' ',x,y+hmm*0.82,{renderingMode:'invisible',horizontalScale:hs});
+        }
+      }
+    }
     var naam=${JSON.stringify('Je hypotheekcijfer nu en later - '+namen+'.pdf')};
     btn.addEventListener('click',async function(){
       if(!window.htmlToImage||!window.jspdf){msg.textContent='PDF-module niet geladen. Gebruik Afdrukken > Opslaan als PDF.';return;}
       btn.disabled=true;var pgs=[].slice.call(document.querySelectorAll('.pg'));
       try{
-        var pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait',compress:true});
+        var pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait',compress:true});pdf.setFont('helvetica','normal');pdf.setProperties({title:document.title,subject:'Hypotheekcheck – hypotheekcijfer nu en later',creator:'Hypotheekcijfer.nl',keywords:'hypotheekcijfer, hypotheekcheck, betaalbaarheid, leennormen 2027'});
         for(var i=0;i<pgs.length;i++){
           msg.textContent='PDF maken… pagina '+(i+1)+' van '+pgs.length;
           var img=await window.htmlToImage.toJpeg(pgs[i],{pixelRatio:2,quality:0.88,style:{margin:'0',boxShadow:'none'}});
           if(i>0)pdf.addPage('a4','portrait');
           pdf.addImage(img,'JPEG',0,0,210,297,undefined,'FAST');
+          tekstlaag(pdf,pgs[i]);
         }
         pdf.save(naam);msg.textContent='PDF gedownload.';
       }catch(e){msg.textContent='Downloaden lukte niet. Gebruik Afdrukken > Opslaan als PDF.';}

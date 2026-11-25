@@ -6,7 +6,7 @@
 - Toetst volgens de leennormen 2027 (Tijdelijke regeling hypothecair krediet, financieringslastpercentages tabel 1 t/m 4) of de hypotheekschuld past bij het inkomen.
 - Belangrijke momenten: einde rentevaste periode (toetsrente 5% bij rentevast korter dan 10 jaar), einde hypotheekrenteaftrek, AOW-leeftijd van aanvrager en partner, einde looptijd.
 - Life events: arbeidsongeschiktheid, werkloosheid, overlijden en scheiding.
-- Cijfer: 6 is het basiscijfer als de schuld op geen enkel moment te hoog is; 7 bij minder dan 10% ruimte, 8 bij 10-25%, 9 bij 25-50%, 10 daarboven. Bij een overschrijding: 5 (tot 5%), 4 (tot 10%), 3 (tot 20%), 2 (tot 35%), 1 daarboven.
+- Cijfer: 6 is het basiscijfer als de schuld op geen enkel moment te hoog is; 7 bij minder dan 10% ruimte, 8 bij 10% of meer. Bij een overschrijding: 5 (tot 5%), 4 (tot 10%), 3 daarboven. Het cijfer ligt altijd tussen 3 en 8.
 - Rekent in de browser; gegevens worden niet verstuurd of opgeslagen.
 
 ## Pagina's

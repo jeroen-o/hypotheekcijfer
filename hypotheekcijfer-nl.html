@@ -551,7 +551,7 @@ a[href*="mijnpensioenoverzicht"]{color:inherit;text-decoration:underline;font-we
         <div><label>Telefoonnummer</label><input id="af_tel" inputmode="tel"></div>
         <div><label>Opmerking</label><input id="af_opm"></div>
       </div>
-      <div class="hint">Uw voorkeur komt in de brief bij het rapport. Stuur het rapport naar uw adviseur of bel <span class="o-tel"></span> om de afspraak te bevestigen; deze tool verstuurt zelf niets.</div>
+      <div class="hint">Uw voorkeur komt in de brief bij het rapport. Stuur het rapport naar uw adviseur en bel of mail met uw adviseur om de afspraak te bevestigen; deze tool verstuurt zelf niets.</div>
     </div>
   </div>
 </section>
@@ -1079,7 +1079,7 @@ function rapportHTML(ms,sc,le,nu){
   <p>Fijn dat u de hypotheekcheck heeft gedaan. Bij deze brief ontvangt u het rapport ‘Uw hypotheekcijfer nu en later’. Het geeft inzicht in de betaalbaarheid van uw hypotheek nu en op belangrijke momenten in de toekomst, en in wat er gebeurt bij life events zoals arbeidsongeschiktheid, werkloosheid${S.partner?', overlijden of scheiding':''}. Het rapport is gebaseerd op de gegevens die u zelf heeft ingevuld.</p>
   <p><b>Kunnen we u verder helpen?</b><br>Dit rapport is geen hypotheekadvies. Wilt u de betaalbaarheid verbeteren of heeft u vragen over uw situatie? Bespreek het rapport dan met een hypotheekadviseur.${S.plannen.length?` In de hypotheekcheck gaf u aan dat u van plan bent om:</p><ul>${PLANNEN.filter(p=>S.plannen.includes(p.id)).map(p=>`<li>${esc(p.l.replace(/^Ik /,'').replace(/:$/,''))}${p.id==='anders'?' '+esc(S.plannenTxt.anders):''}${p.id==='niets'?' '+esc(S.plannenTxt.niets):''}</li>`).join('')}</ul><p>`:''}</p>
   ${afspraakTekst()?`<p><b>Toelichting</b><br>${afspraakTekst()}</p>`:''}
-  <p><b>Vragen?</b><br>Bel ${esc(o.tel)} of mail naar ${esc(o.mail)}.</p><br>
+  <p><b>Vragen?</b><br>Bel met of mail met uw adviseur. Hij helpt u graag.</p><br>
   <p>Met vriendelijke groet,<br><br><br>${esc(o.afz)}<br>${esc(o.fun)}<br>${esc(o.naam)}</p></div>
   <!-- cover -->
   <div class="pg" style="padding:0"><div class="cover"><div class="o"><span class="hc">${hcLogo(o.naam)}</span></div><h1>Uw hypotheekcijfer<br>nu en later</h1><div>${esc(namen)} · ${vandaag}</div><div style="margin-top:10px;opacity:.8">${esc(o.web)}</div></div></div>

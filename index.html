@@ -491,7 +491,7 @@ a[href*="mijnpensioenoverzicht"],a[href*="mijn.uwv.nl"]{color:inherit;text-decor
         <div><label>Telefoonnummer</label><input id="af_tel" inputmode="tel"></div>
         <div><label>Opmerking</label><input id="af_opm"></div>
       </div>
-      <div class="hint">Je voorkeur komt in de brief bij het rapport. Stuur het rapport naar je adviseur of bel <span class="o-tel"></span> om de afspraak te bevestigen; deze tool verstuurt zelf niets.</div>
+      <div class="hint">Je voorkeur komt in de brief bij het rapport. Stuur het rapport naar je adviseur en bel of mail met je adviseur om de afspraak te bevestigen; deze tool verstuurt zelf niets.</div>
     </div>
   </div>
 </section>
@@ -988,7 +988,7 @@ function rapportHTML(ms,sc,le,nu){
   <p>Fijn dat je de hypotheekcheck hebt gedaan. Bij deze brief ontvang je het rapport ‘Je hypotheekcijfer nu en later’. Het geeft inzicht in de betaalbaarheid van je hypotheek nu en op belangrijke momenten in de toekomst, en in wat er gebeurt bij life events zoals arbeidsongeschiktheid, werkloosheid${S.partner?', overlijden of scheiding':''}. Het rapport is gebaseerd op de gegevens die je zelf hebt ingevuld.</p>
   <p><b>Kunnen we je verder helpen?</b><br>Dit rapport is geen hypotheekadvies. Wil je de betaalbaarheid verbeteren of heb je vragen over je situatie? Bespreek het rapport dan met een hypotheekadviseur.${S.plannen.length?` In de hypotheekcheck gaf je aan dat je van plan bent om:</p><ul>${PLANNEN.filter(p=>S.plannen.includes(p.id)).map(p=>`<li>${esc(p.l.replace(/^Ik /,'').replace(/:$/,''))}${p.id==='anders'?' '+esc(S.plannenTxt.anders):''}${p.id==='niets'?' '+esc(S.plannenTxt.niets):''}</li>`).join('')}</ul><p>`:''}</p>
   ${afspraakTekst()?`<p><b>Toelichting</b><br>${afspraakTekst()}</p>`:''}
-  <p><b>Vragen?</b><br>Bel ${esc(o.tel)} of mail naar ${esc(o.mail)}.</p><br>
+  <p><b>Vragen?</b><br>Bel met of mail met je adviseur. Hij helpt je graag.</p><br>
   <p>Met vriendelijke groet,<br><br><br>${esc(o.afz)}<br>${esc(o.fun)}<br>${esc(o.naam)}</p></div>
   <!-- cover -->
   <div class="pg" style="padding:0"><div class="cover"><div class="o"><svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><path d="M13 1 25 8v12l-12 7L1 20V8z" fill="#010101"/><path d="M8 9h7a4 4 0 0 1 0 8h-2l4 4h-3l-6-6V9z" fill="#FFD31C"/></svg>${esc(o.naam).toUpperCase()}</div><h1>Je hypotheekcijfer<br>nu en later</h1><div>${esc(namen)} · ${vandaag}</div><div style="margin-top:10px;opacity:.8">${esc(o.web)}</div></div></div>

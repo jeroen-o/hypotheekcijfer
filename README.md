@@ -1,5 +1,8 @@
 # Hypotheekcijfer
 
+- `index.html` – **HypotheekCijfer.nl**-site volgens het Sketch-ontwerp (Poppins, turquoise/leisteenblauw, u-vorm): hero, Check uw hypotheek, Bepaal uw HypotheekCijfer (met of zonder persoonlijke code), het stappenplan, Bereken uw mogelijkheden (6 what-if-berekeningen) en footer.
+- `blinqx.html` – dezelfde rekentool in Blinqx-huisstijl (je-vorm).
+
 Standalone rekentool (één HTML-bestand, geen build-step, geen externe API's, geen localStorage) die de betaalbaarheid van een bestaande hypotheek scoort (1–10) en het rapport **‘Je hypotheek nu en later’** genereert.
 
 Open `index.html` in de browser of embed het in Google Sites. Het rapport opent via `window.open()` en kan als PDF worden opgeslagen.

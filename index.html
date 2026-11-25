@@ -81,6 +81,8 @@ table{width:100%;border-collapse:collapse;font-size:13.5px}
 th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 th{color:var(--muted);font-weight:600;font-size:12.5px}
 td.r,th.r{text-align:right;white-space:nowrap}
+.sc{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--orange);color:#010101;font-weight:800;font-size:15px}
+.sc.lo{background:var(--bad);color:#fff}
 .pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:700}
 .pill.ok{background:var(--ok-l);color:var(--ok)} .pill.bad{background:var(--bad-l);color:var(--bad)}
 .chart{width:100%;height:auto;display:block}
@@ -474,6 +476,9 @@ const UITLEG={
 };
 
 /* ---------- cijfer ---------- */
+/* cijfer per event: zelfde schaal als het totaalcijfer */
+function cijferPct(p){if(p>=0)return p<0.10?7:p<0.25?8:p<0.50?9:10;const t=-p;return t<=0.05?5:t<=0.10?4:t<=0.20?3:t<=0.35?2:1;}
+const badge=c=>`<span class="sc ${c<6?'lo':''}" title="Cijfer voor dit event">${c}</span>`;
 function cijfer(ms){
   if(!ms.length||!S.delen.length)return{c:null,txt:'Vul hypotheekgegevens in',expl:''};
   const w=ms.reduce((a,b)=>b.pct<a.pct?b:a);
@@ -493,7 +498,7 @@ function cijfer(ms){
 /* ---------- life events ---------- */
 function lifeEvents(){
   const d=S.peil,s=schuld(d),v=vermogen(d);const out=[];
-  const ev=(naam,sc,orv=0,note='')=>{const mh=maxHyp(d,sc);const r=mh.max+v+orv-s;out.push({naam,max:mh.max,schuld:s,verm:v+orv,ruimte:r,ok:r>=0,note});};
+  const ev=(naam,sc,orv=0,note='')=>{const mh=maxHyp(d,sc);const r=mh.max+v+orv-s;const pct=s>0?r/s:1;out.push({naam,max:mh.max,schuld:s,verm:v+orv,ruimte:r,ok:r>=0,note,pct,c:cijferPct(pct)});};
   ev('Huidige situatie (referentie)',{});
   for(const [k,p] of personen()){
     const wie=S.partner?p.naam:'je';
@@ -564,7 +569,7 @@ function render(){
   $('#chart').innerHTML=chartSVG(ms);
   // life
   const le=lifeEvents();
-  $('#life').innerHTML=`<table><thead><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th class="r">Ruimte / tekort</th></tr></thead><tbody>${le.map(e=>`<tr><td>${esc(e.naam)}${e.note?`<div class="hint">${esc(e.note)}</div>`:''}</td><td class="r">${fE(e.max)}</td><td class="r">${fE(e.schuld-e.verm)}</td><td class="r"><span class="pill ${e.ok?'ok':'bad'}">${e.ok?'+ ':''}${fE(e.ruimte)}</span></td></tr>`).join('')}</tbody></table><div class="hint">Toets op ${fD(S.peil)} volgens de leennormen. Een tekort betekent dat de schuld hoger is dan wat volgens de normen verantwoord is bij dat inkomen; dat betekent niet automatisch betalingsproblemen, wel een risico.</div>`;
+  $('#life').innerHTML=`<table><thead><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th class="r">Ruimte / tekort</th><th class="r">Cijfer</th></tr></thead><tbody>${le.map(e=>`<tr><td>${esc(e.naam)}${e.note?`<div class="hint">${esc(e.note)}</div>`:''}</td><td class="r">${fE(e.max)}</td><td class="r">${fE(e.schuld-e.verm)}</td><td class="r"><span class="pill ${e.ok?'ok':'bad'}">${e.ok?'+ ':''}${fE(e.ruimte)}</span></td><td class="r">${badge(e.c)}</td></tr>`).join('')}</tbody></table><div class="hint">Toets op ${fD(S.peil)} volgens de leennormen. Een tekort betekent dat de schuld hoger is dan wat volgens de normen verantwoord is bij dat inkomen; dat betekent niet automatisch betalingsproblemen, wel een risico.</div>`;
   // lasten
   const nu=lasten(S.peil);
   const rows=[['Nu',S.peil,nu]];
@@ -580,7 +585,7 @@ function momHTML(m){
   return `<div class="mom"><div class="ic ${ok?(krap?'w':'ok'):'bad'}">${ok?'✓':'!'}</div>
   <div><div class="t1">${fD(m.d)}</div><div class="t2 ${ok?'':'bad'}">${esc(m.txt)}</div>
   <div class="hint">Schuld ${fE(m.schuld)}${m.verm?` · eigen geld ${fE(m.verm)}`:''} · max. hypotheek ${fE(m.max)} · toetsrente ${fP(m.rente,2)} · woonquote ${fP(m.wq,1)}${m.blend?' · pensioenmenging':''}${m.extra?` · incl. extra ${fE(m.extra)} (alleenstaande/energielabel)`:''}</div></div>
-  <div class="amt">${ok?'Leenruimte':'Overschrijding'}<br><b style="color:${ok?'var(--ok)':'var(--bad)'}">${fE(Math.abs(m.ruimte))}</b></div>
+  <div class="amt">${badge(cijferPct(m.pct))}<br>${ok?'Leenruimte':'Overschrijding'}<br><b style="color:${ok?'var(--ok)':'var(--bad)'}">${fE(Math.abs(m.ruimte))}</b></div>
   <div class="bar"><i style="width:${Math.min(100,(m.max+m.verm)/tot*100)}%;background:var(--navy)"></i><i style="width:${Math.min(100,m.schuld/tot*100)}%;background:${ok?'var(--orange)':'var(--bad)'};height:4px;top:3px"></i></div></div>`;
 }
 function chartSVG(ms,w=640,h=260){
@@ -669,7 +674,7 @@ function rapportHTML(ms,sc,le,nu){
   const verplL={krediet:'Krediet',studie_oud:'Studieschuld (oud stelsel)',studie_nieuw:'Studieschuld (SF35)',alimentatie:'Partneralimentatie p/m',erfpacht:'Erfpachtcanon p/j',lease:'Private lease p/m',overig:'Overige maandlast'};
   const vormL={af:'Aflossingsvrij',ann:'Annuïtair',lin:'Lineair'};
   const momBlok=m=>{const ok=m.ruimte>=0;const tot=Math.max(m.max+m.verm,m.schuld)||1;const hMax=Math.round((m.max+m.verm)/tot*140),hS=Math.round(Math.min(m.schuld,m.max+m.verm)/tot*140),hO=ok?0:Math.round((m.schuld-m.max-m.verm)/tot*140);
-    return `<div class="mb"><div class="mt"><h3>${fD(m.d)}</h3><div class="sub">${esc(m.txt)}</div><p>${UITLEG[m.type]} ${ok?`Volgens de huidige leennormen is de hypotheekschuld dan <b>niet te hoog</b>; de leenruimte is ${fE(m.ruimte)}.`:`Volgens de huidige leennormen is de hypotheekschuld dan <b>te hoog</b>: de overschrijding is ${fE(-m.ruimte)}.`}</p>
+    return `<div class="mb"><div class="mt"><h3>${fD(m.d)} <span class="scr ${cijferPct(m.pct)<6?'lo':''}">cijfer ${cijferPct(m.pct)}</span></h3><div class="sub">${esc(m.txt)}</div><p>${UITLEG[m.type]} ${ok?`Volgens de huidige leennormen is de hypotheekschuld dan <b>niet te hoog</b>; de leenruimte is ${fE(m.ruimte)}.`:`Volgens de huidige leennormen is de hypotheekschuld dan <b>te hoog</b>: de overschrijding is ${fE(-m.ruimte)}.`}</p>
     <table class="kv">${rij('Maximale hypotheek',fE(m.max))}${m.verm?rij('Eigen geld om af te lossen',fE(m.verm)):''}${rij('Hypotheekschuld',fE(m.schuld))}${rij(ok?'Ruimte':'Overschrijding',`<b style="color:${ok?'#1f8a4c':'#E5486B'}">${fE(Math.abs(m.ruimte))}</b>`)}${rij('Toetsrente / woonquote',`${fP(m.rente,2)} / ${fP(m.wq,1)}`)}</table></div>
     <div class="bars"><div class="col"><div class="stk" style="height:${hMax}px;background:#010101"></div><span>Max.</span></div><div class="col"><div class="stk" style="height:${hO}px;background:#E5486B"></div><div class="stk" style="height:${hS}px;background:#FFD31C"></div><span>Schuld</span></div></div></div>`;};
   return `<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>Je hypotheek nu en later – ${esc(namen)}</title><style>
@@ -693,6 +698,7 @@ function rapportHTML(ms,sc,le,nu){
   .lt th,.lt td{border-bottom:1px solid #ececec;padding:5px 6px;text-align:left}.lt .r{text-align:right}.ok{color:#1f8a4c;font-weight:700}.bad{color:#E5486B;font-weight:700}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.two h4{margin:8px 0 2px;color:#010101}
   .disc{font-size:11px;color:#666666;border-top:1px solid #dddddd;padding-top:8px;margin-top:14px}
+  .scr{display:inline-block;min-width:22px;padding:1px 7px;border-radius:12px;background:#FFD31C;color:#010101;font-weight:800;font-size:12px;text-align:center;vertical-align:middle}.scr.lo{background:#E5486B;color:#fff}
   .tools{position:fixed;top:10px;right:10px}.tools button{background:#FFD31C;color:#010101;border:2px solid #010101;border-radius:2px;padding:9px 14px;font-weight:700;cursor:pointer}
   @media print{.tools{display:none}}
   </style></head><body>
@@ -715,9 +721,9 @@ function rapportHTML(ms,sc,le,nu){
   <p>De score is gebaseerd op de ingevulde gegevens en op de leennormen. <b>${esc(sc.txt)}</b></p>
   <div class="box"><b>Hoe is het cijfer berekend?</b><br>${esc(sc.expl)}</div>
   <h3 style="margin-top:14px">Belangrijke momenten</h3>
-  <div class="tl">${ms.map(m=>`<div class="${m.ruimte<0?'bad':''}"><b>${fD(m.d)}</b><br>${esc(m.txt)}<br>${m.ruimte<0?`<span class="bad">tekort ${fE(-m.ruimte)}</span>`:`<span class="ok">ruimte ${fE(m.ruimte)}</span>`}</div>`).join('')}</div>
+  <div class="tl">${ms.map(m=>`<div class="${m.ruimte<0?'bad':''}"><b>${fD(m.d)}</b> <span class="scr ${cijferPct(m.pct)<6?'lo':''}">${cijferPct(m.pct)}</span><br>${esc(m.txt)}<br>${m.ruimte<0?`<span class="bad">tekort ${fE(-m.ruimte)}</span>`:`<span class="ok">ruimte ${fE(m.ruimte)}</span>`}</div>`).join('')}</div>
   <h3 style="margin-top:16px">Life events in één oogopslag</h3>
-  <table class="lt"><tr><th>Situatie</th><th class="r">Ruimte / tekort</th></tr>${le.map(e=>`<tr><td>${esc(e.naam)}</td><td class="r ${e.ok?'ok':'bad'}">${e.ok?'+ ':''}${fE(e.ruimte)}</td></tr>`).join('')}</table>
+  <table class="lt"><tr><th>Situatie</th><th class="r">Ruimte / tekort</th><th class="r">Cijfer</th></tr>${le.map(e=>`<tr><td>${esc(e.naam)}</td><td class="r ${e.ok?'ok':'bad'}">${e.ok?'+ ':''}${fE(e.ruimte)}</td><td class="r"><span class="scr ${e.c<6?'lo':''}">${e.c}</span></td></tr>`).join('')}</table>
   <p style="margin-top:14px">Vragen over de berekening of het rapport? Neem contact op: ${esc(o.tel)}.</p></div>
   <!-- gegevens -->
   <div class="pg"><h2>2 Je gegevens</h2><div class="two"><div>
@@ -732,7 +738,7 @@ function rapportHTML(ms,sc,le,nu){
   <!-- life events -->
   <div class="pg"><h2>4 Kun je de hypotheek blijven betalen bij life events?</h2>
   <p>We hebben getoetst of de huidige hypotheekschuld past bij het inkomen dat overblijft als er iets onverwachts gebeurt. Daarbij is uitgegaan van de leennormen en van deze aannames: arbeidsongeschiktheid ${fP(S.le.ao*100,0)} van het bruto inkomen, werkloosheid ${fP(S.le.ww*100,0)} van het (gemaximeerde) loon${S.partner?', bij overlijden het inkomen van de achterblijvende partner plus nabestaandenpensioen en een eventuele ORV-uitkering, bij scheiding één inkomen voor de volledige schuld':''}.</p>
-  <table class="lt"><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th class="r">Ruimte / tekort</th></tr>${le.map(e=>`<tr><td>${esc(e.naam)}${e.note?`<br><small style="color:#666666">${esc(e.note)}</small>`:''}</td><td class="r">${fE(e.max)}</td><td class="r">${fE(e.schuld-e.verm)}</td><td class="r ${e.ok?'ok':'bad'}">${e.ok?'+ ':''}${fE(e.ruimte)}</td></tr>`).join('')}</table>
+  <table class="lt"><tr><th>Situatie</th><th class="r">Max. hypotheek</th><th class="r">Schuld − eigen geld</th><th class="r">Ruimte / tekort</th><th class="r">Cijfer</th></tr>${le.map(e=>`<tr><td>${esc(e.naam)}${e.note?`<br><small style="color:#666666">${esc(e.note)}</small>`:''}</td><td class="r">${fE(e.max)}</td><td class="r">${fE(e.schuld-e.verm)}</td><td class="r ${e.ok?'ok':'bad'}">${e.ok?'+ ':''}${fE(e.ruimte)}</td><td class="r"><span class="scr ${e.c<6?'lo':''}">${e.c}</span></td></tr>`).join('')}</table>
   <div class="box">Een tekort betekent dat de schuld in die situatie hoger is dan volgens de leennormen verantwoord is. Dat leidt niet automatisch tot betalingsproblemen, maar is wel een risico. Een adviseur kan bekijken of een verzekering (zoals een woonlastenverzekering, AOV of overlijdensrisicoverzekering), extra aflossen of sparen dit risico verkleint.</div></div>
   <!-- plannen -->
   <div class="pg"><h2>5 Wat je van plan bent</h2>

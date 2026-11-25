@@ -110,6 +110,57 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 .vink li:before{content:"✓";position:absolute;left:0;top:5px;width:20px;height:20px;border-radius:50%;background:var(--orange);display:grid;place-items:center;font-size:12px;font-weight:900}
 .docl li:before{content:"";position:absolute;left:4px;top:13px;width:10px;height:10px;background:#010101;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
 .ask-y{background:var(--orange-l);border-left:5px solid var(--orange);padding:14px 16px;margin-bottom:16px;font-size:14px}
+
+/* ===== Figma-ontwerp (Blinqx) ===== */
+main.wiz{max-width:1060px;display:grid;grid-template-columns:minmax(0,1fr) 190px;column-gap:36px;align-items:start}
+main.wiz>*{grid-column:1}
+main.wiz>.side{grid-column:2;grid-row:1/span 40;position:sticky;top:16px}
+.side .cbox{background:var(--orange-l);padding:14px 10px;text-align:center;font-size:12px}
+.side .cbox b{display:block;font-size:15px;margin:4px 0 2px}
+.side .cbox svg{width:20px;height:20px}
+.side .help{border:1px solid #e4e4e4;padding:10px;font-size:12px;margin-bottom:10px;background:#fff}
+@media (max-width:860px){main.wiz{grid-template-columns:1fr}main.wiz>.side{grid-column:1;grid-row:auto;position:static;order:99}}
+.step.card{border:0;box-shadow:none;background:transparent}
+.step.card>h2{font-size:36px;font-weight:900;line-height:1.1;border:0;padding:0 0 14px;background:none}
+.step.card>h2 .n,.step .card>h2 .n{display:none}
+.step.card>.body{padding:0}
+.ph{font-size:38px;font-weight:900;line-height:1.1;margin:6px 0 10px;color:#010101}
+.sub2{font-size:17px;margin:0 0 22px}
+.choice{border:2px solid #010101;padding:16px 18px;margin-bottom:16px;background:#fff}
+.choice h3{margin:0 0 8px;font-size:19px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.choice p{margin:0 0 12px;font-size:14px;max-width:560px}
+.choice.off{border-color:#bdbdbd;color:#777}.choice.off .btn{opacity:.45;cursor:not-allowed}
+.tag{background:var(--orange);color:#010101;font-size:11px;font-weight:800;border-radius:20px;padding:2px 8px}
+.cfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.na{font-size:12px;color:#999}
+.q{margin-bottom:26px;max-width:520px}
+.q h3{margin:0 0 4px;font-size:18px}.q p{margin:0 0 10px;font-size:14px}
+.steppers{display:flex;gap:16px}
+.stp{display:flex;align-items:center;border:1.5px solid #010101;width:140px;justify-content:space-between}
+.stp button{border:0;background:none;font-size:20px;width:38px;height:36px;cursor:pointer}
+.stp span{font-weight:700}
+.opts1{display:grid;gap:10px;max-width:300px}
+.yn{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:300px}
+.ob{display:flex;align-items:center;gap:10px;border:1.5px solid #010101;padding:9px 12px;cursor:pointer;font-size:14px;color:#010101;margin:0}
+.ob input{width:16px;height:16px;margin:0;accent-color:#010101}
+.ob:has(input:checked){background:var(--orange-l)}
+.ylist{margin:0 0 22px}
+.ylist h3{font-size:18px;margin:18px 0 8px}
+.ylist .r{display:grid;grid-template-columns:230px 1fr;font-size:13.5px;border-left:4px solid var(--orange);padding:2px 0 2px 8px;margin-bottom:3px}
+.ylist .r.h{font-weight:800;grid-template-columns:1fr}
+.meer summary{cursor:pointer;text-decoration:underline;font-size:13px;list-style:none;margin-top:4px}
+.meer summary::-webkit-details-marker{display:none}
+.meer .mi{background:#fff;border:1.5px solid #010101;padding:10px 12px;margin-top:6px;font-size:13px}
+.meer .mi table td{border:0;padding:2px 4px}
+.afspraak{border:2px solid #010101;padding:14px 16px;margin-top:14px;background:#fff}
+.stepper{gap:3px}.stepper button{min-width:62px;font-size:11.5px;padding:6px 2px 2px}
+footer.bq{background:#010101;color:#fff;text-align:left;padding:40px 20px 24px;margin-top:30px;font-size:13px}
+footer.bq .in{max-width:1060px;margin:0 auto}
+footer.bq h2{color:var(--orange);font-size:34px;margin:0 0 6px;font-weight:900}
+footer.bq .ln{width:30px;height:5px;background:#fff;margin-bottom:18px}
+footer.bq .cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+footer.bq a{color:var(--orange)}
+footer.bq .disc{border-top:1px solid #444;margin-top:24px;padding-top:12px;font-size:12px;color:#bbb}
 </style>
 </head>
 <body>
@@ -125,6 +176,7 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 <div class="mini" id="mini"></div>
 
 <main class="wiz">
+<aside class="side"><div class="help">Hulp nodig bij het invullen? Neem contact met ons op.</div><div class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="#010101" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><b class="o-tel">020 - 758 21 11</b>Maandag t/m vrijdag<br>van 08:30 tot 17:30</div></aside>
 
 <section class="card" id="instellingen" hidden>
   <h2>Rapportinstellingen en normen</h2>
@@ -207,9 +259,64 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
   <div class="ask-y"><b>Vragen?</b> Bel <span class="o-tel">020 - 758 21 11</span> of mail naar <span class="o-mail">hello@blinqx.tech</span>. Wij helpen je graag.</div>
 </section>
 
-<section class="card step" data-step="2" data-title="Over jou">
+<!--KEUZE-->
+<section class="step" data-step="2" data-title="Invoeren" data-key="keuze">
+  <h1 class="ph">Hoe wil je je gegevens invoeren?</h1>
+  <p class="sub2">Maak hieronder een keuze</p>
+  <div class="choice off">
+    <h3>Via Veilig Ophalen <span class="tag">± 5 minuten</span></h3>
+    <p>Gemakkelijk en snel al je gegevens ingevuld met de Veilig Ophalen-app. Je logt in met DigiD en haalt je gegevens op bij Belastingdienst, MijnOverheid, Mijn Pensioenoverzicht, DUO en UWV.</p>
+    <div class="cfoot"><span class="na">Koppeling nog niet actief in deze versie</span><button class="btn btn-k" type="button" disabled>Start met Veilig Ophalen →</button></div>
+  </div>
+  <div class="choice off">
+    <h3>Documenten uploaden <span class="tag">± 10 minuten</span></h3>
+    <p>Upload je loonstrook en pensioenoverzicht. Wij lezen deze uit en jij ontvangt het rapport.</p>
+    <div class="cfoot"><span class="na">Koppeling nog niet actief in deze versie</span><button class="btn btn-k" type="button" disabled>Start met documenten uploaden →</button></div>
+  </div>
+  <div class="choice">
+    <h3>Handmatig invullen <span class="tag">± 20 minuten</span></h3>
+    <p>Houd al je gegevens bij de hand en vul de gevraagde velden zelf in.</p>
+    <div class="cfoot"><span></span><button class="btn btn-k" type="button" data-go-handmatig>Start met handmatig invullen →</button></div>
+  </div>
+</section>
+
+<!--SITUATIE-->
+<section class="step" data-step="3" data-title="Je situatie" data-key="situatie">
+  <h1 class="ph">Je situatie</h1>
+  <p class="sub2">Om te bepalen welke gegevens we nodig hebben, stellen we eerst een paar korte vragen.</p>
+  <div class="q">
+    <h3>Huishouden</h3>
+    <p>Geef hier aan hoeveel volwassenen en hoeveel kinderen in je huis wonen. Heb je volwassen kinderen die thuiswonen? Vul die dan in bij ‘kinderen’.</p>
+    <div class="steppers">
+      <div><label>Volwassenen</label><div class="stp" data-stp="vol"><button type="button" data-d="-1">−</button><span id="q_vol">1</span><button type="button" data-d="1">+</button></div></div>
+      <div><label>Kinderen</label><div class="stp" data-stp="kind"><button type="button" data-d="-1">−</button><span id="q_kind">0</span><button type="button" data-d="1">+</button></div></div>
+    </div>
+    <div class="hint">Bij 2 volwassenen vragen we ook de gegevens van je partner (medeaanvrager).</div>
+  </div>
+  <div class="q">
+    <h3>Soort inkomen</h3>
+    <p>Wat is je situatie op dit moment? Meerdere antwoorden zijn mogelijk.</p>
+    <div class="opts1">
+      <label class="ob"><input type="checkbox" name="q_ink" value="loondienst" checked> Loondienst</label>
+      <label class="ob"><input type="checkbox" name="q_ink" value="ondernemer"> Ondernemer</label>
+      <label class="ob"><input type="checkbox" name="q_ink" value="uitkering"> Uitkering</label>
+      <label class="ob"><input type="checkbox" name="q_ink" value="pensioen"> Pensioen</label>
+    </div>
+  </div>
+  <div class="q"><h3>Studieschuld</h3><p>Heb je op dit moment nog een lopende studieschuld?</p>
+    <div class="yn" data-yn="studie_oud"><label class="ob"><input type="radio" name="yn_studie" value="1"> Ja</label><label class="ob"><input type="radio" name="yn_studie" value="0" checked> Nee</label></div></div>
+  <div class="q"><h3>Kredieten en private lease</h3><p>Heb je een persoonlijke lening, doorlopend krediet of private lease?</p>
+    <div class="yn" data-yn="krediet"><label class="ob"><input type="radio" name="yn_krediet" value="1"> Ja</label><label class="ob"><input type="radio" name="yn_krediet" value="0" checked> Nee</label></div></div>
+  <div class="q"><h3>Partneralimentatie</h3><p>Betaal je op dit moment partneralimentatie?</p>
+    <div class="yn" data-yn="alimentatie"><label class="ob"><input type="radio" name="yn_alim" value="1"> Ja</label><label class="ob"><input type="radio" name="yn_alim" value="0" checked> Nee</label></div></div>
+  <div class="q"><h3>Erfpacht</h3><p>Betaal je op dit moment erfpachtcanon?</p>
+    <div class="yn" data-yn="erfpacht"><label class="ob"><input type="radio" name="yn_erf" value="1"> Ja</label><label class="ob"><input type="radio" name="yn_erf" value="0" checked> Nee</label></div></div>
+</section>
+
+<section class="card step" data-step="4" data-title="Over jou" data-key="over">
   <h2><span class="n">2</span> Over jou en je huidige inkomen</h2>
   <div class="body">
+    <div class="flag" id="inkHint" hidden></div>
     <p class="intro">Vul je gegevens en je huidige bruto jaarinkomen in. Heb je een partner die mee-aanvraagt? Vul dan ook diens gegevens in.</p>
     <div class="sub-h">Aanvrager</div>
     <div class="grid">
@@ -236,7 +343,7 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 2 -->
-<section class="card step" data-step="3" data-title="Pensioen">
+<section class="card step" data-step="5" data-title="Pensioen" data-key="pensioen">
   <h2><span class="n">3</span> Je inkomen op pensioendatum</h2>
   <div class="body">
     <p class="intro">Vanaf de AOW-datum verandert je inkomen. Vul het totale bruto inkomen in dat je dan verwacht: AOW plus aanvullend pensioen. Je vindt dit op <b>mijnpensioenoverzicht.nl</b>.</p>
@@ -253,7 +360,7 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 3 -->
-<section class="card step" data-step="4" data-title="Eigen geld">
+<section class="card step" data-step="6" data-title="Eigen geld">
   <h2><span class="n">4</span> Eigen geld en verplichtingen</h2>
   <div class="body">
     <p class="intro">Hoeveel eigen geld heb je nu beschikbaar om af te lossen? Denk aan spaargeld of beleggingen. Houd zelf rekening met een buffer voor onverwachte uitgaven.</p>
@@ -270,7 +377,7 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 4 -->
-<section class="card step" data-step="5" data-title="Hypotheek">
+<section class="card step" data-step="7" data-title="Hypotheek" data-key="hypotheek">
   <h2><span class="n">5</span> Je hypotheek</h2>
   <div class="body">
     <p class="intro">Neem de gegevens over van je jaaroverzicht. Vul per leningdeel de huidige schuld in.</p>
@@ -287,7 +394,7 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 5 -->
-<section class="card step" data-step="6" data-title="Life events">
+<section class="card step" data-step="8" data-title="Life events">
   <h2><span class="n">6</span> Life events</h2>
   <div class="body">
     <p class="intro">Wat gebeurt er als je inkomen onverwacht daalt? Controleer de aannames; de standaardwaarden zijn een vereenvoudiging.</p>
@@ -309,7 +416,14 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 6 -->
-<section class="step" data-step="7" data-title="Resultaat">
+<!--CONTROLE-->
+<section class="step" data-step="9" data-title="Controle" data-key="controle">
+  <h1 class="ph">Deze gegevens heb je ingevuld</h1>
+  <p class="sub2">Controleer je gegevens. Klopt er iets niet? Ga terug naar de stap en pas het aan.</p>
+  <div id="controle"></div>
+</section>
+
+<section class="step" data-step="10" data-title="Resultaat">
   <div class="card">
     <h2><span class="n">7</span> Resultaat</h2>
     <div class="score-wrap">
@@ -327,10 +441,23 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 </section>
 
 <!-- STAP 7 -->
-<section class="card step" data-step="8" data-title="Wat ga je doen?">
-  <h2><span class="n">8</span> Wat ga je doen?</h2>
+<section class="card step" data-step="11" data-title="Wat ga je doen?" data-key="doen">
+  <h2><span class="n">11</span> Wat ga je nu doen?</h2>
   <div class="body">
+    <div class="card" style="border:2px solid #010101;box-shadow:none"><div class="score-wrap"><div>De betaalbaarheid van je hypotheek scoort een:</div><div class="score-scale" id="scale2"></div><div class="score-txt" id="scoreTxt2"></div>
+      <div class="expl">De score is gebaseerd op de gegevens die je hebt ingevuld en op de wettelijke leennormen. In het rapport krijg je ook tips om de betaalbaarheid te verbeteren.</div></div></div>
+    <h3 style="font-size:20px;margin:18px 0 6px">Wat ga je doen?</h3>
     <div id="plannenBlok"></div>
+    <div class="afspraak" id="afspraak" hidden>
+      <h3 style="margin:0 0 8px">Afspraak voor een toelichting</h3>
+      <div class="grid">
+        <div><label>Voorkeursdag</label><select id="af_dag"><option>maandag</option><option>dinsdag</option><option>woensdag</option><option>donderdag</option><option>vrijdag</option><option>geen voorkeur</option></select></div>
+        <div><label>Dagdeel</label><select id="af_deel"><option>ochtend</option><option>middag</option><option>geen voorkeur</option></select></div>
+        <div><label>Telefoonnummer</label><input id="af_tel" inputmode="tel"></div>
+        <div><label>Opmerking</label><input id="af_opm"></div>
+      </div>
+      <div class="hint">Je voorkeur komt in de brief bij het rapport. Stuur het rapport naar je adviseur of bel <span class="o-tel"></span> om de afspraak te bevestigen; deze tool verstuurt zelf niets.</div>
+    </div>
   </div>
 </section>
 
@@ -341,7 +468,10 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
   <button class="btn btn-o" id="btnRapport" type="button" hidden>Download rapport →</button>
 </div>
 </main>
-<footer>Indicatieve berekening op basis van de ingevulde gegevens en de leennormen 2027 (Tijdelijke regeling hypothecair krediet). Dit is geen hypotheekadvies.</footer>
+<footer class="bq"><div class="in"><h2>Vragen over je hypotheek?</h2><div class="ln"></div>
+<div class="cols"><div>Wil je meer weten over de hypotheekcheck of je rapport bespreken? Neem contact op met je hypotheekadviseur of met ons.</div>
+<div>BLINQX<br>Pesetastraat 46<br>2991 XT Barendrecht<br><a href="mailto:hello@blinqx.tech" class="o-mail">hello@blinqx.tech</a><br>KvK 84045132</div></div>
+<div class="disc">Indicatieve berekening op basis van de ingevulde gegevens en de leennormen 2027 (Tijdelijke regeling hypothecair krediet). Dit is geen hypotheekadvies.</div></div></footer>
 
 <template id="tplDeel">
   <div class="row-card deel">
@@ -651,13 +781,17 @@ function render(){
   <table><thead><tr><th>Moment</th><th class="r">Aftrektarief</th><th class="r">Bruto p/m</th><th class="r">Netto p/m</th></tr></thead><tbody>${rows.map(([t,d,l])=>`<tr><td>${esc(t)}<div class="hint">${fD(d)}</div></td><td class="r">${l.tarief?fP(l.tarief*100,2):'–'}</td><td class="r">${fE(l.bruto)}</td><td class="r">${fE(l.netto)}</td></tr>`).join('')}</tbody></table><div class="hint">Na einde rentevast gerekend met ${fP(S.le.rente,2)} marktrente. Netto = bruto − renteaftrek na bijtelling eigenwoningforfait. Aftrektarief per inkomen (2027): ${fP(S.t1N*100,2)} in de 1e schijf (AOW: ${fP(S.t1A*100,2)}), ${fP(S.hraT*100,2)} boven ${fE(S.t1Grens)}; aftrek toegerekend aan de partner met het hoogste inkomen.</div>`;
   window.__laatste={ms,sc,le,nu};
   if(typeof miniScore==='function')miniScore();
+  if(typeof figRender==='function')figRender();
 }
 function momHTML(m){
   const ok=m.ruimte>=0;const krap=ok&&m.pct<0.10;
   const tot=Math.max(m.max+m.verm,m.schuld)||1;
   return `<div class="mom"><div class="ic ${ok?(krap?'w':'ok'):'bad'}">${ok?'✓':'!'}</div>
   <div><div class="t1">${fD(m.d)}</div><div class="t2 ${ok?'':'bad'}">${esc(m.txt)}</div>
-  <div class="hint">Schuld ${fE(m.schuld)}${m.verm?` · eigen geld ${fE(m.verm)}`:''} · max. hypotheek ${fE(m.max)} · toetsrente ${fP(m.rente,2)} · woonquote ${fP(m.wq,1)}${m.blend?' · pensioenmenging':''}${m.extra?` · incl. extra ${fE(m.extra)} (alleenstaande/energielabel)`:''}</div></div>
+  <div class="hint">Schuld ${fE(m.schuld)}${m.verm?` · eigen geld ${fE(m.verm)}`:''} · max. hypotheek ${fE(m.max)} · toetsrente ${fP(m.rente,2)} · woonquote ${fP(m.wq,1)}${m.blend?' · pensioenmenging':''}${m.extra?` · incl. extra ${fE(m.extra)} (alleenstaande/energielabel)`:''}</div><details class="meer"><summary>Meer informatie</summary><div class="mi">${UITLEG[m.type]}<table>
+    <tr><td>Hypotheekschuld</td><td class="r">- ${fE(m.schuld)}</td></tr><tr><td>Vermogen om af te lossen</td><td class="r">+ ${fE(m.verm)}</td></tr>
+    <tr><td>Maximale hypotheek volgens de leennormen</td><td class="r">+ ${fE(m.max)}</td></tr><tr><td><b>${ok?'Ruimte':'Overschrijding'}</b></td><td class="r"><b style="color:${ok?'var(--ok)':'var(--bad)'}">${ok?'':'- '}${fE(Math.abs(m.ruimte))}</b></td></tr></table>
+    <div class="hint">Getoetst met ${fP(m.rente,2)} toetsrente en een woonquote van ${fP(m.wq,1)}. Er is rekening gehouden met de ingevulde financiële verplichtingen.</div></div></details></div>
   <div class="amt">${badge(cijferPct(m.pct))}<br>${ok?'Leenruimte':'Overschrijding'}<br><b style="color:${ok?'var(--ok)':'var(--bad)'}">${fE(Math.abs(m.ruimte))}</b></div>
   <div class="bar"><i style="width:${Math.min(100,(m.max+m.verm)/tot*100)}%;background:var(--navy)"></i><i style="width:${Math.min(100,m.schuld/tot*100)}%;background:${ok?'var(--orange)':'var(--bad)'};height:4px;top:3px"></i></div></div>`;
 }
@@ -725,7 +859,7 @@ function voorbeeld(){
 }
 function togglePartner(){const on=$('#p_actief').checked;$('#partnerBlok').hidden=!on;$$('.pp').forEach(e=>e.style.display=on?'':'none');}
 $('#p_actief').addEventListener('change',togglePartner);
-$('#btnVoorbeeld').onclick=voorbeeld;
+$('#btnVoorbeeld').onclick=()=>{voorbeeld();syncSituatie();};
 
 let tmr;document.addEventListener('input',()=>{clearTimeout(tmr);tmr=setTimeout(render,180);});
 document.addEventListener('change',()=>{clearTimeout(tmr);tmr=setTimeout(render,50);});
@@ -783,6 +917,7 @@ function rapportHTML(ms,sc,le,nu){
   <p>${esc(k.aanhef||'Beste '+namen+',')}</p>
   <p>Fijn dat je de hypotheekcheck hebt gedaan. Bij deze brief ontvang je het rapport ‘Je hypotheek nu en later’. Het geeft inzicht in de betaalbaarheid van je hypotheek nu en op belangrijke momenten in de toekomst, en in wat er gebeurt bij life events zoals arbeidsongeschiktheid, werkloosheid${S.partner?', overlijden of scheiding':''}. Het rapport is gebaseerd op de gegevens die je zelf hebt ingevuld.</p>
   <p><b>Kunnen we je verder helpen?</b><br>Dit rapport is geen hypotheekadvies. Wil je de betaalbaarheid verbeteren of heb je vragen over je situatie? Bespreek het rapport dan met een hypotheekadviseur.${S.plannen.length?` In de hypotheekcheck gaf je aan dat je van plan bent om:</p><ul>${PLANNEN.filter(p=>S.plannen.includes(p.id)).map(p=>`<li>${esc(p.l.replace(/^Ik /,'').replace(/:$/,''))}${p.id==='anders'?' '+esc(S.plannenTxt.anders):''}${p.id==='niets'?' '+esc(S.plannenTxt.niets):''}</li>`).join('')}</ul><p>`:''}</p>
+  ${afspraakTekst()?`<p><b>Toelichting</b><br>${afspraakTekst()}</p>`:''}
   <p><b>Vragen?</b><br>Bel ${esc(o.tel)} of mail naar ${esc(o.mail)}.</p><br>
   <p>Met vriendelijke groet,<br><br><br>${esc(o.afz)}<br>${esc(o.fun)}<br>${esc(o.naam)}</p></div>
   <!-- cover -->
@@ -836,12 +971,13 @@ function rapportHTML(ms,sc,le,nu){
 function maandDeel(p){const n=Math.max(1,mdiff(S.peil,p.eind)),i=p.rente/100/12;if(p.vorm==='af')return p.bedrag*i;if(p.vorm==='lin')return p.bedrag/n+p.bedrag*i;return i===0?p.bedrag/n:p.bedrag*i/(1-Math.pow(1+i,-n));}
 
 /* ---------- stappenplan ---------- */
-let stap=1;const STAPPEN=$$('.step');const N=STAPPEN.length;
+let stap=1;const STAPPEN=$$('.step').sort((a,b)=>a.dataset.step-b.dataset.step);const N=STAPPEN.length;
 function valideer(n){
   const fout=[];const req=(id,ok)=>{const el=$('#'+id);el.classList.toggle('err',!ok);if(!ok)fout.push(el);};
-  if(n===2){req('a_geb',!!$('#a_geb').value);req('a_ink',pE($('#a_ink').value)>0);if($('#p_actief').checked)req('p_geb',!!$('#p_geb').value);}
-  if(n===3){req('a_pens',pE($('#a_pens').value)>0);}
-  if(n===5){const ok=$$('#delenLijst .deel').some(c=>pE(c.querySelector('[data-k="bedrag"]').value)>0&&c.querySelector('[data-k="eind"]').value);
+  const key=(STAPPEN.find(x=>+x.dataset.step===n)||{dataset:{}}).dataset.key;
+  if(key==='over'){req('a_geb',!!$('#a_geb').value);req('a_ink',pE($('#a_ink').value)>0);if($('#p_actief').checked)req('p_geb',!!$('#p_geb').value);}
+  if(key==='pensioen'){req('a_pens',pE($('#a_pens').value)>0);}
+  if(key==='hypotheek'){const ok=$$('#delenLijst .deel').some(c=>pE(c.querySelector('[data-k="bedrag"]').value)>0&&c.querySelector('[data-k="eind"]').value);
     if(!ok){alert('Vul minimaal één leningdeel in met schuld en einddatum.');return false;}}
   if(fout.length){fout[0].focus();return false;}
   return true;
@@ -853,7 +989,8 @@ function toon(n){
   $('#btnPrev').style.visibility=stap===1?'hidden':'visible';
   $('#btnNext').hidden=stap===N;$('#btnRapport').hidden=stap!==N;
   $('#btnNext').textContent=stap===1?'Start de hypotheekcheck →':stap===N-2?'Bekijk resultaat →':'Volgende →';
-  $('#mini').style.display=stap===1?'none':'';
+  $('#mini').style.display=stap<4?'none':'';
+  if(stap===N)afspraakToggle();
   $('#navInfo').textContent=`Stap ${stap} van ${N}`;
   render();window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -866,9 +1003,53 @@ $$('.o-tel').forEach(e=>e.textContent=$('#o_tel').value);$$('.o-mail').forEach(e
 document.addEventListener('input',e=>{if(e.target.id==='o_tel')$$('.o-tel').forEach(x=>x.textContent=e.target.value);if(e.target.id==='o_mail')$$('.o-mail').forEach(x=>x.textContent=e.target.value);});
 $('#btnInst').onclick=()=>{const p=$('#instellingen');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({behavior:'smooth'});};
 function miniScore(){const sc=window.__laatste&&window.__laatste.sc;
-  $('#mini').innerHTML=stap>1&&stap<7&&sc&&sc.c?`Voorlopig hypotheekcijfer: <b>${sc.c}</b> <span>(wordt bijgewerkt terwijl je invult)</span>`:'';}
+  $('#mini').innerHTML=stap>3&&stap<10&&sc&&sc.c?`Voorlopig hypotheekcijfer: <b>${sc.c}</b> <span>(wordt bijgewerkt terwijl je invult)</span>`:'';}
 
-voorbeeld();toon(1);
+/* ---------- Figma-flow: keuze, situatie, controle, afspraak ---------- */
+$$('[data-go-handmatig]').forEach(b=>b.onclick=()=>toon(3));
+const Q={vol:1,kind:0};
+function zetVol(n){Q.vol=Math.max(1,Math.min(2,n));$('#q_vol').textContent=Q.vol;const on=Q.vol>=2;if($('#p_actief').checked!==on){$('#p_actief').checked=on;togglePartner();}render();}
+$$('.stp').forEach(st=>st.addEventListener('click',e=>{const b=e.target.closest('[data-d]');if(!b)return;const d=+b.dataset.d;
+  if(st.dataset.stp==='vol')zetVol(Q.vol+d);else{Q.kind=Math.max(0,Math.min(9,Q.kind+d));$('#q_kind').textContent=Q.kind;}}));
+$('#p_actief').addEventListener('change',()=>{Q.vol=$('#p_actief').checked?2:1;$('#q_vol').textContent=Q.vol;});
+const YN_SOORT={studie_oud:['studie_oud','studie_nieuw'],krediet:['krediet','lease'],alimentatie:['alimentatie'],erfpacht:['erfpacht']};
+function rijenVan(t){return $$('#verplLijst .verpl').filter(r=>YN_SOORT[t].includes(r.querySelector('[data-k="soort"]').value));}
+$$('.yn').forEach(g=>g.addEventListener('change',()=>{const t=g.dataset.yn;const ja=g.querySelector('input:checked').value==='1';const rijen=rijenVan(t);
+  if(ja&&!rijen.length){addRow('#tplVerpl','#verplLijst',{soort:t});const s=$$('#verplLijst .verpl').pop().querySelector('[data-k="soort"]');s.dispatchEvent(new Event('change'));}
+  if(!ja)rijen.forEach(r=>r.remove());render();}));
+function syncSituatie(){
+  for(const t of Object.keys(YN_SOORT)){const g=$(`.yn[data-yn="${t}"]`);const ja=rijenVan(t).length>0;g.querySelector(`input[value="${ja?1:0}"]`).checked=true;}
+  Q.vol=$('#p_actief').checked?2:1;$('#q_vol').textContent=Q.vol;
+}
+function inkSoorten(){return $$('input[name="q_ink"]:checked').map(c=>c.value);}
+function inkHint(){const s=inkSoorten();const t=[];
+  if(s.includes('ondernemer'))t.push('Ondernemer: vul als bruto jaarinkomen het gemiddelde belastbare inkomen uit je laatste drie aangiftes inkomstenbelasting in.');
+  if(s.includes('uitkering'))t.push('Uitkering: vul het bruto jaarbedrag van je uitkering in. Een tijdelijke uitkering (zoals WW) telt bij geldverstrekkers vaak niet of beperkt mee.');
+  if(s.includes('pensioen'))t.push('Pensioen: heb je de AOW-leeftijd al bereikt? Vul dan je AOW en pensioen in als huidig inkomen én als inkomen op pensioendatum.');
+  const el=$('#inkHint');if(el){el.hidden=!t.length;el.innerHTML=t.join('<br>');}}
+document.addEventListener('change',e=>{if(e.target.name==='q_ink')inkHint();if(e.target.closest&&e.target.closest('#plannenBlok'))afspraakToggle();});
+function afspraakToggle(){const on=!!$('#plannenBlok input[value="toelichting"]:checked');$('#afspraak').hidden=!on;$('#btnRapport').textContent=on?'Plan afspraak en download rapport →':'Download rapport →';}
+const rijY=(l,v)=>`<div class="r"><span>${l}</span><span>${v}</span></div>`;
+function controleHTML(){
+  const vl={krediet:'Krediet',studie_oud:'Studieschuld (oud stelsel)',studie_nieuw:'Studieschuld (SF35)',alimentatie:'Partneralimentatie p/m',erfpacht:'Erfpachtcanon p/j',lease:'Private lease p/m',overig:'Overige maandlast'};
+  const vorm={af:'Aflossingsvrij',ann:'Annuïtair',lin:'Lineair'};
+  let h='<div class="ylist"><h3>Persoonlijk</h3>';
+  for(const [,p] of personen())h+=`<div class="r h">${esc(p.naam)}</div>`+rijY('Geboortedatum',fD(p.geb))+rijY('AOW-datum',fD(p.aow))+rijY('Bruto jaarinkomen',fE(p.ink))+rijY('Bruto AOW en pensioen per jaar',fE(p.pens));
+  h+=rijY('Huishouden',`${Q.vol} volwassene${Q.vol>1?'n':''}, ${Q.kind} kind${Q.kind===1?'':'eren'}`)+rijY('Soort inkomen',inkSoorten().join(', ')||'-');
+  h+='<h3>Vermogen en verplichtingen</h3>'+rijY('Eigen geld',fE(S.eigen))+(S.kapitaal?rijY('Verwacht kapitaal',fE(S.kapitaal)+' per '+fDk(S.kapDatum)):'');
+  h+=S.verpl.map(v=>rijY(vl[v.soort],fE(v.bedrag)+(v.eind?' t/m '+fDk(v.eind):''))).join('')||rijY('Financiële verplichtingen','geen');
+  h+='<h3>Hypotheekoverzicht</h3>'+rijY('Waarde huis',fE(S.woning))+(S.hypnr?rijY('Contractnummer',esc(S.hypnr)):'')+rijY('Totale schuld',fE(schuld(S.peil)));
+  for(const p of S.delen)h+=`<div class="r h">${esc(p.naam||'Leningdeel')}</div>`+rijY('Schuld',fE(p.bedrag))+rijY('Aflosvorm',vorm[p.vorm])+rijY('Rente',fP(p.rente,2))+rijY('Einddatum rentevaste periode',fDk(p.rvp))+rijY('Einddatum leningdeel',fDk(p.eind))+rijY('Einddatum hypotheekrenteaftrek',fDk(p.hra));
+  return h+'</div>';
+}
+function figRender(){
+  const c=$('#controle');if(c&&S.A)c.innerHTML=controleHTML();
+  const s1=$('#scale'),s2=$('#scale2');if(s1&&s2){s2.innerHTML=s1.innerHTML;$('#scoreTxt2').textContent=$('#scoreTxt').textContent;}
+}
+function afspraakTekst(){if(!$('#plannenBlok input[value="toelichting"]:checked'))return '';
+  const v=id=>$('#'+id).value.trim();return `Je wilt een toelichting op het rapport. Voorkeur: ${v('af_dag')}, ${v('af_deel')}${v('af_tel')?`, telefoon ${esc(v('af_tel'))}`:''}${v('af_opm')?`. Opmerking: ${esc(v('af_opm'))}`:''}.`;}
+
+voorbeeld();syncSituatie();inkHint();toon(1);
 })();
 </script>
 </body>

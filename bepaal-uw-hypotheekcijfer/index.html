@@ -1471,11 +1471,33 @@ function rapportHTML(ms,sc,le,nu){
   .opt{border-left:2mm solid #FFD31C;background:#fafafa;padding:3mm 4mm;font-size:9pt}.opt b{font-size:10pt}.opt p{margin:1mm 0 0}
   .contact{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;margin-top:2mm}.contact>div{background:#FFD31C;padding:4mm 5mm}.contact span{font-weight:800}.contact p{margin:1mm 0 0}
   .disc{font-size:7.8pt;color:#777;margin-top:6mm;line-height:1.45}
-  .tools{position:fixed;top:10px;right:10px;z-index:5}.tools button{background:#FFD31C;color:#010101;border:2px solid #010101;padding:9px 14px;font-weight:700;cursor:pointer}
+  .tools{position:fixed;top:10px;right:10px;z-index:5;display:flex;gap:8px;align-items:center}.tools .sec{background:#fff!important}.tools button[disabled]{opacity:.6;cursor:wait}#pdfMsg{background:#fff;padding:4px 8px;font-size:12px}#pdfMsg:empty{display:none}.tools button{background:#FFD31C;color:#010101;border:2px solid #010101;padding:9px 14px;font-weight:700;cursor:pointer}
   </style></head><body>
-  <div class="tools"><button onclick="window.print()">Afdrukken / opslaan als PDF</button></div>
+  <div class="tools"><button id="pdfBtn" type="button">Download als PDF</button><button type="button" class="sec" onclick="window.print()">Afdrukken</button><span id="pdfMsg"></span></div>
   ${brief}${cover}${pToc}${p1}${pM}${pChart}${pLE}${pG}${pP}${pW}
-  <script>setTimeout(function(){try{window.focus();window.print();}catch(e){}},500);<\/script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"><\/script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"><\/script>
+  <script>
+  (function(){
+    var btn=document.getElementById('pdfBtn'),msg=document.getElementById('pdfMsg');
+    var naam=${JSON.stringify('Je hypotheekcijfer nu en later - '+namen+'.pdf')};
+    btn.addEventListener('click',async function(){
+      if(!window.htmlToImage||!window.jspdf){msg.textContent='PDF-module niet geladen. Gebruik Afdrukken > Opslaan als PDF.';return;}
+      btn.disabled=true;var pgs=[].slice.call(document.querySelectorAll('.pg'));
+      try{
+        var pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait',compress:true});
+        for(var i=0;i<pgs.length;i++){
+          msg.textContent='PDF maken… pagina '+(i+1)+' van '+pgs.length;
+          var img=await window.htmlToImage.toJpeg(pgs[i],{pixelRatio:2,quality:0.88,style:{margin:'0',boxShadow:'none'}});
+          if(i>0)pdf.addPage('a4','portrait');
+          pdf.addImage(img,'JPEG',0,0,210,297,undefined,'FAST');
+        }
+        pdf.save(naam);msg.textContent='PDF gedownload.';
+      }catch(e){msg.textContent='Downloaden lukte niet. Gebruik Afdrukken > Opslaan als PDF.';}
+      btn.disabled=false;
+    });
+  })();
+  <\/script>
   </body></html>`;
 }
 function maandDeel(p){const n=Math.max(1,mdiff(S.peil,p.eind)),i=p.rente/100/12;if(p.vorm==='af')return p.bedrag*i;if(p.vorm==='lin')return p.bedrag/n+p.bedrag*i;return i===0?p.bedrag/n:p.bedrag*i/(1-Math.pow(1+i,-n));}

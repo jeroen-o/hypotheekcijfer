@@ -1045,7 +1045,7 @@ function rapportHTML(ms,sc,le,nu){
     return `<div class="mb"><div class="mt"><h3>${fD(m.d)} <span class="scr ${cijferPct(m.pct)<6?'lo':''}">cijfer ${cijferPct(m.pct)}</span></h3><div class="sub">${esc(m.txt)}</div><p>${UITLEG[m.type]} ${ok?`Volgens de huidige leennormen is de hypotheekschuld dan <b>niet te hoog</b>; de leenruimte is ${fE(m.ruimte)}.`:`Volgens de huidige leennormen is de hypotheekschuld dan <b>te hoog</b>: de overschrijding is ${fE(-m.ruimte)}.`}</p>
     <table class="kv">${rij('Maximale hypotheek',fE(m.max))}${m.verm?rij('Eigen geld om af te lossen',fE(m.verm)):''}${rij('Hypotheekschuld',fE(m.schuld))}${rij(ok?'Ruimte':'Overschrijding',`<b style="color:${ok?'#1f8a4c':'#E5486B'}">${fE(Math.abs(m.ruimte))}</b>`)}${rij('Toetsrente / woonquote',`${fP(m.rente,2)} / ${fP(m.wq,1)}`)}</table></div>
     <div class="bars"><div class="col"><div class="stk" style="height:${hMax}px;background:#334659"></div><span>Max.</span></div><div class="col"><div class="stk" style="height:${hO}px;background:#E5486B"></div><div class="stk" style="height:${hS}px;background:#65E6D4"></div><span>Schuld</span></div></div></div>`;};
-  return `<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>Uw hypotheek nu en later – ${esc(namen)}</title><style>
+  return `<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>Uw hypotheekcijfer nu en later – ${esc(namen)}</title><style>
   @page{size:A4;margin:16mm 15mm}
   body{font-family:Poppins,"Segoe UI",Roboto,Arial,sans-serif;color:#334659;font-size:12.5px;line-height:1.5;margin:0}
   .pg{page-break-after:always;padding:6mm 2mm;min-height:250mm;position:relative}
@@ -1074,15 +1074,15 @@ function rapportHTML(ms,sc,le,nu){
   <!-- brief -->
   <div class="pg"><div class="logo"><span class="hc">${hcLogo(o.naam)}</span></div><br><br>
   <div>${esc(namen)}<br>${esc(k.adres)}<br>${esc(k.pc)}</div><br>
-  <table class="kv" style="width:60%"><tr><td>Datum</td><td style="text-align:left">${vandaag}</td></tr>${S.hypnr?`<tr><td>Hypotheeknummer</td><td style="text-align:left">${esc(S.hypnr)}</td></tr>`:''}<tr><td>Onderwerp</td><td style="text-align:left">Uw hypotheek scoort een ${sc.c??'-'}</td></tr><tr><td>Bijlage</td><td style="text-align:left">Rapport ‘Uw hypotheek nu en later’</td></tr></table><br>
+  <table class="kv" style="width:60%"><tr><td>Datum</td><td style="text-align:left">${vandaag}</td></tr>${S.hypnr?`<tr><td>Hypotheeknummer</td><td style="text-align:left">${esc(S.hypnr)}</td></tr>`:''}<tr><td>Onderwerp</td><td style="text-align:left">Uw hypotheek scoort een ${sc.c??'-'}</td></tr><tr><td>Bijlage</td><td style="text-align:left">Rapport ‘Uw hypotheekcijfer nu en later’</td></tr></table><br>
   <p>${esc(k.aanhef||'Beste '+namen+',')}</p>
-  <p>Fijn dat u de hypotheekcheck heeft gedaan. Bij deze brief ontvangt u het rapport ‘Uw hypotheek nu en later’. Het geeft inzicht in de betaalbaarheid van uw hypotheek nu en op belangrijke momenten in de toekomst, en in wat er gebeurt bij life events zoals arbeidsongeschiktheid, werkloosheid${S.partner?', overlijden of scheiding':''}. Het rapport is gebaseerd op de gegevens die u zelf heeft ingevuld.</p>
+  <p>Fijn dat u de hypotheekcheck heeft gedaan. Bij deze brief ontvangt u het rapport ‘Uw hypotheekcijfer nu en later’. Het geeft inzicht in de betaalbaarheid van uw hypotheek nu en op belangrijke momenten in de toekomst, en in wat er gebeurt bij life events zoals arbeidsongeschiktheid, werkloosheid${S.partner?', overlijden of scheiding':''}. Het rapport is gebaseerd op de gegevens die u zelf heeft ingevuld.</p>
   <p><b>Kunnen we u verder helpen?</b><br>Dit rapport is geen hypotheekadvies. Wilt u de betaalbaarheid verbeteren of heeft u vragen over uw situatie? Bespreek het rapport dan met een hypotheekadviseur.${S.plannen.length?` In de hypotheekcheck gaf u aan dat u van plan bent om:</p><ul>${PLANNEN.filter(p=>S.plannen.includes(p.id)).map(p=>`<li>${esc(p.l.replace(/^Ik /,'').replace(/:$/,''))}${p.id==='anders'?' '+esc(S.plannenTxt.anders):''}${p.id==='niets'?' '+esc(S.plannenTxt.niets):''}</li>`).join('')}</ul><p>`:''}</p>
   ${afspraakTekst()?`<p><b>Toelichting</b><br>${afspraakTekst()}</p>`:''}
   <p><b>Vragen?</b><br>Bel ${esc(o.tel)} of mail naar ${esc(o.mail)}.</p><br>
   <p>Met vriendelijke groet,<br><br><br>${esc(o.afz)}<br>${esc(o.fun)}<br>${esc(o.naam)}</p></div>
   <!-- cover -->
-  <div class="pg" style="padding:0"><div class="cover"><div class="o"><span class="hc">${hcLogo(o.naam)}</span></div><h1>Uw hypotheek<br>nu en later</h1><div>${esc(namen)} · ${vandaag}</div><div style="margin-top:10px;opacity:.8">${esc(o.web)}</div></div></div>
+  <div class="pg" style="padding:0"><div class="cover"><div class="o"><span class="hc">${hcLogo(o.naam)}</span></div><h1>Uw hypotheekcijfer<br>nu en later</h1><div>${esc(namen)} · ${vandaag}</div><div style="margin-top:10px;opacity:.8">${esc(o.web)}</div></div></div>
   <!-- samenvatting -->
   <div class="pg"><h2>1 Samenvatting</h2>
   <p>De betaalbaarheid van uw hypotheek scoort een: <b style="font-size:20px;background:#65E6D4;padding:0 8px;border-radius:50%">${sc.c??'-'}</b></p>

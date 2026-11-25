@@ -27,12 +27,12 @@ main{padding:20px 16px;max-width:980px;margin:0 auto}
 .step{display:none}.step.act{display:block}
 .card>h2 .n{background:var(--orange);color:#010101;border-radius:50%;width:26px;height:26px;display:inline-grid;place-items:center;font-size:14px;margin-right:6px}
 .intro{margin:0 0 12px;font-size:15px}
-.stepper{display:flex;gap:4px;max-width:980px;margin:18px auto 0;padding:0 16px;overflow-x:auto}
+.stepper{display:flex;gap:4px;max-width:1060px;margin:18px auto 0;padding:0 16px;overflow-x:auto}
 .stepper button{flex:1;min-width:92px;background:#fff;border:0;border-top:5px solid #e4e4e4;padding:8px 4px 4px;text-align:left;font:inherit;font-size:12.5px;color:#666;cursor:pointer}
 .stepper button b{display:block;font-size:11px;color:#999}
 .stepper button.done{border-top-color:#010101;color:#010101}
 .stepper button.act{border-top-color:var(--orange);color:#010101;font-weight:700}
-.mini{max-width:980px;margin:8px auto 0;padding:0 16px;font-size:13px;color:#666}
+.mini{max-width:1060px;margin:8px auto 0;padding:0 16px;font-size:13px;color:#666}
 .mini b{background:var(--orange);color:#010101;border-radius:50%;display:inline-grid;place-items:center;width:24px;height:24px;margin:0 4px}
 .nav{display:flex;align-items:center;gap:10px;margin:6px 0 20px}
 .nav .navinfo{flex:1;text-align:center;font-size:13px;color:#666}
@@ -115,14 +115,7 @@ footer{text-align:center;background:#010101;color:#fff;font-size:12px;padding:22
 .ask-y{background:var(--orange-l);border-left:5px solid var(--orange);padding:14px 16px;margin-bottom:16px;font-size:14px}
 
 /* ===== Figma-ontwerp (Blinqx) ===== */
-main.wiz{max-width:1060px;display:grid;grid-template-columns:minmax(0,1fr) 190px;column-gap:36px;align-items:start}
-main.wiz>*{grid-column:1}
-main.wiz>.side{grid-column:2;grid-row:1/span 40;position:sticky;top:16px}
-.side .cbox{background:var(--orange-l);padding:14px 10px;text-align:center;font-size:12px}
-.side .cbox b{display:block;font-size:15px;margin:4px 0 2px}
-.side .cbox svg{width:20px;height:20px}
-.side .help{border:1px solid #e4e4e4;padding:10px;font-size:12px;margin-bottom:10px;background:#fff}
-@media (max-width:860px){main.wiz{grid-template-columns:1fr}main.wiz>.side{grid-column:1;grid-row:auto;position:static;order:99}}
+main.wiz{max-width:1060px}
 .step.card{border:0;box-shadow:none;background:transparent}
 .step.card>h2{font-size:36px;font-weight:900;line-height:1.1;border:0;padding:0 0 14px;background:none}
 .step.card>h2 .n,.step .card>h2 .n{display:none}
@@ -206,7 +199,7 @@ a[href*="mijnpensioenoverzicht"],a[href*="mijn.uwv.nl"]{color:inherit;text-decor
 <div class="mini" id="mini"></div>
 
 <main class="wiz">
-<aside class="side"><div class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="#010101" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><b>Vragen?</b>Neem contact op met je adviseur</div></aside>
+
 
 <section class="card" id="instellingen" hidden>
   <h2>Rapportinstellingen en normen</h2>

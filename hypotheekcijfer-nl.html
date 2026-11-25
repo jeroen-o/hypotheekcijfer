@@ -221,6 +221,13 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
 #plannenBlok .chk>input{margin:2px 0 0;width:16px;height:16px}
 #plannenBlok .chk span input{display:block;margin-top:8px;width:100%;max-width:440px}
 .nav{margin-top:18px}
+
+/* verplichtingen: soort krijgt de meeste ruimte */
+.grid.gv{grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)!important}
+@media (max-width:760px){.grid.gv{grid-template-columns:repeat(2,minmax(0,1fr))!important}.grid.gv>div:first-child{grid-column:1/-1}}
+@media (max-width:480px){.grid.gv{grid-template-columns:1fr!important}}
+select{text-overflow:ellipsis;padding-right:30px}
+.lnk{background:none;border:0;padding:0;font:inherit;text-decoration:underline;cursor:pointer;color:inherit;font-weight:700}
 </style>
 </head>
 <body>
@@ -286,6 +293,7 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
     <div class="hero-btns">
       <button class="btn btn-o" type="button" data-start="code">Bereken met code</button>
       <button class="btn btn-n" type="button" data-start="zonder">Bereken zonder code</button>
+      <button class="btn btn-l" type="button" data-voorbeeldrapport>Bekijk een voorbeeldrapport</button>
     </div>
     <div class="codebox card" id="codebox" hidden>
       <h2>Persoonlijke code</h2>
@@ -608,14 +616,14 @@ footer.site .disc{color:#9fb0c0;font-size:12px;margin-top:34px;border-top:1px so
 <template id="tplVerpl">
   <div class="row-card verpl">
     <button type="button" class="del" title="Verwijderen">×</button>
-    <div class="grid">
+    <div class="grid gv">
       <div><label>Soort</label><select data-k="soort">
-        <option value="krediet">Krediet (doorlopend of aflopend)</option>
-        <option value="studie_oud">Studieschuld – oud stelsel (vóór 1-9-2015)</option>
-        <option value="studie_nieuw">Studieschuld – SF35 (vanaf 1-9-2015)</option>
-        <option value="alimentatie">Partneralimentatie (per maand)</option>
-        <option value="erfpacht">Erfpachtcanon (per jaar)</option>
-        <option value="lease">Private lease (per maand)</option>
+        <option value="krediet">Krediet (lening of doorlopend)</option>
+        <option value="studie_oud">Studieschuld (vóór 2015)</option>
+        <option value="studie_nieuw">Studieschuld SF35 (na 2015)</option>
+        <option value="alimentatie">Partneralimentatie, per maand</option>
+        <option value="erfpacht">Erfpachtcanon, per jaar</option>
+        <option value="lease">Private lease, per maand</option>
         <option value="overig">Overige maandlast</option>
       </select></div>
       <div><label data-lbl>Bedrag</label><input class="eur" data-k="bedrag" inputmode="numeric"></div>
@@ -986,12 +994,43 @@ let tmr;document.addEventListener('input',()=>{clearTimeout(tmr);tmr=setTimeout(
 document.addEventListener('change',()=>{clearTimeout(tmr);tmr=setTimeout(render,50);});
 
 /* ---------- rapport (via window.open i.v.m. iframe/Google Sites) ---------- */
-$('#btnRapport').onclick=()=>{
+const TXT_ONTBREEKT='Vul eerst de volgende gegevens in om uw rapport te maken:';
+function openRapport(){
   render();const {ms,sc,le,nu}=window.__laatste;
   const w=window.open('','_blank');
-  if(!w){alert('Pop-up geblokkeerd. Sta pop-ups toe om het rapport te openen.');return;}
-  w.document.open();w.document.write(rapportHTML(ms,sc,le,nu));w.document.close();
+  if(!w){alert('Pop-up geblokkeerd. Sta pop-ups toe om het rapport te openen.');return false;}
+  w.document.open();w.document.write(rapportHTML(ms,sc,le,nu));w.document.close();return true;
+}
+function ontbreekt(){
+  const m=[];const st=k=>+(STAPPEN.find(x=>x.dataset.key===k)||{dataset:{step:1}}).dataset.step;
+  if(!$('#a_geb').value)m.push(['geboortedatum',st('over')]);
+  if(!(pE($('#a_ink').value)>0))m.push(['huidig bruto jaarinkomen',st('over')]);
+  if(!(pE($('#a_pens').value)>0))m.push(['inkomen op pensioendatum',st('pensioen')]);
+  if(!$$('#delenLijst .deel').some(c=>pE(c.querySelector('[data-k="bedrag"]').value)>0&&c.querySelector('[data-k="eind"]').value))m.push(['minimaal één leningdeel met schuld en einddatum',st('hypotheek')]);
+  return m;
+}
+$('#btnRapport').onclick=()=>{
+  const m=ontbreekt();
+  if(m.length){alert(TXT_ONTBREEKT+'\n\n- '+m.map(x=>x[0]).join('\n- '));toon(m[0][1]);return;}
+  openRapport();
 };
+/* voorbeeldrapport zonder het eigen dossier te overschrijven */
+function snapshot(){
+  const vals={};$$('input[id],select[id],textarea[id]').forEach(e=>{vals[e.id]=(e.type==='checkbox'||e.type==='radio')?e.checked:e.value;});
+  const vinkjes=$$('input[type=radio]:not([id]),input[type=checkbox]:not([id])').map(e=>e.checked);
+  const rijen=sel=>$$(sel).map(r=>Object.fromEntries($$('[data-k]',r).map(el=>[el.dataset.k,el.classList.contains('eur')?pE(el.value):el.value])));
+  return{vals,vinkjes,delen:rijen('#delenLijst .deel'),verpl:rijen('#verplLijst .verpl'),q:{...Q}};
+}
+function herstel(sn){
+  $('#delenLijst').innerHTML='';$('#verplLijst').innerHTML='';
+  sn.delen.forEach(d=>addRow('#tplDeel','#delenLijst',d));sn.verpl.forEach(d=>addRow('#tplVerpl','#verplLijst',d));
+  $$('#verplLijst [data-k="soort"]').forEach(s=>s.dispatchEvent(new Event('change')));
+  for(const [id,v] of Object.entries(sn.vals)){const e=document.getElementById(id);if(!e)continue;if(e.type==='checkbox'||e.type==='radio')e.checked=v;else e.value=v;}
+  $$('input[type=radio]:not([id]),input[type=checkbox]:not([id])').forEach((e,i)=>{if(i<sn.vinkjes.length)e.checked=sn.vinkjes[i];});
+  Object.assign(Q,sn.q);$('#q_vol').textContent=Q.vol;$('#q_kind').textContent=Q.kind;togglePartner();inkHint();render();
+}
+function voorbeeldRapport(){const sn=snapshot();try{voorbeeld();syncSituatie();openRapport();}finally{herstel(sn);}}
+$$('[data-voorbeeldrapport]').forEach(b=>b.onclick=voorbeeldRapport);
 function rapportHTML(ms,sc,le,nu){
   const o=S.org,k=S.klant,vandaag=fD(new Date());
   const namen=S.partner?`${S.A.naam} en ${S.P.naam}`:S.A.naam;

@@ -108,6 +108,45 @@ h2.h{overflow-wrap:break-word;hyphens:auto}@media (max-width:520px){h2.h{font-si
 @media (max-width:980px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.flow{grid-template-columns:1fr}}
 .democta{background:var(--k);color:#fff;padding:32px 34px;display:grid;grid-template-columns:1fr auto;gap:10px 30px;align-items:center;clip-path:polygon(30px 0,100% 0,100% 100%,0 100%,0 30px)}.democta p{margin:0}.democta .fine2{grid-column:1/-1;font-size:12.5px;color:#bbb}.democta .b.w{background:transparent;color:#fff;border-color:#fff}@media (max-width:760px){.democta{grid-template-columns:1fr}}
+
+/* ===== ontwerp gedeelde site: inhoudsopgave + kaarten ===== */
+.mon{padding-top:56px}
+.mon-intro{max-width:860px;margin-bottom:24px}
+.mon-grid{display:grid;grid-template-columns:230px minmax(0,1fr);gap:26px;align-items:start}
+.mtoc{position:sticky;top:110px;background:#fff;padding:18px 16px;font-size:13.5px;clip-path:polygon(16px 0,100% 0,100% 100%,0 100%,0 16px)}
+.mtoc b{display:block;margin-bottom:8px;font-size:14px}
+.mtoc a{display:block;color:var(--k);text-decoration:none;padding:6px 0 6px 10px;border-left:3px solid transparent;line-height:1.35}
+.mtoc a:hover{border-color:var(--y);background:var(--yl)}
+.mtoc .mprint{margin-top:10px;text-decoration:underline;border:0;padding-left:0}
+.mcol{display:flex;flex-direction:column;gap:22px;min-width:0}
+.mcard{background:#fff;padding:30px 32px;clip-path:polygon(26px 0,100% 0,100% 100%,0 100%,0 26px);scroll-margin-top:110px}
+.mcard h2{font-size:26px;font-weight:900;margin:0 0 6px}
+.mcard h2:after{content:"";display:block;width:44px;height:6px;background:var(--y);margin:10px 0 14px}
+.mcard .lead{max-width:none}
+.mcard .grid3,.mcard .grid2{gap:14px}
+.mcard .icard{border:1px solid #d5dce6;padding:18px;background:#fff}
+.mcard .icard h3{margin:8px 0 6px;font-size:16px}
+.mcard .box{clip-path:none}
+.mcard .mtwo{align-items:start}
+.bi{width:40px;height:40px;color:var(--k);display:block}
+.icard .bi{margin-bottom:2px}
+.mcard .roles .icard{border-top:4px solid var(--y)}
+.flowsvg{background:#fff;padding:8px 0;overflow-x:auto}.flowsvg svg{min-width:640px}
+@media (max-width:980px){.mon-grid{grid-template-columns:1fr}.mtoc{position:static}}
+@media (max-width:560px){.mcard{padding:22px 18px}}
+/* footer met contactpersonen */
+.sitefoot .cols3{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:30px;margin-top:36px}
+.sitefoot h3{color:var(--y);font-size:13px;text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px}
+.sitefoot p{margin:0;line-height:1.8}
+.sitefoot .flist a{display:block;color:#ddd;text-decoration:none}.sitefoot .flist a:hover{color:var(--y)}
+.fp{display:flex;gap:12px;margin-bottom:16px;font-size:12.5px;line-height:1.55;color:#ccc}
+.fp img{width:48px;height:54px;object-fit:cover;flex:none;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:var(--y)}
+.fp b{display:block;color:#fff;font-size:13.5px}.fp .fn{display:block;color:var(--y);margin-bottom:2px}
+.fp a{color:#ddd;overflow-wrap:anywhere}
+.fnav{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:26px;padding-top:16px;border-top:1px solid #333}
+.fnav a{color:#fff;font-weight:700;text-decoration:none;font-size:13px}.fnav a:hover{color:var(--y)}
+@media (max-width:860px){.sitefoot .cols3{grid-template-columns:1fr}}
+@media print{.sitehead,.mtoc,.sitefoot,.hero:after,.hero:before{display:none!important}.mon-grid{display:block}.mcard{clip-path:none;break-inside:avoid}}
 .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:center}
 .strip img{min-width:0;width:100%;height:96px;padding:16px 22px!important;border:1px solid #d5dce6!important;object-fit:contain;background:#fff;border:2px solid var(--k);padding:10px}
 @media (max-width:980px){.strip{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -421,12 +460,14 @@ h2.h{overflow-wrap:break-word;hyphens:auto}@media (max-width:520px){h2.h{font-si
 	</g>
 </g>
 </svg></a></div>
-<div class="cols">
-<div><b>Adres</b>Hullenbergweg 109<br>1101 CL Amsterdam, NL<br>T: <a href="tel:+31207582111">020 - 758 21 11</a><br><a href="https://verzekeringhypotheek.blinqx.tech" target="_blank" rel="noopener noreferrer">verzekeringhypotheek.blinqx.tech</a></div>
-<div><b>Voor meer informatie</b>Igor Driessen<br>Director Banking &amp; Financial Services<br>M: <a href="tel:+31620615614">+31 6 20 615 614</a><br>E: <a href="mailto:igor.driessen@blinqx.tech">igor.driessen@blinqx.tech</a><br><a href="https://www.linkedin.com/in/igor-driessen/" target="_blank" rel="noopener noreferrer">LinkedIn</a><br><br>Oscar Kuypers<br>Business Development Manager Blinqx V&amp;H<br>M: <a href="tel:+31628321881">+31 6 28 321 881</a><br>E: <a href="mailto:oscar.kuypers@blinqx.tech">oscar.kuypers@blinqx.tech</a><br><a href="https://www.linkedin.com/in/oscar-kuypers-3b898aa/" target="_blank" rel="noopener noreferrer">LinkedIn</a><br><br>Jeroen Oversteegen<br>Non Executive Director Business Partners<br>M: <a href="tel:+31621247257">+31 6 21 247 257</a><br>E: <a href="mailto:jeroen.oversteegen@blinqx.tech">jeroen.oversteegen@blinqx.tech</a><br><a href="https://www.linkedin.com/in/oversteegen/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
-<div><b>Andere cijfers van Blinqx</b><a href="https://support-eblinqx-connect.nl/banking-insurance/index.html" target="_blank" rel="noopener">Banking &amp; Insurance</a><br><a href="https://support-eblinqx-connect.nl/sites/woningcijfer-nl/index.html" target="_blank" rel="noopener">Woningcijfer.nl</a><br><a href="https://support-eblinqx-connect.nl/sites/klimaatcijfer-nl/index.html" target="_blank" rel="noopener">Klimaatcijfer.nl</a><br><a href="https://support-eblinqx-connect.nl/sites/funderingscijfer-nl/index.html" target="_blank" rel="noopener">Funderingscijfer.nl</a><br><a href="https://support-eblinqx-connect.nl/sites/pandwise-nl/index.html" target="_blank" rel="noopener">PandWise</a><br><a href="https://support-eblinqx-connect.nl/sites/pensioencijfer-nl/index.html" target="_blank" rel="noopener">Pensioencijfer.nl</a></div>
-<div><b>Sitemap</b><a href="../../">Home</a><br><a href="../../bepaal-uw-hypotheekcijfer/">Bepaal je hypotheekcijfer</a><br><a href="../../voor-consumenten/">Voor consumenten</a><br><a href="../../voor-hypotheekadviseurs/">Voor adviseurs</a><br><a href="../../voor-geldverstrekkers/">Voor geldverstrekkers</a><br><a href="../../contact/">Contact</a><br><a href="../../voor-geldverstrekkers/use-cases/">Use cases</a></div>
-</div><div class="disc">Hypotheekcijfer is een oplossing van Blinqx. De hypotheekcheck geeft een indicatie op basis van de ingevulde gegevens en de leennormen 2027 (Tijdelijke regeling hypothecair krediet). Dit is geen hypotheekadvies.</div></div></footer>
+<div class="cols3">
+<div><h3>Adres</h3><p>Hullenbergweg 109<br>1101 CL Amsterdam, NL<br><a href="tel:+31207582111">T: 020 - 758 21 11</a><br><a href="https://verzekeringhypotheek.blinqx.tech" target="_blank" rel="noopener noreferrer">verzekeringhypotheek.blinqx.tech</a></p>
+<h3 style="margin-top:22px">Andere cijfers van Blinqx</h3><p class="flist"><a href="https://support-eblinqx-connect.nl/banking-insurance/index.html" target="_blank" rel="noopener">Banking &amp; Insurance</a><a href="https://support-eblinqx-connect.nl/sites/woningcijfer-nl/index.html" target="_blank" rel="noopener">Woningcijfer.nl</a><a href="https://support-eblinqx-connect.nl/sites/klimaatcijfer-nl/index.html" target="_blank" rel="noopener">Klimaatcijfer.nl</a><a href="https://support-eblinqx-connect.nl/sites/funderingscijfer-nl/index.html" target="_blank" rel="noopener">Funderingscijfer.nl</a><a href="https://support-eblinqx-connect.nl/sites/pandwise-nl/index.html" target="_blank" rel="noopener">PandWise</a><a href="https://support-eblinqx-connect.nl/sites/pensioencijfer-nl/index.html" target="_blank" rel="noopener">Pensioencijfer.nl</a></p></div>
+<div><h3>Voor meer informatie</h3><div class="fp"><img src="/assets/team/igor-driessen.jpg" alt="" loading="lazy"><div><b>Igor Driessen</b><span class="fn">Director Banking &amp; Financial Services</span>M: <a href="tel:+31620615614">+31 6 20 615 614</a><br>E: <a href="mailto:igor.driessen@blinqx.tech">igor.driessen@blinqx.tech</a><br><a href="https://www.linkedin.com/in/igor-driessen/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div><div class="fp"><img src="/assets/team/oscar-kuypers.jpg" alt="" loading="lazy"><div><b>Oscar Kuypers</b><span class="fn">Business Development Manager Blinqx V&amp;H</span>M: <a href="tel:+31628321881">+31 6 28 321 881</a><br>E: <a href="mailto:oscar.kuypers@blinqx.tech">oscar.kuypers@blinqx.tech</a><br><a href="https://www.linkedin.com/in/oscar-kuypers-3b898aa/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div><div class="fp"><img src="/assets/team/jeroen-oversteegen.jpg" alt="" loading="lazy"><div><b>Jeroen Oversteegen</b><span class="fn">Non Executive Director Business Partners</span>M: <a href="tel:+31621247257">+31 6 21 247 257</a><br>E: <a href="mailto:jeroen.oversteegen@blinqx.tech">jeroen.oversteegen@blinqx.tech</a><br><a href="https://www.linkedin.com/in/oversteegen/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div></div>
+<div><h3>Contact</h3><div class="fp"><img src="/assets/team/bob-van-dam.jpg" alt="" loading="lazy"><div><b>Bob van Dam</b><span class="fn">Product Enablement Manager</span>M: <a href="tel:+31643811940">06 43 81 19 40</a><br>E: <a href="mailto:bob.van.dam@blinqx.tech">bob.van.dam@blinqx.tech</a><br><a href="https://www.linkedin.com/in/bob-van-dam-a74381144/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div><div class="fp"><img src="/assets/team/dennes-roes.jpg" alt="" loading="lazy"><div><b>Dennes Roes</b><span class="fn">Directeur Hypotheken Blinqx V&amp;H</span>M: <a href="tel:+31651117893">06 51 11 78 93</a><br>E: <a href="mailto:dennes.roes@blinqx.tech">dennes.roes@blinqx.tech</a><br><a href="https://www.linkedin.com/in/dennesroes/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div><div class="fp"><img src="/assets/team/jos-van-driesum.jpg" alt="" loading="lazy"><div><b>Jos van Driesum</b><span class="fn">CPO Blinqx V&amp;H</span>M: <a href="tel:+31644081447">06 44 08 14 47</a><br>E: <a href="mailto:jos.van.driesum@blinqx.tech">jos.van.driesum@blinqx.tech</a><br><a href="https://www.linkedin.com/in/jos-van-driesum/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div></div>
+</div>
+<nav class="fnav"><a href="../../">Home</a> <a href="../../bepaal-uw-hypotheekcijfer/">Bepaal je hypotheekcijfer</a> <a href="../../voor-consumenten/">Voor consumenten</a> <a href="../../voor-hypotheekadviseurs/">Voor adviseurs</a> <a href="../../voor-geldverstrekkers/">Voor geldverstrekkers</a> <a href="../../contact/">Contact</a> <a href="../../voor-geldverstrekkers/use-cases/">Use cases</a></nav>
+<div class="disc">© 2026 Blinqx Verzekering &amp; Hypotheek. Hypotheekcijfer is een oplossing van Blinqx. De hypotheekcheck geeft een indicatie op basis van de ingevulde gegevens en de leennormen 2027 (Tijdelijke regeling hypothecair krediet). Dit is geen hypotheekadvies, geen kredietbeslissing en geen taxatie. Tarieven en voorwaarden: op aanvraag.</div></div></footer>
 <script>
 /* gemarkeerd cijfer in het logo: volgt het cijfer in de zeshoek van deze pagina */
 function zetLogoCijfer(c){document.querySelectorAll('.hclogo').forEach(function(svg){var x=function(n){return 9.2+18.17*(n-1);}; var blob=[].slice.call(svg.querySelectorAll('path')).find(function(p){return (p.getAttribute('d')||'').indexOf('M140.5,34.4')===0;}); if(!blob||!(c>=1&&c<=10))return;blob.style.opacity='0'; var bub=[].slice.call(svg.querySelectorAll('path')).find(function(p){return (p.getAttribute('d')||'').indexOf('M151.2,0H8.9')===0;}); if(bub&&c>=3&&c<=8){var dd=x(c)-x(8);if(!bub.getAttribute('data-d0'))bub.setAttribute('data-d0',bub.getAttribute('d'));bub.setAttribute('d',bub.getAttribute('data-d0').replace(/H125\s*c4\.3,0,8\.4,1\.5,11\.6,4\.3v-4\.3h14\.6/,'H'+(125+dd).toFixed(2)+'c4.3,0,8.4,1.5,11.6,4.3v-4.3h'+(14.6-dd).toFixed(2)));} var ns='http://www.w3.org/2000/svg',old=svg.querySelector('.hcmark');if(old)old.remove(); var g=document.createElementNS(ns,'g');g.setAttribute('class','hcmark'); var ci=document.createElementNS(ns,'circle');ci.setAttribute('cx',x(c).toFixed(2));ci.setAttribute('cy','38.3');ci.setAttribute('r','4.6');ci.setAttribute('style','fill:#FFD31C;stroke:#010101;stroke-width:0.9'); var t=document.createElementNS(ns,'text');t.setAttribute('x',x(c).toFixed(2));t.setAttribute('y','38.4');t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','central'); t.setAttribute('style','fill:#010101;font:900 5.6px Arial,Helvetica,sans-serif');t.textContent=String(c); g.appendChild(ci);g.appendChild(t);svg.appendChild(g);});}

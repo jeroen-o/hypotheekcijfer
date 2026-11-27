@@ -95,6 +95,18 @@ form.cf .rad input{width:auto}
 .advprev .lp{width:220px;height:90px;display:grid;place-items:center;border:1px dashed #bbb;color:#888;font-size:13px;flex:none}
 .advprev .lp img{max-width:100%;max-height:100%;object-fit:contain}
 @media (max-width:560px){.advprev{flex-direction:column;align-items:flex-start}}
+h2.h{overflow-wrap:break-word;hyphens:auto}@media (max-width:520px){h2.h{font-size:27px}.hero h1{font-size:30px;hyphens:auto;overflow-wrap:break-word}}
+.toc2{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.toc2 a{background:#fff;border:1px solid #d5dce6;padding:8px 14px;font-weight:700;font-size:13.5px;text-decoration:none;color:var(--k)}.toc2 a:hover{background:var(--y)}
+.list.sm li{font-size:14px;padding:5px 0 5px 26px}.list.sm li:before{top:11px}
+.hex b{font-weight:900;font-size:18px}
+.flow{list-style:none;padding:0;margin:22px 0 8px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;counter-reset:f}
+.flow li{position:relative;background:#fff;border:1px solid #d5dce6;padding:42px 12px 14px;font-size:13px;clip-path:polygon(14px 0,100% 0,100% 100%,0 100%,0 14px)}
+.flow li:before{counter-increment:f;content:counter(f);position:absolute;top:8px;left:12px;width:26px;height:28px;display:grid;place-items:center;background:var(--y);font-weight:900;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.flow li b{display:block;font-size:14px}.flow li span{display:block;color:#444;margin-top:2px}.flow li em{display:block;margin-top:8px;font-style:normal;font-size:11.5px;background:var(--k);color:var(--y);padding:4px 6px}
+.flow li.hl{border:2px solid var(--k)}
+.loop{display:inline-block;background:var(--k);color:var(--y);font-weight:800;padding:8px 14px;margin:6px 0 14px}
+@media (max-width:980px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.flow{grid-template-columns:1fr}}
 .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:center}
 .strip img{min-width:0;width:100%;height:96px;padding:16px 22px!important;border:1px solid #d5dce6!important;object-fit:contain;background:#fff;border:2px solid var(--k);padding:10px}
 @media (max-width:980px){.strip{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -272,7 +284,102 @@ form.cf .rad input{width:auto}
 <div class="grid3"><div class="person"><div class="av"><img src="/assets/team/igor-driessen.jpg" alt="" onerror="this.remove()"><span>ID</span></div><div class="pi"><b>Igor Driessen</b>Director Banking &amp; Financial Services<br>M: <a href="tel:+31620615614">+31 6 20 615 614</a><br>E: <a href="mailto:igor.driessen@blinqx.tech">igor.driessen@blinqx.tech</a><br><a href="https://www.linkedin.com/in/igor-driessen/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div>
 <div class="person"><div class="av"><img src="/assets/team/oscar-kuypers.jpg" alt="" onerror="this.remove()"><span>OK</span></div><div class="pi"><b>Oscar Kuypers</b>Business Development Manager Blinqx V&amp;H<br>M: <a href="tel:+31628321881">+31 6 28 321 881</a><br>E: <a href="mailto:oscar.kuypers@blinqx.tech">oscar.kuypers@blinqx.tech</a><br><a href="https://www.linkedin.com/in/oscar-kuypers-3b898aa/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div>
 <div class="person"><div class="av"><img src="/assets/team/jeroen-oversteegen.jpg" alt="" onerror="this.remove()"><span>JO</span></div><div class="pi"><b>Jeroen Oversteegen</b>Non Executive Director Business Partners<br>M: <a href="tel:+31621247257">+31 6 21 247 257</a><br>E: <a href="mailto:jeroen.oversteegen@blinqx.tech">jeroen.oversteegen@blinqx.tech</a><br><a href="https://www.linkedin.com/in/oversteegen/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div></div>
-<div class="btns" style="margin-top:18px"><a class="b k" href="../contact/">Naar contact →</a></div></div></section></main>
+<div class="btns" style="margin-top:18px"><a class="b k" href="../contact/">Naar contact →</a></div></div></section>
+<section class="sec" id="monitoring"><div class="wrap">
+<h2 class="h">Waarom structurele <mark>hypotheekmonitoring</mark> nodig is</h2><span class="bar"></span>
+<p class="lead">EBA-richtlijnen, de SREP-methodologie en het ECB-beleid vragen dat geldverstrekkers de kredietkwaliteit van hypotheken volgen over de hele looptijd, niet alleen bij het verstrekken. Blinqx organiseert dit end-to-end met het Hypotheekcijfer en de Procesversneller, met de adviseur als schakel naar de klant.</p>
+<nav class="toc2"><a href="#regelgeving">1 · Het regelgevend belang</a><a href="#oplossing">2 · De Blinqx-oplossing</a><a href="#stroomschema">3 · Stroomschema</a><a href="../voor-geldverstrekkers/use-cases/">4 · Use cases</a><a href="#oplevert">5 · Wat het oplevert</a></nav>
+</div></section>
+
+<section class="sec yl" id="regelgeving"><div class="wrap">
+<h2 class="h">1 · Het regelgevend belang</h2><span class="bar"></span>
+<p class="lead">Drie lagen regelgeving wijzen in dezelfde richting: kredietrisico stopt niet bij het verstrekken van de hypotheek, maar moet over de hele looptijd aantoonbaar beheerst worden.</p>
+<div class="grid3" style="margin-top:18px">
+ <div class="tile"><div class="hex"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div><h3>EBA Guidelines on Loan Origination and Monitoring (EBA/GL/2020/06)</h3>
+  <ul class="list sm"><li>Doorlopende monitoring van kredietkwaliteit, inclusief onderpandwaarde, gedurende de hele looptijd.</li><li>Vroegtijdige signalering (early warning indicators) van verslechterende kredietkwaliteit, niet pas bij betalingsachterstand.</li><li>Eisen aan frequentie en methode van onderpandherwaardering, afhankelijk van het risicoprofiel.</li></ul></div>
+ <div class="tile"><div class="hex"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>SREP-methodologie (ECB)</h3>
+  <ul class="list sm"><li>Toezicht beoordeelt bij credit risk en risk control hoe banken hun exposures en onderpandwaarden monitoren en tijdig actualiseren.</li><li>Daarbij tellen de kwaliteit en betrouwbaarheid van waarderingen, de frequentie van herwaardering en het collateral price risk.</li><li>Een zwakke beheersing kan doorwerken in de SREP-score en de kapitaaleisen (Pillar 2).</li></ul></div>
+ <div class="tile"><div class="hex"><svg viewBox="0 0 24 24"><path d="M3 10 12 4l9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18"/></svg></div><h3>ECB-toezichtsprioriteiten 2026–28</h3>
+  <ul class="list sm"><li>Prioriteit “Ensure prudent risk-taking and sound credit standards”, met een thematische review van acceptatiestandaarden en een vervolgonderzoek naar loan pricing.</li><li>Klimaat- en natuurrisico als blijvende druk op woningwaarde: periodieke herwaardering wordt structureel noodzakelijk.</li><li>Toezicht op CRR III constateerde tekortkomingen in collateral valuations: waarderingsprocessen moeten aantoonbaar en herhaalbaar zijn.</li></ul></div>
+</div>
+<div class="box" style="margin-top:22px"><b style="color:var(--y)">Het gevolg voor geldverstrekkers</b><p style="margin:6px 0 0">Periodieke, gestructureerde en herleidbare monitoring van alle hypotheken (inkomen, lasten én onderpandwaarde) is geen kwaliteitskeuze meer, maar een factor in de toezichtbeoordeling en de kapitaaleisen.</p></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+<h2 class="h">Prudentieel toezicht en gedragstoezicht</h2><span class="bar"></span>
+<p class="lead">ECB en DNB houden <b>prudentieel</b> toezicht: blijft de geldverstrekker financieel gezond, met voldoende kapitaal en beheerste risico’s. De AFM houdt vooral <b>gedragstoezicht</b>: wordt de klant eerlijk, passend en begrijpelijk behandeld. Dat bepaalt de vraag achter de monitoring.</p>
+<div class="grid2" style="margin-top:18px">
+ <div class="tile"><h3>ECB en DNB vragen</h3><p style="font-size:17px;font-weight:700">Kan deze klant de hypotheek nog dragen, en is het onderpand nog voldoende dekking voor de bank?</p></div>
+ <div class="tile"><h3>De AFM vraagt</h3><p style="font-size:17px;font-weight:700">Is deze klant nog goed geadviseerd, en weet hij wat te doen als zijn situatie verandert?</p></div>
+</div>
+<p style="margin-top:18px;max-width:820px">Structurele monitoring met het Hypotheekcijfer bedient beide doelen: het cijfer en de onderpandwaarde onderbouwen het prudentiële risicobeeld, het handelingsperspectief richting de klant geeft invulling aan de zorgplicht van adviseur en aanbieder. Eén proces, twee toezichthouders, en dus ook twee redenen waarom het uitblijven ervan risicovol is.</p>
+</div></section>
+
+<section class="sec yl"><div class="wrap">
+<h2 class="h">De samenloop: renteschok, aftrekverval en pensioen</h2><span class="bar"></span>
+<p class="lead">De komende jaren loopt bij een grote groep klanten de rentevaste periode af. Wie destijds voor een lage rente koos, krijgt bij herfinanciering vaak te maken met een rente die 2 tot 3 keer hoger ligt. Voor veel van deze klanten vervalt tegelijk de hypotheekrenteaftrek omdat de termijn van 30 jaar afloopt, en een deel gaat in dezelfde periode met pensioen.</p>
+<div class="grid3" style="margin-top:18px">
+ <div class="tile"><div class="hex"><b>1</b></div><h3>Renteschok</h3><p>De nieuwe rente kan ruim boven het niveau liggen waarop destijds is getoetst.</p></div>
+ <div class="tile"><div class="hex"><b>2</b></div><h3>Aftrekschok</h3><p>Na 30 jaar vervalt de hypotheekrenteaftrek: de netto rentelast stijgt zonder dat de bruto rente verandert.</p></div>
+ <div class="tile"><div class="hex"><b>3</b></div><h3>Inkomensschok</h3><p>Pensionering verlaagt het besteedbaar inkomen, vaak juist wanneer de eerste twee schokken spelen.</p></div>
+</div>
+<p style="margin-top:18px;max-width:820px">Samen geven ze een netto-maandlastenschok die groter is dan elk afzonderlijk doet vermoeden, en die de klant pas voelt als de rentevaste periode afloopt en bijsturen weinig ruimte meer biedt. Structurele monitoring <b>ruim vóór</b> het aflopen van de rentevaste periode is de manier om deze samenloop op tijd zichtbaar te maken.</p>
+</div></section>
+
+<section class="sec"><div class="wrap grid2" style="align-items:start">
+<div><h2 class="h">Funderingsrisico</h2><span class="bar"></span><h3 style="margin-top:0">Een onderschat onderpandrisico</h3>
+<p>Woningen op houten palen van vóór circa 1970 in gebieden met een dalende grondwaterstand (delen van Gouda, Zaanstad, Dordrecht, Schiedam en andere veenweide- en rivierkleigebieden) lopen een verhoogd risico op paalrot en verzakking. Herstelkosten lopen in de tienduizenden euro’s en worden zonder zichtbare schade niet in een reguliere taxatie meegenomen.</p></div>
+<div class="box"><b style="color:var(--y)">Waarom dit telt</b><p style="margin:6px 0 0">Toezicht vraagt een actueel en betrouwbaar beeld van de onderpandwaarde gedurende de looptijd. Een funderingsprobleem dat zich jaren later openbaart, kan de LTV snel doen stijgen. Monitoring met funderingsindicatoren (bouwjaar, grondsoort, regio) maakt preventief onderzoek of herstel tijdig bespreekbaar.</p>
+<p style="margin:12px 0 0"><a class="b y" href="https://funderingscijfer.nl/" target="_blank" rel="noopener">Funderingscijfer.nl →</a></p></div>
+</div></section>
+
+<section class="sec yl" id="oplossing"><div class="wrap">
+<h2 class="h">2 · De Blinqx-oplossing</h2><span class="bar"></span>
+<p class="lead">Blinqx verbindt drie bouwstenen tot één proces dat geldverstrekker, adviseur en klant in één keten plaatst.</p>
+<div class="grid2" style="margin-top:18px">
+ <div class="tile"><div class="hex"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Hypotheekcijfer</h3><p>Het klantgerichte monitoringinstrument. Klant en adviseur toetsen samen de betaalbaarheid op belangrijke momenten en life events: pensionering, scheiding, inkomensdaling, overlijden en werkloosheid. Uitkomst: een cijfer per scenario met concreet handelingsperspectief.</p></div>
+ <div class="tile"><div class="hex"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><h3>Procesversneller</h3><p>De databron. Via Ockto wordt brondata (inkomen, saldi, hypotheekgegevens) rechtstreeks en geverifieerd bij de klant opgehaald, zonder handmatige aanlevering. Snel, betrouwbaar en herhaalbaar: cruciaal voor periodieke monitoring op schaal.</p></div>
+ <div class="tile"><div class="hex"><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8v10H3z"/><path d="M10 21v-6h4v6"/></svg></div><h3>Woningwaarde-rapport (cadeau)</h3><p>Elke klant ontvangt een woningwaarderapport van PandWise of Calcasa: een actuele waardebepaling naast de inkomens- en lastentoets. Voor herwaardering richting toezicht geldt een gevalideerd model (AVM) of taxatie.</p></div>
+ <div class="tile"><div class="hex"><svg viewBox="0 0 24 24"><path d="M14 6 18 2l4 4-4 4M18 6 8 16M3 21l4-1 1-4-3-3z"/></svg></div><h3>Onderhoudstoestand (optionele module)</h3><p>Achterstallig onderhoud kan de onderpandwaarde ondermijnen zonder dat dit uit een reguliere waardebepaling blijkt. Blinqx organiseert de beoordeling via een koppeling met het eigen <b>taxateursnetwerk</b> (inspectie), of via de <b>adviseur zelf</b>, die na een aanvullende cursus de onderhoudstoestand signaleert tijdens het reguliere klantcontact.</p></div>
+</div>
+<h3 style="margin-top:28px">De rolverdeling</h3>
+<div class="grid3 roles">
+ <div class="tile"><h3>Geldverstrekker</h3><p>Stelt klantdata beschikbaar aan Blinqx; per klant is bekend welke adviseur bij de klant hoort.</p></div>
+ <div class="tile"><h3>Adviseur</h3><p>Activeert de klant in het Hypotheekcijfer en doorloopt de tool samen met de klant. Het advies blijft bij de adviseur; Blinqx faciliteert data en tool.</p></div>
+ <div class="tile"><h3>Klant</h3><p>Ontvangt het rapport per e-mail en post, uit naam van adviseur en geldverstrekker, met het cijfer per scenario en het handelingsperspectief.</p></div>
+</div>
+<p style="margin-top:16px"><b>Elke klant wordt elke 3 tot 5 jaar opnieuw uitgevraagd:</b> monitoring is een doorlopend proces, geen eenmalige actie.</p>
+</div></section>
+
+<section class="sec" id="stroomschema"><div class="wrap">
+<h2 class="h">3 · Stroomschema</h2><span class="bar"></span>
+<p class="lead">Een doorlopend monitoringproces van geldverstrekker tot klant en terug: 7 stappen, herhaling elke 3 tot 5 jaar.</p>
+<ol class="flow">
+ <li><b>Geldverstrekker</b><span>levert klantdata aan Blinqx</span></li>
+ <li><b>Blinqx</b><span>koppelt adviseur aan klant</span></li>
+ <li><b>Adviseur</b><span>activeert klant in de tool</span></li>
+ <li class="hl"><b>Klant + adviseur</b><span>doorlopen de tool samen</span><em>Procesversneller · Ockto: brondata real-time</em></li>
+ <li><b>Klantrapport</b><span>cijfer + woningwaarde</span></li>
+ <li><b>Blinqx</b><span>verwerkt resultaten, monitoring</span></li>
+ <li><b>Geldverstrekker</b><span>ECB / DNB / AFM-rapportage</span></li>
+</ol>
+<div class="loop">↻ elke 3 tot 5 jaar opnieuw</div>
+<p style="max-width:820px">De geldverstrekker levert klantdata, Blinqx koppelt adviseur en klant, en de adviseur activeert de klant in het Hypotheekcijfer. De Procesversneller haalt via Ockto real-time brondata op, waarna de klant een rapport en een woningwaarde-cadeau ontvangt. Blinqx verwerkt de resultaten en levert de geldverstrekker een rapportage voor ECB, DNB en AFM. Na 3 tot 5 jaar herhaalt het proces zich.</p>
+</div></section>
+
+<section class="sec yl" id="oplevert"><div class="wrap">
+<h2 class="h">5 · Wat het oplevert</h2><span class="bar"></span>
+<div class="grid2" style="margin-top:10px">
+ <div class="tile"><h3>Een aantoonbaar ingericht proces, zonder eigen uitvoeringslast</h3><ul class="list sm"><li>Blinqx verzorgt de volledige afhandeling: klantactivatie, dataverzameling via Ockto, rapportage en archivering.</li><li>U krijgt een herleidbare rapportage voor ECB-, DNB- en AFM-doeleinden, met vastlegging van frequentie, methode en dekking van de herwaardering.</li></ul></div>
+ <div class="tile"><h3>Aansluiting op de beoordelingscriteria</h3><ul class="list sm"><li><b>Betrouwbaarheid van waarderingen:</b> onafhankelijke woningwaarde via Calcasa (AVM) of PandWise, met bron en peildatum per lening.</li><li><b>Frequentie van monitoring:</b> gestructureerde uitvraag elke 3 tot 5 jaar, in plaats van ad hoc of alleen bij mutaties.</li><li><b>Vroegtijdige signalering:</b> het cijfer per moment en life event werkt als early warning indicator, gekoppeld aan handelingsperspectief richting de klant.</li></ul></div>
+ <div class="tile"><h3>Effect op de toezichtbeoordeling</h3><ul class="list sm"><li>Een sterk ingericht monitoringproces <b>ondersteunt</b> een betere beoordeling van risk control in de SREP.</li><li>Het helpt voorkomen dat onderpandmonitoring een aandachtspunt wordt in het reguliere toezichtgesprek of bij een on-site inspectie.</li></ul></div>
+ <div class="tile"><h3>Voor de adviseur en de klant</h3><ul class="list sm"><li>De adviseur blijft eigenaar van het klantcontact en het advies; Blinqx faciliteert de tool en de data.</li><li>De klant ervaart het als service van de eigen adviseur en geldverstrekker, niet als externe controle, met het woningwaarderapport als positieve opening.</li></ul></div>
+</div>
+<div class="box" style="margin-top:22px"><b style="color:var(--y)">Vergoeding</b><p style="margin:6px 0 0">Een vaste vergoeding per afgerond dossier aan Blinqx voor de uitvoering van de monitoring (dataverzameling, rapportage, archivering). Tarieven en voorwaarden: op aanvraag.</p>
+<div class="btns" style="margin-top:14px"><a class="b y" href="../contact/">Neem contact op →</a></div></div>
+<p style="font-size:13px;color:#555;margin-top:14px">Indicatief: het hypotheekcijfer is geen kredietbeslissing en een indicatieve woningwaarde is geen taxatie. Of en hoe een monitoringproces meeweegt in de toezichtbeoordeling, bepaalt de toezichthouder.</p>
+</div></section>
+</main>
 <footer class="sitefoot"><div class="wrap"><div class="top"><div><h2>Doe de hypotheekcheck en bepaal je hypotheekcijfer!</h2><div class="ln"></div>
 <a class="b y" href="../bepaal-uw-hypotheekcijfer/">Start de hypotheekcheck →</a></div><a href="../"><svg class="hclogo" role="img" aria-label="Hypotheekcijfer.nl" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 190.2 43.9" style="enable-background:new 0 0 190.2 43.9;" xml:space="preserve">
